@@ -1,0 +1,19 @@
+＃my($what,@array)=@_; 是会自动适配的，如果加上个test，那么test会是第一个String fred...
+
+  mes=qw/ fred barney betty dino wilma pebbles bamm-bamm /;
+  my $result = &which_element_is("dino",@names);
+  print $result;
+  sub which_element_is{
+          my($what,$test,@array)=@_;
+          foreach(0..$#array){
+                  print $what." ".$test."\n";
+                  if($what eq $array[$_]){
+                          return $_;
+                  }
+          }
+          -1;
+  }
+
+@_
+state
+print "The numbers from 1 to 1000 add up to ", toatal (1..1000),".\n";

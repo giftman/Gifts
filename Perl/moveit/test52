@@ -1,0 +1,10 @@
+#!/usr/bin/perl -w
+printf "%g %g %g\n",5/2,51/17,51**17;
+printf "in %d days!\n",17.85;
+printf "%6d\n",42;
+printf "%d\n",2e3 + 1.95;
+printf "%-10s\n","wilma";
+printf "%12.3f\n",6*7 + 2/3;
+printf "Monthly interest rate:%.2f%%\n",5/10;
+printf "Monthly interest rate:%d%%\n",50;
+

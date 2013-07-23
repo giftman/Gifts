@@ -1,0 +1,13 @@
+$family_name{}
+
+%family_name  整个哈希表
+
+
+my %last_name = (
+"fred" => "flintstone",
+"dino" => undef,
+"barney" => "rubble",
+"betty" => "rubble",
+);
+
+sort keys %ENV   是百分号呀

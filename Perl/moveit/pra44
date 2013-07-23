@@ -1,0 +1,21 @@
+#!/usr/bin/perl -w
+use 5.010;
+greet_test("Barney");
+greet_test("Fred");
+greet_test("Wilma");
+greet_test("Betty");
+
+sub greet_test{
+	state @names;
+	my $name = shift;
+	print "Hi $name!";
+	if(@names){
+		print "I've seen: @names\n";
+	}
+	else {
+		print "You are the first one here !\n";
+	}
+	push @names,$name;
+}
+
+

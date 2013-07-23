@@ -1,0 +1,27 @@
+#!/usr/bin/perl -w
+sub above_average{
+	my @sumarray ={} ;
+	my $average=&average(@_);
+	foreach (@_){
+		if($_ > $average){
+		push @sumarray,$_;
+		}
+	}
+	@sumarray;
+}
+sub average{
+	my $sum=0;
+	my $num = 0;
+	foreach (@_){
+		$sum +=$_;
+		$num++;
+	}
+	$sum/$num;
+}
+my @fred = above_average(1..10);
+print "\@fred is @fred\n";
+print "(Should be 6 7 8 9 10)\n";
+my @barney = above_average(100,1..10);
+print "\@barney is @barney\n";
+print "(Should be just 100)\n";
+

@@ -1,0 +1,11 @@
+#!/usr/bin/perl -w
+print "Please input one word\n";
+$input=<STDIN>;
+print "Please input another word\n";
+$input2=<STDIN>;
+$result=$input*$input2;
+if($result lt 0){
+print 0;
+}else{
+print $result;
+}

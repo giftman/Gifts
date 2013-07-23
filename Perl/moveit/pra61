@@ -1,0 +1,7 @@
+#!/usr/bin/perl -w
+$names{"fred"}="flintstone";
+$names{"barney"}="rubble";
+$names{"wilma"}="flintstone";
+print "Enter an name, then press Ctrl-D:\n";
+chomp(my $name = <STDIN>);
+print $names{$name};

@@ -1,0 +1,10 @@
+#!/usr/bin/perl -w
+my(@words,%count,$word);
+print "Enter an name, then press Ctrl-D:\n";
+chomp(@words = <STDIN>);
+foreach $word (@words){
+	$count{$word} +=1;
+}
+foreach $word (sort keys %count){
+	print "$word was see  $count{$word} times.\n";
+}

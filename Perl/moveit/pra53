@@ -1,0 +1,10 @@
+#!/usr/bin/perl -w
+print "Enter an interger, then press Ctrl-D:\n";
+chomp(my $inputLength = <STDIN>);
+print "Enter some lines, then press Ctrl-D:\n";
+chomp(my @lines = <STDIN>);
+print "1234567890" x (($inputLength+9)/10),"\n";
+
+foreach(@lines){
+printf "%${inputLength}s\n",$_;
+}
