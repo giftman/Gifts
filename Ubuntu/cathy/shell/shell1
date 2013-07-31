@@ -1,0 +1,6 @@
+#!/bin/bash
+a="hello world"
+num=2
+echo "A is:"$a "this is the ${num}nd"
+var=1
+echo "A is:(($var++))"

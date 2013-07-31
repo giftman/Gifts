@@ -1,0 +1,5 @@
+#!/bin/bash
+#对变量赋值
+a="hellp world" #等号两边均不可以有空格存在
+#打印变量a的值
+echo "A is : " $a

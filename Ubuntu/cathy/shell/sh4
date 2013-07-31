@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "I will use 'touch' command to create 3 files."
+read -p "first number: " firstnu
+read -p "second number: " secnu
+total=$(($firstnu*secnu))
+echo "\nThe result of $firstnu X $secnu is ==> $total"
+

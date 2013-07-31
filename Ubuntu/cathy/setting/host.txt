@@ -1,0 +1,231 @@
+ubuntu 下修改host文件
+
+    有些时候，我们需要让某些域名指向本地，来实现调试，下面介绍下ubuntu下修改host实现域名指向本地的方法。
+    Ubuntu系统的Hosts只需修改/etc/hosts文件，在目录中还有一个hosts.conf文件，刚开始还以为只需要修改这个就可以了，结果发现是需要修改hosts。修改完之后要重启网络。
+
+    打开host文件
+
+vim gedit /etc/hosts
+
+    添加你需要的项，格式如下：
+
+    格式:
+    <IP> <HOSTNAME>.<DOMAIN> <ALIAS>
+
+    示例:
+
+ 
+
+    编辑后，你需要重新启动一下你的网络。
+
+ /etc/init.d/networking restart
+
+203.208.46.178 www.google.com.hk
+203.208.39.22 webcache.googleusercontent.com
+203.208.39.22 spreadsheets.google.com
+203.208.39.22 spreadsheets0.google.com
+203.208.39.22 docs.google.com
+203.208.39.22 code.google.com
+203.208.46.178 www.google.com.tw
+74.125.71.103 code.google.com 
+74.125.71.103 encrypted.google.com 
+74.125.71.103 suggestqueries.google.com 
+74.125.71.103 mail.google.com 
+74.125.71.103 groups.google.com 
+74.125.71.103 groups.google.com.hk 
+74.125.71.103 docs0.google.com 
+74.125.71.103 docs1.google.com 
+74.125.71.103 spreadsheets.google.com 
+74.125.71.103 spreadsheets0.google.com 
+74.125.71.103 webcache.googleusercontent.com 
+74.125.71.103 sites.google.com 
+74.125.71.103 talkgadget.google.com 
+74.125.71.103 clients1.google.com 
+74.125.71.103 clients2.google.com 
+74.125.71.103 clients3.google.com 
+74.125.71.103 clients4.google.com
+74.125.71.103 docs.google.com
+
+解決谷歌文档无法访问的方法 Google Docs，Gmail——修改hosts
+Google Docs经常无法访问的问题：
+解决方法一：OpenDNS
+既然https访问被重置是发生在向DNS发出请求的时候，一个能很容易就想到的解决方案是换一个不会审查DNS请求的DNS。OpenDNS是较为普遍的选择。使用方法很简单，将电脑的DNS设置为：
+208.67.222.222
+208.67.220.220
+如果你需要经常切换不同的DNS，可以使用“8个提高windows效率的免费软件”里介绍的NetSetman来进行DNS切换。
+但是，OpenDNS是位于国外的DNS，连接速度有点慢，我们不妨考虑另一种解决方案。
+ 
+解决方法二：自定义hosts
+在hosts里添加Google Docs的解析IP直接绕过DNS查询，就能正常使用https的Google Docs了。
+hosts文件的位置：
+1、windows：C:\Windows\System32\drivers\etc\hosts
+2、Linux：/etc/hosts
+用记事本打开hosts文件，下面这些内容添加到hosts文件的顶部：
+209.85.225.101 docs.google.com
+74.125.127.100 writely.google.com
+74.125.127.139 spreadsheets.google.com
+保存hosts，重启浏览器后，https方式的Google Docs就能正常访问了。
+万一Gmail也遭遇到Google Docs的情况怎么办？用同样的方法，在hosts文件里加入Gmail的IP即可，为方便使用，我将提供有https方式的Google服务及其的IP列表如下：
+209.85.147.109 pop.gmail.com
+209.85.147.109 smtp.gmail.com
+66.102.7.19 mail.google.com
+209.85.225.101 docs.google.com
+209.85.225.102 groups.google.com
+74.125.127.139 spreadsheets.google.com
+74.125.127.100 services.google.com
+74.125.127.100 writely.google.com
+74.125.127.100 sites.google.com
+209.85.225.104 reader.google.com
+74.125.127.101 calendar.google.com
+ 
+解决Gmail及Google无法访问的问题
+Google的服务一直很好，可惜被屏蔽了，这里总结了一下如何不借助工具直接访问Gmail和Google的搜索服务，方法获取自网络，有本人总结一下
+windows用户打开系统所在盘符（一般为C盘），然后依次打开Windows—system32—drivers—etc，然后用记事本打开hosts文件，把下面的代码加入到这个文件中，然后保存就可以了
+203.208.39.22 webcache.googleusercontent.com
+203.208.39.22 mail.google.com
+203.208.39.22 www.google.com.hk
+203.208.39.22 www.google.com
+这样，你就可以顺畅的使用Google，Gmail了，但是请按照法律办事！
+注：保存hosts时可能出现无法保存的问题，请将文件的属性去掉只读即可.
+ 
+2011-9-20 更新：
+203.208.46.1   plus.google.com
+203.208.46.1   accounts.google.com
+203.208.46.1   picasaweb.google.com
+203.208.46.1   lh1.ggpht.com
+203.208.46.1   lh2.ggpht.com
+203.208.46.1   lh3.ggpht.com
+203.208.46.1   lh4.ggpht.com
+203.208.46.1   lh5.ggpht.com
+203.208.46.1   lh6.ggpht.com
+203.208.46.1   lh6.googleusercontent.com
+203.208.46.1   lh5.googleusercontent.com
+203.208.46.1   lh4.googleusercontent.com
+203.208.46.1   lh3.googleusercontent.com
+203.208.46.1   lh2.googleusercontent.com
+203.208.46.1   lh1.googleusercontent.com
+203.208.46.1   talkgadget.google.com
+203.208.46.1   profiles.google.com
+203.208.46.1   webcache.googleusercontent.com
+203.208.46.1   sites.google.com
+203.208.46.1   mail.google.com
+203.208.46.1   www.google.com.hk
+203.208.46.1   www.google.com
+203.208.46.1   news.google.com
+203.208.46.1   code.google.com
+203.208.46.1   docs.google.com
+203.208.46.1   services.google.com
+203.208.46.1   clients4.google.com
+203.208.46.1   clients2.google.com
+203.208.46.1   chrome.google.com
+203.208.46.1   tools.google.com
+203.208.46.1   sites.google.com
+203.208.46.1   accounts.google.com
+209.85.229.18  reader.google.com
+--------------------------------------------------------
+#Google+ Hosts IP
+74.125.237.1 plus.google.com
+74.125.237.1 plus.google.com.hk
+74.125.237.1 talkgadget.google.com
+74.125.237.1 picasaweb.google.com
+74.125.237.1 lh1.ggpht.com
+74.125.237.1 lh2.ggpht.com
+74.125.237.1 lh3.ggpht.com
+74.125.237.1 lh4.ggpht.com
+74.125.237.1 lh5.ggpht.com
+74.125.237.1 lh6.ggpht.com
+74.125.237.1 lh6.googleusercontent.com
+74.125.237.1 lh5.googleusercontent.com
+74.125.237.1 lh4.googleusercontent.com
+74.125.237.1 lh3.googleusercontent.com
+74.125.237.1 lh2.googleusercontent.com
+74.125.237.1 lh1.googleusercontent.com
+##Chrome 网上应用店
+74.125.237.1 chrome.google.com
+74.125.237.1 clients0.google.com
+74.125.237.1 clients1.google.com
+74.125.237.1 clients2.google.com
+74.125.237.1 clients3.google.com
+74.125.237.1 clients4.google.com
+74.125.237.1 www.googleusercontent.com
+74.125.237.1 lh0.googleusercontent.com
+74.125.237.1 lh1.googleusercontent.com
+74.125.237.1 lh2.googleusercontent.com
+74.125.237.1 lh3.googleusercontent.com
+74.125.237.1 lh4.googleusercontent.com
+74.125.237.1 lh5.googleusercontent.com
+74.125.237.1 lh6.googleusercontent.com
+74.125.237.1 clients1.googleusercontent.com
+74.125.237.1 clients2.googleusercontent.com
+##网页快照
+68.68.107.69 webcache.googleusercontent.com
+##Google SSL
+74.125.237.1 encrypted.google.com
+74.125.237.1 encrypted.google.com.hk
+##Google Docs
+74.125.237.1 docs.google.com
+74.125.237.1 docs0.google.com
+74.125.237.1 docs1.google.com
+74.125.237.1 docs2.google.com
+74.125.237.1 docs3.google.com
+74.125.237.1 spreadsheets.google.com
+74.125.237.1 spreadsheets0.google.com
+74.125.237.1 spreadsheets1.google.com
+74.125.237.1 spreadsheets2.google.com
+74.125.237.1 spreadsheets3.google.com
+#Gmail
+74.125.237.1 mail.google.com
+74.125.237.1 chatenabled.mail.google.com        #Gmail中Gtalk聊天服务
+##Google 搜索
+74.125.237.1 www.google.com
+##Google preview
+74.125.237.1 www.googlepreview.com
+##Google 翻译
+74.125.237.1 translate.google.com
+74.125.237.1 translate.googleapis.com
+##Google 搜索建议（IE9）
+74.125.237.1 clients5.google.com
+##Google code
+74.125.237.1 code.google.com
+##Picasa 网络相册
+74.125.237.1 picasaweb.google.com
+74.125.237.1 lh0.ggpht.com
+74.125.237.1 lh1.ggpht.com
+74.125.237.1 lh2.ggpht.com
+74.125.237.1 lh3.ggpht.com
+74.125.237.1 lh4.ggpht.com
+74.125.237.1 lh5.ggpht.com
+74.125.237.1 lh6.ggpht.com
+74.125.237.1 lh7.ggpht.com
+74.125.237.1 lh8.ggpht.com
+74.125.237.1 lh8.ggpht.com
+74.125.237.1 lh9.ggpht.com
+74.125.237.1 lh6.google.com
+##Google 个人资料
+74.125.237.1 profiles.google.com
+74.125.237.1 browsersync.google.com
+##Google+
+74.125.237.1 talkgadget.google.com                                     ##Google+中的聊天服务
+74.125.237.1 ssl.gstatic.com
+74.125.237.1 images-pos-opensocial.googleusercontent.com
+74.125.237.1 images1-focus-opensocial.googleusercontent.com
+74.125.237.1 images2-focus-opensocial.googleusercontent.com
+74.125.237.1 images3-focus-opensocial.googleusercontent.com
+74.125.237.1 images4-focus-opensocial.googleusercontent.com
+74.125.237.1 images5-focus-opensocial.googleusercontent.com
+74.125.237.1 images6-focus-opensocial.googleusercontent.com
+74.125.237.1 plus.google.com
+##Download 下载
+74.125.237.1 dl.google.com
+74.125.237.1 dl-ssl.google.com
+##Groups
+74.125.237.1 groups.google.com
+##Google URL Shortener
+74.125.237.1 goo.gl
+##Google app engine
+74.125.237.1 appengine.google.com
+----------------------
+收藏  http://just-ping.com 
+Hosts里的最新IP地址去哪里找？
+是的，这是一个问题，为什么有人就能搞到直接有效的ip地址呢？他们是如何找到的？好吧，我介绍在线网站给大家吧，大家切记收藏http://just-ping.com它可以在全世界里ping我们所访问的域名。过这个网站，可以很容易找到其他网站的真实IP，再用上面的方法改hosts.在使用过这个网站，可以很容易找到其他网站的真实IP.
+使用这个站查询到Gmail的真实IP, Yesure很快很顺利的打开了自己的Gmail.目前http://just-ping.com还不支持加密连接，很可能在使用的过程中也会被重置。当然对于一些相对来说合法的站来说，应该问题是不大的。当然IP被封的话此方法是无效的，也并不是所有上面显示的IP是可用的,这个得试.记得改完Hosts记得刷新下你的DNS，运行ipconfig /flushdns命令清除本机DNS缓存。最好再重启下浏览器。

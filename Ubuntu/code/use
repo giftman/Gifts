@@ -1,0 +1,53 @@
+sudo shutdown -h now
+sudo shutdown -r now #reboot
+sync;sync;sync;reboot
+
+
+chown (-R) user:user file/reposity
+chmod (-R) 777(4:2:1) file/reposity 
+
+
+ll = ls -l
+
+
+cp -r -a /etc /tmp
+cp -s bashrc bashrc_slink   #建立快捷方式
+cp -u ~/.bashrc /tmp/bashrc  #只有目标档案与来源档案有差异时，才会复制，常用于备份工作中
+rm -- -aaa-
+
+mv #复制一档案，建立一目录，更名
+
+umask 002 #要减掉的权限
+#建立档案 没有可执行x的权限 最大为666
+#建立为目录，变即777
+
+#目标：了解到为何项目开发时，目录最好需要设定SGID的权限!
+#所以最终的结果显示，此目录的权限最好是2770，这样两人才可以互相修改对方的档案。 	
+
+
+suid -a sgid 还不是很懂--
+第八章跳过
+
+
+bzip2  -d 解
+	-z 压
+	-k 保留原文件
+	-9 -1 压缩比
+单文件操作
+
+
+find /home -name .bashrc > list_right 2> list_error
+
+:;,&&,||
+
+last | grep 'root' |cut -d ' ' -f1
+-c 找到次数 
+--color=auto
+
+cp #复制目录只可cp到有的目录，不会自动创建(比如说drawable_bak存在，复制到它就行，再复制到它下面的不存在的abc目录就不可以啦)，有后面的/和没效果一样
+cp SanGuo_Main/res/drawable-xxhdpi/ drawable_bak -rp
+cp SanGuo_Main/res/drawable-xxhdpi/ drawable_bak/drawable-xxhdpi/ -rp
+#上面两行效果一致
+
+
+test 

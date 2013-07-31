@@ -1,0 +1,11 @@
+#!/bin/bash 
+sgpath=SanGuo_Main
+bakpath=drawable_bak
+
+echo "Begin"
+cp $sgpath/res/drawable-xxhdpi/ $bakpath/drawable-xxhdpi/ -rp
+cp $sgpath/res/drawable-hdpi/ $bakpath/drawable-hdpi/ -rp
+cp $sgpath/res/drawable-mdpi/ $bakpath/drawable-mdpi/ -rp
+cp $sgpath/res/drawable-ldpi/ $bakpath/drawable-ldpi/ -rp
+cp $sgpath/assets/c_480x320/ $bakpath/c_480x320/ -rp
+

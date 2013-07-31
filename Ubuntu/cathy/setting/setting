@@ -1,0 +1,14 @@
+no permission:  sudo chmod 777 /usr/bin/XXX
+java
+android sdk (permission .. and the usr/bin..after I change its user , it crash...I change it back by diskU
+maven 
+#sudo apt-get install subversion
+#sudo apt-get install libapache2-svn
+sudo apt-get install samba
+#查看文件及文件夹容量
+du -h --max-depth=1 /opt/android/*
+#查看系统数据块使用情况
+df -h
+
+svn co svn://10.1.1.99/dev/client_android/SanGuo_Client_v2.1_tag/SanGuo_Main_2.11_final/SanGuo_Main /media/repository/workplace/SanGuo_Main
+
