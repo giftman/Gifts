@@ -1,0 +1,17 @@
+<?xml version="1.0" ?><cherrytree><node name="BroadcastReceiver" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="1"><rich_text></rich_text><node name="Indroduction" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="2"><rich_text>Broadcastreceiver本质上只是一个</rich_text><rich_text scale="h2">系统级的监听器</rich_text><rich_text>－－它专门负责监听各程序所发出的Broadcast
+
+</rich_text><node name="启动Receiver" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="3"><rich_text>First: 创建需要启动的BroadcastReceiver的Intent
+Second:调用Context　的　sendBroadcast()或sendOrderedBroadcast()方法来启动指定的BroadcastReceiver.
+
+</rich_text></node><node name="指定Receiver的Intent" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="4"><rich_text>两种方法：
+一种自定义注册。
+一种在Manifest注册。
+
+
+• 执行完onReceiver方法BroadcastReceiver的实例就会被销毁。
+• 不要在onReceiver()方法里执行一些耗时的操作。</rich_text></node></node><node name="两种广播方式" prog_lang="custom-colors" readonly="False" tags="Broadcast" unique_id="5"><rich_text></rich_text><node name="Ｎormal" prog_lang="custom-colors" readonly="False" tags="Broadcast" unique_id="6"><rich_text>大家都可以接收到，效率高。缺点当然是不能处理完一个再交给下一个，也无法终止。</rich_text></node><node name="Ordered Broadcast" prog_lang="custom-colors" readonly="False" tags="Broadcast" unique_id="7"><rich_text>可以一个传完给下一个，中间也可以加以处理再继续传递。
+
+有优先级：
+android:priority 数越大优先级越高，取值范围为-1000~1000.
+
+</rich_text></node></node></node></cherrytree>

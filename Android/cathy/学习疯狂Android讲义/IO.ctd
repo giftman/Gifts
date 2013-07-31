@@ -1,0 +1,177 @@
+<?xml version="1.0" ?><cherrytree><node name="IO" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="1"><rich_text></rich_text><node name="SharePreference" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="2"><rich_text>少量简单数据保存：
+SharePreference本身是一个接口，程序无法直接创建SharePreferences实例，只能通过Context提供的getSharedPreferences(String name , int mode)方法来获取SharedPreferences实例。
+支持只允许自己程序读写，允许其它程序读，允许其它程序读写三种。
+
+方法：
+contains
+getAll();
+getXXX
+
+读写：
+editor=preference.editor;
+editor clear();
+editor putXXX
+editor remove
+commit
+
+</rich_text><rich_text justification="left"></rich_text><rich_text>
+
+读写其他应用SharePreferences
+１　需要创建其他程序对应的Context,例如如下代码：
+useCount ==createPackageContext(&quot;org.crazyit.io&quot; , Context.CONTEXT_IGNORE_SECURITY);
+
+2   调用其它程序的Context 的getSharedPreferences
+
+3   如果要更改数据，调用editor
+
+</rich_text><codebox char_offset="290" frame_height="200" frame_width="700" highlight_brackets="False" show_line_numbers="False" syntax_highlighting="java" width_in_pixels="True">public class MainActivity extends Activity {
+	SharedPreferences preferences;
+	SharedPreferences.Editor editor;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		preferences=getSharedPreferences(&quot;cool&quot;, MODE_WORLD_READABLE);
+		editor=preferences.edit();
+		SimpleDateFormat sdf=new SimpleDateFormat(&quot;yyyy年MM月dd日&quot;+&quot;hh:mm:ss&quot;);
+		editor.putString(&quot;time&quot;, sdf.format(new Date()));
+		editor.putInt (&quot;random&quot;, (int)(Math.random()*100));
+		editor.commit();
+		String time= preferences.getString(&quot;time&quot;, null);
+		int random=preferences.getInt(&quot;random&quot;, 0);
+		String result= time==null? &quot;No record&quot;:&quot;time is : &quot;+time +&quot;/nThe number is:&quot; + random;
+		Toast.makeText(this, result, 1000).show();
+			
+		}
+	}</codebox><codebox char_offset="495" frame_height="200" frame_width="700" highlight_brackets="False" show_line_numbers="False" syntax_highlighting="java" width_in_pixels="True">@Override
+	public void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		Context useCount = null;
+		try
+		{
+			// 获取其他程序所对应的Context
+			useCount = createPackageContext(&quot;org.crazyit.io&quot;,
+				Context.CONTEXT_IGNORE_SECURITY);
+		}
+		catch (NameNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		// 使用其他程序的Context获取对应的SharedPreferences
+		SharedPreferences prefs = useCount.getSharedPreferences(&quot;count&quot;,
+			Context.MODE_WORLD_READABLE);
+		// 读取数据
+		int count = prefs.getInt(&quot;count&quot;, 0);
+		TextView show = (TextView) findViewById(R.id.show);
+		// 显示读取的数据内容
+		show.setText(&quot;UseCount应用程序以前被使用了&quot; + count + &quot;次。&quot;);
+	}</codebox></node><node name="File" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="3"><rich_text></rich_text><node name="openFileInput&amp;openFileOutput" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="4"><rich_text>所打开的都是应用程序的数据文件夹里的文件。</rich_text></node><node name="SD" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="5"><rich_text>FileInputStream, FileOutputStream,FileReader/FileWriter
+
+简单SD卡文件浏览器：
+即使是这样赋值：File root=new File(&quot;/mnt/sdcard/&quot;);
+读出来的后面都会没有“／”，自己加上。
+
+
+
+</rich_text><codebox char_offset="134" frame_height="200" frame_width="700" highlight_brackets="False" show_line_numbers="False" syntax_highlighting="java" width_in_pixels="True">public class MainActivity extends Activity {
+	ListView listView;
+	TextView textView;
+	File currentParent;
+	File[] currentFiles;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		listView=(ListView)findViewById(R.id.list);
+		textView=(TextView)findViewById(R.id.path);
+		File root=new File(&quot;/mnt/sdcard/&quot;);
+		if(root.exists()){
+			currentParent = root;
+			currentFiles = root.listFiles();
+			inflateListView(currentFiles);
+		}
+		listView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView&lt;?&gt; parent, View view, int position,
+					long id) {
+				if(currentFiles[position].isFile()){
+					String path=currentParent+&quot;/&quot;+currentFiles[position].getName();
+					Toast.makeText(MainActivity.this, path, 20000).show();
+					return;
+				}
+				File[] tmp=currentFiles[position].listFiles();
+				if(tmp == null || tmp.length==0){
+					Toast.makeText(MainActivity.this, &quot;No file&quot;, 200).show();
+				}else{
+					currentParent =currentFiles[position];
+					currentFiles=tmp;
+					inflateListView(currentFiles);
+				}
+			}
+		});
+		Button parent =(Button)findViewById(R.id.parent);
+		parent.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				try {
+					if(!currentParent.getCanonicalPath().equals(&quot;/mnt/sdcard&quot;)){
+						currentParent = currentParent.getParentFile();
+						currentFiles = currentParent.listFiles();
+						inflateListView(currentFiles);
+					}
+				} catch (IOException e) {
+					// TODO: handle exception
+				}
+				
+			}
+		});
+	}
+
+	private void inflateListView(File[] files) {
+		List&lt;Map&lt;String,Object&gt;&gt; listItems = new ArrayList&lt;Map&lt;String,Object&gt;&gt;();
+		for (int i=0;i&lt;files.length;i++){
+			Map&lt;String,Object&gt; listItem = new HashMap&lt;String, Object&gt;();
+			if(files[i].isDirectory()){
+				listItem.put(&quot;icon&quot;,R.drawable.folder);
+			}else{
+				listItem.put(&quot;icon&quot;, R.drawable.file);
+			}
+			listItem.put(&quot;fileName&quot;,files[i].getName());
+			listItems.add(listItem);
+		}
+		SimpleAdapter simpleAdapter= new SimpleAdapter(this, listItems, R.layout.line, new String[]{&quot;icon&quot;,&quot;fileName&quot;}, new int[]{R.id.icon,R.id.file_name});
+		listView.setAdapter(simpleAdapter); 
+		try{
+			textView.setText(currentParent.getCanonicalPath());
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+}</codebox><codebox char_offset="137" frame_height="200" frame_width="700" highlight_brackets="False" show_line_numbers="False" syntax_highlighting="xml" width_in_pixels="True">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+	android:orientation=&quot;horizontal&quot;
+	android:layout_width=&quot;fill_parent&quot;
+	android:layout_height=&quot;fill_parent&quot;
+	&gt;	
+&lt;!-- 定义一个ImageView，用于作为列表项的一部分。 --&gt;
+&lt;ImageView android:id=&quot;@+id/icon&quot;
+	android:layout_width=&quot;wrap_content&quot;
+	android:layout_height=&quot;wrap_content&quot; 
+	android:paddingLeft=&quot;10dp&quot;
+	/&gt;
+&lt;!-- 定义一个TextView，用于作为列表项的一部分。 --&gt;
+&lt;TextView android:id=&quot;@+id/file_name&quot;
+	android:layout_width=&quot;wrap_content&quot; 
+	android:layout_height=&quot;wrap_content&quot;
+	android:textSize=&quot;16dp&quot;
+	android:gravity=&quot;center_vertical&quot;
+	android:paddingLeft=&quot;10dp&quot;
+	android:paddingTop=&quot;10dp&quot;
+	android:paddingBottom=&quot;10dp&quot;	
+	/&gt;	
+&lt;/LinearLayout&gt;</codebox></node></node></node></cherrytree>

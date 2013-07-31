@@ -1,0 +1,352 @@
+<?xml version="1.0" ?><cherrytree><node name="ErroLog" prog_lang="custom-colors" readonly="False" tags="errorLog" unique_id="1"><rich_text></rich_text><node name="Xml" prog_lang="custom-colors" readonly="False" tags="errorLog" unique_id="2"><rich_text>12-08 23:03:57.630: E/AndroidRuntime(19869): java.lang.RuntimeException: Unable to start activity ComponentInfo{whu.iss.sric.android/whu.iss.sric.android.WelActivity}: java.lang.ClassCastException: whu.iss.sric.view.GameView cannot be cast to android.widget.LinearLayout
+
+提示信息ClassCastException: android.widget.ImageView can not be cast to android.view.ViewGroup
+楼主明白这个提示的意思吧？
+就是说类转换异常，不能把ImageView转换为ViewGroup.
+也就是说不能把ImageView当做ViewGroup来用，简单点说就是不能在ImageView里面包含其他控件；而楼主的layout中ImageView里面还嵌套了LinearLayout, LinearLayout下又嵌套了TableLayout， ...</rich_text></node><node name="java中由形参传递到方法内的对象" prog_lang="custom-colors" readonly="False" tags="java中由形参传递到方法内的对象" unique_id="3"><rich_text>
+</rich_text><rich_text scale="h2">java中由形参传递到方法内的对象</rich_text><rich_text>
+
+
+	public class EqualExample  {
+
+		 String str=new String(&quot;good&quot;);
+
+		 char[] ch={'a','b','c'};
+
+		 public static void main(String args[]){
+
+		 EqualExample ex=new EqualExample();
+
+		 ex.change(ex.str,ex.ch);
+
+		 System.out.print(ex.str+&quot; and &quot;);
+
+		 System.out.print(ex.ch) ;
+
+		 }
+
+		 public void change(String str,char ch[]){
+
+		 str=&quot;test ok&quot;;
+
+		 ch[0]= 'g' ;
+
+		 }
+
+		}
+		
+		
+		</rich_text><rich_text foreground="#00000000ffff">问题：这个的结果为什么是 good and gbc?  (因为对于它们来说都是引用了对象，而string类型比较特殊，是final，任何改变都是新造一个)</rich_text><rich_text>
+		
+		
+		既不是本身，也不是复制品，对象引用指向你的实际对象，对象引用只是访问对象的途径
+java的参数传递永远是值传递，传递的就是一个引用的copy，这时有两个引用，一个是原来的一个是参数声明的，但是因为引用有两种类型，一种是基本数据类型的引用，他们的copy就是原值，1就是1,2就是2，相当于两个引用都各自有了自己的值，所以你在方法里改变的只是参数的值，跟传递前引用指向的值没有关系，二种是对象引用，他们的copy值是个地址，就是两个引用都指向一个对象的地址，你改变这个地址或者改变这个地址里面的值都是实际改变传递之前的对象值
+        如果非参数传递：  基本类型 可以直接改变，对象 改变对象引用的地址 相当于换了个对象，引用指向另一个对象了，那么对象里面有的值自然也变了
+如果是参数传递： 基本类型 传递进方法内部，原来的值没有被改变，你所谓的‘=’就是赋值过程，那么你在方法内部对其任何赋值都不会改变原来的值，原因上面已经回答你了，copy的是值，有两个独立里引用独立的值。 
+        对象类型 因为对象引用是把地址的copy给参数中新声明的引用，相当于两个引用，一个值，所以如果你对对象里面包含的int或者String或者什么其他属性修改（赋值过程），那么原来的对象里面的值也修改了
+String类型在java里极特殊，他是final的，不能改变，你的任何改变String的方式只是新造了个String对象给原来的引用而已，可以用replace（）方法改变某个char，但是“aba”.replace（‘a’，‘c’）结果是“cbc”全部都会改，不知道对你是否有用</rich_text></node><node name="快捷失效" prog_lang="custom-colors" readonly="False" tags="" unique_id="4"><rich_text link="webs http://www.myexception.cn/eclipse/457187.html">http://www.myexception.cn/eclipse/457187.html</rich_text><rich_text>
+
+     
+</rich_text><rich_text scale="h1">       eclipse停 alt+/快捷键方式失效的解决      </rich_text><rich_text>
+             www.MyException.Cn   发布于：2012-06-26 10:04:13   浏览：33次                          eclipse下 alt+/快捷键方式失效的解决
+     
+eclipse下 alt+/快捷键方式失效的解决 eclipse使用时间不长，看到很多快捷的代码编写方法，可是alt+/这种方法对我怎么就无效呢？？  
+
+尤其经常用到System.out.println()，很多文章都说输入sysout然后按下alt+/就可以自动转换，可我怎么试验都无效，到处寻找资料。。。。
+
+原来还是出在eclipse不同版本的设置问题上。  我使用的是 eclipse 3.1.1 在 Window - Preferences - General - Keys 内找到</rich_text><rich_text foreground="#ff0000">Content Assist</rich_text><rich_text>，发现他的快捷键居然是 Ctrl+SpaceBar  这不是跟咱们操作系统输入法的快捷冲突了吗？ 难怪不管用，把这个设置成 </rich_text><rich_text foreground="#ff0000">atl+/ 就可以</rich_text><rich_text>了！  不过还要注意哟，如果Keys里面还有其他用到alt+/的地方也要修改，快捷键不能相同的！ 然后一切OK啦！ 附：简要方法：在 Window -  Preferences - General - Keys 内 1、把</rich_text><rich_text foreground="#ff0000">word  completion</rich_text><rich_text>的快捷键设置</rich_text><rich_text foreground="#ff0000">alt+C</rich_text><rich_text> 2、把Content  Assist的快捷键由ctrl+space改成alt+/
+(注：其中when的选择不要弄错选择Editing text（包含in java， in jsp），选择in  window还是有问题的，貌似集合太大，反而不认)
+-----------------------------------------------------------------------------------------------------------------
+每个项目用的eclipse版本经常不一样，换了一个之后alt+/就失灵了，但这个功能是最常用的:) 解决方法：在 Window - Preferences  - General - Keys 内
+</rich_text><rich_text foreground="#ff0000">1、把word completion的快捷键设置alt+C</rich_text><rich_text>
+</rich_text><rich_text foreground="#ff0000">2、把Content Assist的快捷键由ctrl+space改成alt+/</rich_text><rich_text>
+-------------------------------------------------------------------------------------------------------------------------
+eclipse快捷键大全2007年03月21日 星期三 14:03eclipse快捷键大全 1. 常用快捷键 
+(1)Ctrl+Space  
+说明:内容助理。提供对方法,变量,参数,javadoc等得提示, 
+应运在多种场合,总之需要提示的时候可先按此快捷键。  
+注:避免输入法的切换设置与此设置冲突 
+
+(2)Ctrl+Shift+Space 
+说明:变量提示 
+(3)Ctrl+/  
+说明:添加/消除//注释,在eclipse2.0中,消除注释为Ctrl+\ 
+
+(4)Ctrl+Shift+/ 
+说明:添加/*  */注释 
+
+(5)Ctrl+Shift+\ 
+说明:消除/* */注释 
+
+(6)Ctrl+Shift+F  
+说明:自动格式化代码 
+
+(7)Ctrl+1 
+说明:批量修改源代码中的变量名,此外还可用在catch块上.  
+
+(8)Ctril+F6 
+说明:界面切换 
+
+(9)Ctril+Shift+M 
+说明:查找所需要得包  
+
+(10)Ctril+Shift+O 
+说明:自动引入所需要得包 
+
+(11)Ctrl+Alt+S  
+说明:源代码得快捷菜单。其中的Generate getters and setters 和 Surround with try/catch  
+block比较常用.建议把它们添加为快捷键.快捷键设置在windows-&gt;preferences-&gt;Workbench-&gt;Keys  
+
+2. 快捷键列表 
+
+编辑 
+作用域 功能 快捷键 
+全局 查找并替换 Ctrl+F 
+文本编辑器 查找上一个  Ctrl+Shift+K 
+文本编辑器 查找下一个 Ctrl+K 
+全局 撤销 Ctrl+Z 
+全局 复制 Ctrl+C 
+全局  恢复上一个选择 Alt+Shift+↓ 
+全局 剪切 Ctrl+X 
+全局 快速修正 Ctrl1+1 
+全局 内容辅助 Alt+/  
+全局 全部选中 Ctrl+A 
+全局 删除 Delete 
+全局 上下文信息  Alt+？Alt+Shift+?Ctrl+Shift+Space 
+Java编辑器 显示工具提示描述 F2 
+Java编辑器 选择封装元素  Alt+Shift+↑ 
+Java编辑器 选择上一个元素 Alt+Shift+← 
+Java编辑器 选择下一个元素 Alt+Shift+→  
+文本编辑器 增量查找 Ctrl+J 
+文本编辑器 增量逆向查找 Ctrl+Shift+J 
+全局 粘贴 Ctrl+V 
+全局 重做  Ctrl+Y 
+
+查看 
+作用域 功能 快捷键 
+全局 放大 Ctrl+= 
+全局 缩小 Ctrl+- 
+
+窗口  
+作用域 功能 快捷键 
+全局 激活编辑器 F12 
+全局 切换编辑器 Ctrl+Shift+W 
+全局 上一个编辑器  Ctrl+Shift+F6 
+全局 上一个视图 Ctrl+Shift+F7 
+全局 上一个透视图 Ctrl+Shift+F8 
+全局  下一个编辑器 Ctrl+F6 
+全局 下一个视图 Ctrl+F7 
+全局 下一个透视图 Ctrl+F8 
+文本编辑器 显示标尺上下文菜单  Ctrl+W 
+全局 显示视图菜单 Ctrl+F10 
+全局 显示系统菜单 Alt+- 
+
+导航 
+作用域 功能 快捷键  
+Java编辑器 打开结构 Ctrl+F3 
+全局 打开类型 Ctrl+Shift+T 
+全局 打开类型层次结构 F4 
+全局 打开声明  F3 
+全局 打开外部javadoc Shift+F2 
+全局 打开资源 Ctrl+Shift+R 
+全局 后退历史记录 Alt+←  
+全局 前进历史记录 Alt+→ 
+全局 上一个 Ctrl+, 
+全局 下一个 Ctrl+. 
+Java编辑器 显示大纲 Ctrl+O  
+全局 在层次结构中打开类型 Ctrl+Shift+H 
+全局 转至匹配的括号 Ctrl+Shift+P 
+全局 转至上一个编辑位置  Ctrl+Q 
+Java编辑器 转至上一个成员 Ctrl+Shift+↑ 
+Java编辑器 转至下一个成员 Ctrl+Shift+↓  
+文本编辑器 转至行 Ctrl+L 
+
+搜索 
+作用域 功能 快捷键 
+全局 出现在文件中 Ctrl+Shift+U 
+全局  打开搜索对话框 Ctrl+H 
+全局 工作区中的声明 Ctrl+G 
+全局 工作区中的引用 Ctrl+Shift+G 
+
+文本编辑  
+作用域 功能 快捷键 
+文本编辑器 改写切换 Insert 
+文本编辑器 上滚行 Ctrl+↑ 
+文本编辑器 下滚行 Ctrl+↓  
+
+文件 
+作用域 功能 快捷键 
+全局 保存 Ctrl+X Ctrl+S 
+全局 打印 Ctrl+P 
+全局 关闭  Ctrl+F4 
+全局 全部保存 Ctrl+Shift+S 
+全局 全部关闭 Ctrl+Shift+F4 
+全局 属性 Alt+Enter  
+全局 新建 Ctrl+N 
+
+项目 
+作用域 功能 快捷键 
+全局 全部构建 Ctrl+B 
+
+源代码  
+作用域 功能 快捷键 
+Java编辑器 格式化 Ctrl+Shift+F 
+Java编辑器 取消注释 Ctrl+\ 
+Java编辑器  注释 Ctrl+/ 
+Java编辑器 添加导入 Ctrl+Shift+M 
+Java编辑器 组织导入 Ctrl+Shift+O  
+Java编辑器 使用try/catch块来包围 未设置，太常用了，所以在这里列出,建议自己设置。 
+也可以使用Ctrl+1自动修正。  
+
+运行 
+作用域 功能 快捷键 
+全局 单步返回 F7 
+全局 单步跳过 F6 
+全局 单步跳入 F5 
+全局  单步跳入选择 Ctrl+F5 
+全局 调试上次启动 F11 
+全局 继续 F8 
+全局 使用过滤器单步执行 Shift+F5 
+全局  添加/去除断点 Ctrl+Shift+B 
+全局 显示 Ctrl+D 
+全局 运行上次启动 Ctrl+F11 
+全局 运行至行 Ctrl+R  
+全局 执行 Ctrl+U 
+
+重构 
+作用域 功能 快捷键 
+全局 撤销重构 Alt+Shift+Z 
+全局 抽取方法  Alt+Shift+M 
+全局 抽取局部变量 Alt+Shift+L 
+全局 内联 Alt+Shift+I 
+全局 移动  Alt+Shift+V 
+全局 重命名 Alt+Shift+R 
+全局 重做 Alt+Shift+Y  
+
+
+
+
+
+由  于新的公司使用的eclipse+myEclipe的插件开发，myEclipse的插件对Hibernate和Struts的支持要比IDEA操作容易  的多，原来制作Hibernate的POJO和配置XML都是自己写ant文件，虽然可以实现同样的功能，但是ant写起来真的好费时间，而且出错后找问  题很不方便，在struts的编写，原来一直都是手工编写XML，form，action和jsp，这种开发效率实在是低，为了以后能够尽快融入新的工作环境，保证开发速度，现在必须学习eclipe的使用。  
+
+其实开发工具个人认为大体都是相同的，不同的只是快捷键的使用，而且快捷键是开发中的利器，所以首先从快捷键开始学习吧！  
+
+Eclipse快捷键指南 
+
+本文档从Eclipse软件上整理，是列出了标准的快捷键，未列出Emacs快捷键。 
+
+编辑  
+作用域 功能 快捷键 
+全局 查找并替换 Ctrl+F 
+文本编辑器 查找上一个 Ctrl+Shift+K 
+文本编辑器 查找下一个  Ctrl+K 
+全局 撤销 Ctrl+Z 
+全局 复制 Ctrl+C 
+全局 恢复上一个选择 Alt+Shift+↓ 
+全局 剪切  Ctrl+X 
+全局 快速修正 Ctrl1+1 
+全局 内容辅助 Alt+/ 
+全局 全部选中 Ctrl+A 
+全局 删除 Delete  
+全局 上下文信息 Alt+？ 
+Alt+Shift+? 
+Ctrl+Shift+Space 
+Java编辑器 显示工具提示描述 F2  
+Java编辑器 选择封装元素 Alt+Shift+↑ 
+Java编辑器 选择上一个元素 Alt+Shift+← 
+Java编辑器  选择下一个元素 Alt+Shift+→ 
+文本编辑器 增量查找 Ctrl+J 
+文本编辑器 增量逆向查找 Ctrl+Shift+J 
+全局  粘贴 Ctrl+V 
+全局 重做 Ctrl+Y 
+
+
+
+查看 
+作用域 功能 快捷键 
+全局 放大 Ctrl+=  
+全局 缩小 Ctrl+- 
+
+
+
+窗口 
+作用域 功能 快捷键 
+全局 激活编辑器 F12 
+全局 切换编辑器  Ctrl+Shift+W 
+全局 上一个编辑器 Ctrl+Shift+F6 
+全局 上一个视图 Ctrl+Shift+F7 
+全局  上一个透视图 Ctrl+Shift+F8 
+全局 下一个编辑器 Ctrl+F6 
+全局 下一个视图 Ctrl+F7 
+全局 下一个透视图  Ctrl+F8 
+文本编辑器 显示标尺上下文菜单 Ctrl+W 
+全局 显示视图菜单 Ctrl+F10 
+全局 显示系统菜单 Alt+-  
+
+
+导航 
+作用域 功能 快捷键 
+Java编辑器 打开结构 Ctrl+F3 
+全局 打开类型 Ctrl+Shift+T  
+全局 打开类型层次结构 F4 
+全局 打开声明 F3 
+全局 打开外部javadoc Shift+F2 
+全局 打开资源  Ctrl+Shift+R 
+全局 后退历史记录 Alt+← 
+全局 前进历史记录 Alt+→ 
+全局 上一个 Ctrl+, 
+全局  下一个 Ctrl+. 
+Java编辑器 显示大纲 Ctrl+O 
+全局 在层次结构中打开类型 Ctrl+Shift+H 
+全局 转至匹配的括号  Ctrl+Shift+P 
+全局 转至上一个编辑位置 Ctrl+Q 
+Java编辑器 转至上一个成员 Ctrl+Shift+↑  
+Java编辑器 转至下一个成员 Ctrl+Shift+↓ 
+文本编辑器 转至行 Ctrl+L 
+
+
+搜索 
+作用域 功能  快捷键 
+全局 出现在文件中 Ctrl+Shift+U 
+全局 打开搜索对话框 Ctrl+H 
+全局 工作区中的声明 Ctrl+G  
+全局 工作区中的引用 Ctrl+Shift+G 
+
+
+文本编辑 
+作用域 功能 快捷键 
+文本编辑器 改写切换  Insert 
+文本编辑器 上滚行 Ctrl+↑ 
+文本编辑器 下滚行 Ctrl+↓ 
+
+
+文件 
+作用域 功能 快捷键  
+全局 保存 Ctrl+X 
+Ctrl+S 
+全局 打印 Ctrl+P 
+全局 关闭 Ctrl+F4
+</rich_text></node><node name="ExpandableListView 设置默认打开不闭合" prog_lang="java" readonly="False" tags="ExpandableListView" unique_id="5"><rich_text>请问怎样使ExpandableListView  默认打开不会闭合。
+
+我现在实现了默认打开，但是点击group item的时候就会闭合
+
+我的child item 有事件响应
+
+请问怎样让group item取消默认的点击事件呢
+
+已解决，方法在8楼
+
+
+
+设置展开
+                for(int i = 0; i &lt; groups.length; i++){
+                        
+                        expandableListView.expandGroup(i);
+                        
+                }
+然后在adapter 的getGroupView 方法中设置   convertView.setClickable(true);   convertView是你要返回的view
+
+这样就达到了标题 要求的效果。
+
+
+如果帮到你了，请不要吝啬你的回复，这是对我最大的鼓励，谢谢！！！</rich_text></node></node></cherrytree>

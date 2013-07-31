@@ -1,0 +1,75 @@
+Convert.ToDateTime("2007-02-02 11:22:33").ToString("yyyy-MM-dd hh:mm:ss");
+
+引申:
+
+d 	月中的某一天 	一位数的日期没有前导零
+dd 	月中的某一天 	一位数的日期有一个前导零
+ddd 	周中某天的缩写名称 	在 AbbreviatedDayNames 中定义
+dddd 	周中某天的完整名称 	在 DayNames 中定义
+M 	月份数字 	一位数的月份没有前导零
+MM 	月份数字 	一位数的月份有一个前导零
+MMM 	月份的缩写名称 	在 AbbreviatedMonthNames 中定义
+MMMM 	月份的完整名称 	在 MonthNames 中定义
+y 	不包含纪元的年份 	如果不包含纪元的年份小于 10，则显示不具有前导零的年份
+yy 	不包含纪元的年份 	如果不包含纪元的年份小于 10，则显示具有前导零的年份
+yyyy 	包括纪元的四位数的年份 	 
+h 	12 小时制的小时 	一位数的小时数没有前导零
+hh 	12 小时制的小时 	一位数的小时数有前导零
+H 	24 小时制的小时 	一位数的小时数没有前导零
+HH 	24 小时制的小时 	一位数的小时数有前导零
+m 	分钟 	一位数的分钟数没有前导零
+mm 	分钟 	一位数的分钟数有一个前导零
+s 	秒 	一位数的秒数没有前导零
+ss 	秒 	一位数的秒数有一个前导零
+
+Not a bug. getRelativeTimeSpanString will only give you a relative time string for upto one week in time defference. So if you use DateUtils.getRelativeTimeSpanString(time2, now, 0L, DateUtils.FORMAT_ABBREV_RELATIVE) with the following values
+
+long now = System.currentTimeMillis();
+long time2 = now - DateUtils.WEEK_IN_MILLIS;
+
+you'll get 1 October if today is 8 October, but
+
+long now = System.currentTimeMillis();
+long time2 = now - DateUtils.WEEK_IN_MILLIS + 1;
+
+will give you 7 days ago.
+
+
+
+Calendar mydate = new GregorianCalendar();
+String mystring = "January 2, 2010";
+Date thedate = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH).parse(mystring);
+mydate.setTime(thedate);
+//breakdown
+System.out.println("mydate -> "+mydate);
+System.out.println("year   -> "+mydate.get(Calendar.YEAR));
+System.out.println("month  -> "+mydate.get(Calendar.MONTH));
+System.out.println("dom    -> "+mydate.get(Calendar.DAY_OF_MONTH));
+System.out.println("dow    -> "+mydate.get(Calendar.DAY_OF_WEEK));
+System.out.println("hour   -> "+mydate.get(Calendar.HOUR));
+System.out.println("minute -> "+mydate.get(Calendar.MINUTE));
+System.out.println("second -> "+mydate.get(Calendar.SECOND));
+System.out.println("milli  -> "+mydate.get(Calendar.MILLISECOND));
+System.out.println("ampm   -> "+mydate.get(Calendar.AM_PM));
+System.out.println("hod    -> "+mydate.get(Calendar.HOUR_OF_DAY));
+
+
+public long getUtcTimeInMillis(String datetime) {
+		//datetime = StringToTime(datetime);
+	    SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy");
+	    Date date = null;
+		try {
+			date = sdf.parse(datetime);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	    // getInstance() provides TZ info which can be used to adjust to UTC
+	    Calendar cal = Calendar.getInstance();
+	    cal.setTime(date);
+
+	    // Get timezone offset then use it to adjust the return value
+	    int offset = cal.getTimeZone().getOffset(cal.getTimeInMillis());
+	    return cal.getTimeInMillis() + offset;
+	}

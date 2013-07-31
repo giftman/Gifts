@@ -1,0 +1,135 @@
+<?xml version="1.0" ?><cherrytree><node name="代码优化" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="1"><rich_text></rich_text><node name="判断空字符串" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="2"><rich_text>private void function2() {
+　　long startTime = System.currentTimeMillis();
+　　for (long i = 0; i &lt; n; i++) {
+　　if (s == null || s.length() &lt;= 0)
+　　;
+　　}
+　　long endTime = System.currentTimeMillis();
+　　System.out.println(&quot;function 2 use time: &quot; + (endTime - startTime)
+　　+ &quot;ms&quot;);
+　　}
+</rich_text></node><node name="横竖屏生命周期变化" prog_lang="custom-colors" readonly="False" tags="" unique_id="5"><rich_text>android:configChanges=&quot;keyboardHidden|orientation&quot;
+</rich_text><rich_text link="webs http://www.cnblogs.com/charley_yang/archive/2011/04/17/2018940.html">http://www.cnblogs.com/charley_yang/archive/2011/04/17/2018940.html</rich_text><rich_text>
+一、Activity 的 ConfigChanges 属性
+ 官方解释： 通过设置这个属性可以使Activity捕捉设备状态变化，以下是可以被识别的内容： 
+ 
+</rich_text><rich_text link="webs http://developer.android.com/reference/android/content/pm/ActivityInfo.html#CONFIG_FONT_SCALE">CONFIG_FONT_SCALE</rich_text><rich_text>
+</rich_text><rich_text link="webs http://developer.android.com/reference/android/content/pm/ActivityInfo.html#CONFIG_MCC">CONFIG_MCC</rich_text><rich_text>
+</rich_text><rich_text link="webs http://developer.android.com/reference/android/content/pm/ActivityInfo.html#CONFIG_MNC">CONFIG_MNC</rich_text><rich_text>
+</rich_text><rich_text link="webs http://developer.android.com/reference/android/content/pm/ActivityInfo.html#CONFIG_LOCALE">CONFIG_LOCALE</rich_text><rich_text>
+</rich_text><rich_text link="webs http://developer.android.com/reference/android/content/pm/ActivityInfo.html#CONFIG_TOUCHSCREEN">CONFIG_TOUCHSCREEN</rich_text><rich_text>
+</rich_text><rich_text link="webs http://developer.android.com/reference/android/content/pm/ActivityInfo.html#CONFIG_KEYBOARD">CONFIG_KEYBOARD</rich_text><rich_text>
+</rich_text><rich_text link="webs http://developer.android.com/reference/android/content/pm/ActivityInfo.html#CONFIG_NAVIGATION">CONFIG_NAVIGATION</rich_text><rich_text>
+</rich_text><rich_text link="webs http://developer.android.com/reference/android/content/pm/ActivityInfo.html#CONFIG_ORIENTATION">CONFIG_ORIENTATION</rich_text><rich_text>
+ 
+</rich_text><rich_text foreground="#0000ff">设置方法：将下列字段用“|”符号分隔开，例如：“locale|navigation|orientation”</rich_text><rich_text>
+ Value
+Description 
+</rich_text><rich_text foreground="#0000ff">“mcc“</rich_text><rich_text>
+The  IMSI mobile country code (MCC) has changed — that is, a SIM hasbeen  detected and updated the MCC.移动国家号码，由三位数字组成，每个国家都有自己独立的MCC，可以识别手机用户所属国家。  
+</rich_text><rich_text foreground="#0000ff">“mnc“</rich_text><rich_text>
+The IMSI mobile network  code (MNC) has changed — that is, a SIM hasbeen detected and updated the  MNC.移动网号，在一个国家或者地区中，用于区分手机用户的服务商。 
+</rich_text><rich_text foreground="#0000ff">“locale“</rich_text><rich_text>
+The locale has changed — for example, the user has selected a new language that text should be displayed in.用户所在地区发生变化。 
+</rich_text><rich_text foreground="#0000ff">“touchscreen“</rich_text><rich_text>
+The touchscreen has changed. (This should never normally happen.) 
+</rich_text><rich_text foreground="#0000ff">“keyboard“</rich_text><rich_text>
+The keyboard type has changed — for example, the user has plugged in an external keyboard.键盘模式发生变化，例如：用户接入外部键盘输入。 
+</rich_text><rich_text foreground="#0000ff">“keyboardHidden“
+</rich_text><rich_text>The keyboard accessibility has changed — for example, the user has slid the keyboard out to expose it.用户打开手机硬件键盘 
+</rich_text><rich_text foreground="#0000ff">“navigation“</rich_text><rich_text>
+The navigation type has changed. (This should never normally happen.) 
+</rich_text><rich_text foreground="#0000ff">“orientation“</rich_text><rich_text>
+The screen orientation has changed — that is, the user has rotated the device.设备旋转，横向显示和竖向显示模式切换。 
+</rich_text><rich_text foreground="#0000ff">“fontScale“</rich_text><rich_text>
+The font scaling factor has changed — that is, the user has selected a new global font size.全局字体大小缩放发生改变 
+  
+项目的AndroidManifest.xml文件配置方法:
+
+</rich_text><codebox char_offset="1514" frame_height="200" frame_width="700" highlight_brackets="False" show_line_numbers="False" syntax_highlighting="custom-colors" width_in_pixels="True">&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+package=&quot;com.androidres.ConfigChangedTesting&quot;
+android:versionCode=&quot;1&quot;
+android:versionName=&quot;1.0.0&quot;&gt;
+&lt;application android:icon=&quot;@drawable/icon&quot; android:label=&quot;@string/app_name&quot;&gt;
+&lt;activity android:name=&quot;.ConfigChangedTesting&quot;
+android:label=&quot;@string/app_name&quot;
+android:configChanges=&quot;keyboardHidden|orientation&quot;&gt;
+&lt;intent-filter&gt;
+&lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+&lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+&lt;/intent-filter&gt;
+&lt;/activity&gt;
+&lt;/application&gt;
+&lt;/manifest&gt;</codebox></node><node name="ListView" prog_lang="custom-colors" readonly="False" tags="" unique_id="3"><rich_text></rich_text><node name="ListViewChecked" prog_lang="custom-colors" readonly="False" tags="" unique_id="4"><rich_text link="webs http://stackoverflow.com/questions/3742979/how-to-get-a-android-listview-item-selector-to-use-state-checked/4913266">http://stackoverflow.com/questions/3742979/how-to-get-a-android-listview-item-selector-to-use-state-checked/4913266</rich_text><rich_text>
+
+
+public class CheckableLinearLayout extends LinearLayout implements Checkable {
+private boolean checked = false;
+
+public CheckableLinearLayout(Context context) {
+    super(context, null);
+}
+
+public CheckableLinearLayout(Context context, AttributeSet attrs) {
+    super(context, attrs);       
+}
+
+private static final int[] CheckedStateSet = {
+    R.attr.state_checked
+};
+
+public void setChecked(boolean b) {
+    private final List&lt;Checkable&gt; mCheckableViews = new ArrayList&lt;Checkable&gt;();
+
+@Override
+protected void onFinishInflate() {
+    super.onFinishInflate();
+    final int childCount = getChildCount();
+    findCheckableChildren(this);
+}
+
+private void findCheckableChildren(View v) {
+    if (v instanceof Checkable &amp;&amp; v instanceof ViewGroup) {
+        mCheckableViews.add((Checkable) v);
+    }
+    if (v instanceof ViewGroup) {
+        final ViewGroup vg = (ViewGroup) v;
+        final int childCount = vg.getChildCount();
+        for (int i = 0; i &lt; childCount; ++i) {
+            findCheckableChildren(vg.getChildAt(i));
+        }
+    }
+}
+
+    @Override
+    public void setChecked(boolean checked) {
+        mChecked = checked;
+        for (Checkable c : mCheckableViews) {
+            c.setChecked(checked);
+        }
+        refreshDrawableState();
+    }
+}
+
+public boolean isChecked() {
+    return checked;
+}
+
+public void toggle() {
+    checked = !checked;
+}
+
+@Override
+protected int[] onCreateDrawableState(int extraSpace) {
+    final int[] drawableState = super.onCreateDrawableState(extraSpace + 1);
+    if (isChecked()) {
+        mergeDrawableStates(drawableState, CheckedStateSet);
+    }
+    return drawableState;
+}
+
+@Override
+public boolean performClick() {
+    toggle();
+    return super.performClick();
+}</rich_text></node></node></node></cherrytree>

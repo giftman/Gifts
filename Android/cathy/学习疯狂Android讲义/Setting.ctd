@@ -1,0 +1,164 @@
+<?xml version="1.0" ?><cherrytree><node name="Setting" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="1"><rich_text scale="h2">Preference</rich_text><rich_text>
+
+key/title/defaultValue　（必要元素）key在</rich_text><rich_text link="file L29wdC9TREsvYW5kcm9pZC1zZGstbGludXgvZG9jcy9yZWZlcmVuY2UvYW5kcm9pZC9wcmVmZXJlbmNlL1ByZWZlcmVuY2VDYXRlZ29yeS5odG1s">PreferenceCategory</rich_text><rich_text> or </rich_text><rich_text link="file L29wdC9TREsvYW5kcm9pZC1zZGstbGludXgvZG9jcy9yZWZlcmVuY2UvYW5kcm9pZC9wcmVmZXJlbmNlL1ByZWZlcmVuY2VTY3JlZW4uaHRtbA==">PreferenceScreen</rich_text><rich_text>或者用intent时不要
+
+</rich_text><rich_text justification="left"></rich_text><rich_text>
+
+</rich_text><rich_text justification="left"></rich_text><rich_text>
+
+你要分目录表示有两种：
+一种是dpendecy
+选了我才选它的。。。
+一种是就直接Category/groups
+
+子页面和用Intent的:
+
+
+</rich_text><rich_text scale="h2">Header</rich_text><rich_text> 
+还不懂，压根儿不知道它是什么样子的，我晕
+
+
+</rich_text><rich_text scale="h2">Reading Preferences</rich_text><rich_text> (读写Preference以及在可操作时监听他们的变化，这才是交互中最重要的)
+By default, all your app's preferences are saved to a file that's accessible from anywhere within your application by calling the static method </rich_text><rich_text link="file L29wdC9TREsvYW5kcm9pZC1zZGstbGludXgvZG9jcy9yZWZlcmVuY2UvYW5kcm9pZC9wcmVmZXJlbmNlL1ByZWZlcmVuY2VNYW5hZ2VyLmh0bWwjZ2V0RGVmYXVsdFNoYXJlZFByZWZlcmVuY2VzJTI4YW5kcm9pZC5jb250ZW50LkNvbnRleHQlMjk=">PreferenceManager.getDefaultSharedPreferences()</rich_text><rich_text>. This returns the </rich_text><rich_text link="file L29wdC9TREsvYW5kcm9pZC1zZGstbGludXgvZG9jcy9yZWZlcmVuY2UvYW5kcm9pZC9jb250ZW50L1NoYXJlZFByZWZlcmVuY2VzLmh0bWw=">SharedPreferences</rich_text><rich_text> object containing all the key-value pairs that are associated with the </rich_text><rich_text link="file L29wdC9TREsvYW5kcm9pZC1zZGstbGludXgvZG9jcy9yZWZlcmVuY2UvYW5kcm9pZC9wcmVmZXJlbmNlL1ByZWZlcmVuY2UuaHRtbA==">Preference</rich_text><rich_text> objects used in your </rich_text><rich_text link="file L29wdC9TREsvYW5kcm9pZC1zZGstbGludXgvZG9jcy9yZWZlcmVuY2UvYW5kcm9pZC9wcmVmZXJlbmNlL1ByZWZlcmVuY2VBY3Rpdml0eS5odG1s">PreferenceActivity</rich_text><rich_text>.
+For example, here's how you can read one of the preference values from any other activity in your application:
+SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+String syncConnPref = sharedPref.getString(SettingsActivity.KEY_PREF_SYNC_CONN, &quot;&quot;);Listening for preference changesThere are several reasons you might want to be notified as soon as the use changes one of the preferences. In order to receive a callback when a change happens to any one of the preferences, implement the </rich_text><rich_text link="file L29wdC9TREsvYW5kcm9pZC1zZGstbGludXgvZG9jcy9yZWZlcmVuY2UvYW5kcm9pZC9jb250ZW50L1NoYXJlZFByZWZlcmVuY2VzLk9uU2hhcmVkUHJlZmVyZW5jZUNoYW5nZUxpc3RlbmVyLmh0bWw=">SharedPreference.OnSharedPreferenceChangeListener</rich_text><rich_text> interface and register the listener for the </rich_text><rich_text link="file L29wdC9TREsvYW5kcm9pZC1zZGstbGludXgvZG9jcy9yZWZlcmVuY2UvYW5kcm9pZC9jb250ZW50L1NoYXJlZFByZWZlcmVuY2VzLmh0bWw=">SharedPreferences</rich_text><rich_text> object by calling </rich_text><rich_text link="file L29wdC9TREsvYW5kcm9pZC1zZGstbGludXgvZG9jcy9yZWZlcmVuY2UvYW5kcm9pZC9jb250ZW50L1NoYXJlZFByZWZlcmVuY2VzLmh0bWwjcmVnaXN0ZXJPblNoYXJlZFByZWZlcmVuY2VDaGFuZ2VMaXN0ZW5lciUyOGFuZHJvaWQuY29udGVudC5TaGFyZWRQcmVmZXJlbmNlcy5PblNoYXJlZFByZWZlcmVuY2VDaGFuZ2VMaXN0ZW5lciUyOQ==">registerOnSharedPreferenceChangeListener()</rich_text><rich_text>.
+The interface has only one callback method, </rich_text><rich_text link="file L29wdC9TREsvYW5kcm9pZC1zZGstbGludXgvZG9jcy9yZWZlcmVuY2UvYW5kcm9pZC9jb250ZW50L1NoYXJlZFByZWZlcmVuY2VzLk9uU2hhcmVkUHJlZmVyZW5jZUNoYW5nZUxpc3RlbmVyLmh0bWwjb25TaGFyZWRQcmVmZXJlbmNlQ2hhbmdlZCUyOGFuZHJvaWQuY29udGVudC5TaGFyZWRQcmVmZXJlbmNlcywlMjBqYXZhLmxhbmcuU3RyaW5nJTI5">onSharedPreferenceChanged()</rich_text><rich_text>, and you might find it easiest to implement the interface as a part of your activity. For example:
+
+In this example, the method checks whether the changed setting is for a known preference key. It calls </rich_text><rich_text link="file L29wdC9TREsvYW5kcm9pZC1zZGstbGludXgvZG9jcy9yZWZlcmVuY2UvYW5kcm9pZC9wcmVmZXJlbmNlL1ByZWZlcmVuY2VBY3Rpdml0eS5odG1sI2ZpbmRQcmVmZXJlbmNlJTI4amF2YS5sYW5nLkNoYXJTZXF1ZW5jZSUyOQ==">findPreference()</rich_text><rich_text> to get the </rich_text><rich_text link="file L29wdC9TREsvYW5kcm9pZC1zZGstbGludXgvZG9jcy9yZWZlcmVuY2UvYW5kcm9pZC9wcmVmZXJlbmNlL1ByZWZlcmVuY2UuaHRtbA==">Preference</rich_text><rich_text> object that was changed so it can modify the item's summary to be a description of the user's selection. That is, when the setting is a </rich_text><rich_text link="file L29wdC9TREsvYW5kcm9pZC1zZGstbGludXgvZG9jcy9yZWZlcmVuY2UvYW5kcm9pZC9wcmVmZXJlbmNlL0xpc3RQcmVmZXJlbmNlLmh0bWw=">ListPreference</rich_text><rich_text> or other multiple choice setting, you should call </rich_text><rich_text link="file L29wdC9TREsvYW5kcm9pZC1zZGstbGludXgvZG9jcy9yZWZlcmVuY2UvYW5kcm9pZC9wcmVmZXJlbmNlL1ByZWZlcmVuY2UuaHRtbCNzZXRTdW1tYXJ5JTI4aW50JTI5">setSummary()</rich_text><rich_text> when the setting changes to display the current status (such as the Sleep setting shown in figure 5).
+Note: As described in the Android Design document about </rich_text><rich_text link="file L29wdC9TREsvYW5kcm9pZC1zZGstbGludXgvZG9jcy9kZXNpZ24vcGF0dGVybnMvc2V0dGluZ3MuaHRtbA==">Settings</rich_text><rich_text>, we recommend that you update the summary for a </rich_text><rich_text link="file L29wdC9TREsvYW5kcm9pZC1zZGstbGludXgvZG9jcy9yZWZlcmVuY2UvYW5kcm9pZC9wcmVmZXJlbmNlL0xpc3RQcmVmZXJlbmNlLmh0bWw=">ListPreference</rich_text><rich_text> each time the user changes the preference in order to describe the current setting.
+For proper lifecycle management in the activity, we recommend that you register and unregister your </rich_text><rich_text link="file L29wdC9TREsvYW5kcm9pZC1zZGstbGludXgvZG9jcy9yZWZlcmVuY2UvYW5kcm9pZC9jb250ZW50L1NoYXJlZFByZWZlcmVuY2VzLk9uU2hhcmVkUHJlZmVyZW5jZUNoYW5nZUxpc3RlbmVyLmh0bWw=">SharedPreferences.OnSharedPreferenceChangeListener</rich_text><rich_text> during the </rich_text><rich_text link="file L29wdC9TREsvYW5kcm9pZC1zZGstbGludXgvZG9jcy9yZWZlcmVuY2UvYW5kcm9pZC9hcHAvQWN0aXZpdHkuaHRtbCNvblJlc3VtZSUyOCUyOQ==">onResume()</rich_text><rich_text> and </rich_text><rich_text link="file L29wdC9TREsvYW5kcm9pZC1zZGstbGludXgvZG9jcy9yZWZlcmVuY2UvYW5kcm9pZC9hcHAvQWN0aXZpdHkuaHRtbCNvblBhdXNlJTI4JTI5">onPause()</rich_text><rich_text> callbacks, respectively:
+
+
+Providing a default value 还有Saving and restoring the Preference's state……</rich_text><codebox char_offset="97" frame_height="200" frame_width="700" highlight_brackets="False" show_line_numbers="False" syntax_highlighting="xml" width_in_pixels="True">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;PreferenceScreen xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; &gt;
+
+    &lt;!-- 设置系统铃声 --&gt;
+    &lt;RingtonePreference
+        android:key=&quot;ring_key&quot;
+        android:ringtoneType=&quot;all&quot;
+        android:showDefault=&quot;true&quot;
+        android:showSilent=&quot;true&quot;
+        android:summary=&quot;选择铃声（测试RingtonePreference)&quot;
+        android:title=&quot;设置铃声&quot; &gt;
+    &lt;/RingtonePreference&gt;
+
+    &lt;PreferenceCategory android:title=&quot;个人信息设置&quot; &gt;
+
+        &lt;!-- 通过输入框填写用户名 --&gt;
+        &lt;EditTextPreference
+            android:dialogTitle=&quot;您所使用的用户名为：&quot;
+            android:key=&quot;name&quot;
+            android:summary=&quot;填写您的用户名（测试EditTextPreference)&quot;
+            android:title=&quot;填写用户名&quot; /&gt;
+        &lt;!-- 通过列表框选择性别 --&gt;
+        &lt;ListPreference
+            android:dialogTitle=&quot;ListPreference&quot;
+            android:entries=&quot;@array/gender_name_list&quot;
+            android:entryValues=&quot;@array/gender_value_list&quot;
+            android:key=&quot;gender&quot;
+            android:summary=&quot;选择您的性别（测试ListPreference）&quot;
+            android:title=&quot;性别&quot; /&gt;
+    &lt;/PreferenceCategory&gt;
+    &lt;PreferenceCategory android:title=&quot;发送微博设置 &quot; &gt;
+        &lt;SwitchPreference
+            android:defaultValue=&quot;true&quot;
+            android:key=&quot;switch&quot;
+            android:title=&quot;WiFi下自动优化&quot; &gt;
+        &lt;/SwitchPreference&gt;
+
+        &lt;CheckBoxPreference
+            android:defaultValue=&quot;true&quot;
+            android:key=&quot;autoSave&quot;
+            android:summaryOff=&quot;自动保存: 关闭&quot;
+            android:summaryOn=&quot;自动保存: 开启&quot;
+            android:title=&quot;自动保存进度&quot; /&gt;
+
+        &lt;ListPreference
+            android:dialogTitle=&quot;上传图片质量&quot;
+            android:entries=&quot;@array/picture_value_name&quot;
+            android:entryValues=&quot;@array/picture_value_value&quot;
+            android:key=&quot;pictureValue&quot;
+            android:title=&quot;上传图片质量&quot; &gt;
+        &lt;/ListPreference&gt;
+    &lt;/PreferenceCategory&gt;
+    &lt;PreferenceCategory
+        android:key=&quot;pref_key_storage_settings&quot;
+        android:title=&quot; pref_sms_storage_title&quot; &gt;
+        &lt;CheckBoxPreference
+            android:defaultValue=&quot;false&quot;
+            android:key=&quot;pref_key_auto_delete&quot;
+            android:summary=&quot; pref_summary_auto_delete&quot;
+            android:title=&quot; pref_title_auto_delete&quot; /&gt;
+
+        &lt;SwitchPreference
+            android:defaultValue=&quot;true&quot;
+            android:dependency=&quot;pref_key_auto_delete&quot;
+            android:key=&quot;pref_key_mms_delete_limit&quot;
+            android:summary=&quot; pref_summary_delete_limit&quot;
+            android:title=&quot; 我dependency上面那个&quot; /&gt;
+    &lt;/PreferenceCategory&gt;
+
+    &lt;PreferenceScreen
+        android:key=&quot;screenPreference&quot;
+        android:persistent=&quot;false&quot;
+        android:title=&quot;NextPreference&quot; &gt;
+        &lt;MultiSelectListPreference
+            android:entries=&quot;@array/picture_value_name&quot;
+            android:entryValues=&quot;@array/picture_value_value&quot;
+            android:key=&quot;multiSelectListPreference&quot;
+            android:title=&quot;MultiSelect&quot; /&gt;
+    &lt;/PreferenceScreen&gt;
+
+    &lt;Preference android:title=&quot;Intent&quot; &gt;
+        &lt;intent
+            android:action=&quot;android.intent.action.VIEW&quot;
+            android:data=&quot;http://www.meizu.com&quot; /&gt;
+    &lt;/Preference&gt;
+
+&lt;/PreferenceScreen&gt;</codebox><codebox char_offset="100" frame_height="100" frame_width="700" highlight_brackets="False" show_line_numbers="False" syntax_highlighting="xml" width_in_pixels="True">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;resources&gt;
+&lt;string-array name=&quot;gender_name_list&quot;&gt;
+	&lt;item&gt;男&lt;/item&gt;
+	&lt;item&gt;女&lt;/item&gt;
+&lt;/string-array&gt;
+&lt;string-array name=&quot;gender_value_list&quot;&gt;
+	&lt;item&gt;male&lt;/item&gt;
+	&lt;item&gt;female&lt;/item&gt;
+&lt;/string-array&gt;
+&lt;string-array name=&quot;picture_value_name&quot;&gt;
+	&lt;item&gt;小&lt;/item&gt;
+	&lt;item&gt;中&lt;/item&gt;
+	&lt;item&gt;大&lt;/item&gt;
+&lt;/string-array&gt;
+&lt;string-array name=&quot;picture_value_value&quot;&gt;
+	&lt;item&gt;50&lt;/item&gt;
+	&lt;item&gt;100&lt;/item&gt;
+	&lt;item&gt;250&lt;/item&gt;
+&lt;/string-array&gt;
+&lt;/resources&gt;
+</codebox><codebox char_offset="1480" frame_height="100" frame_width="700" highlight_brackets="False" show_line_numbers="False" syntax_highlighting="custom-colors" width_in_pixels="True">public class SettingsActivity extends PreferenceActivity
+                              implements OnSharedPreferenceChangeListener {
+    public static final String KEY_PREF_SYNC_CONN = &quot;pref_syncConnectionType&quot;;
+    ...
+
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(KEY_PREF_SYNC_CONN)) {
+            Preference connectionPref = findPreference(key);
+            // Set summary to be the user-description for the selected value
+            connectionPref.setSummary(sharedPreferences.getString(key, &quot;&quot;));
+        }
+    }
+}</codebox><codebox char_offset="2364" frame_height="100" frame_width="700" highlight_brackets="False" show_line_numbers="False" syntax_highlighting="xml" width_in_pixels="True">@Override
+protected void onResume() {
+    super.onResume();
+    getPreferenceScreen().getSharedPreferences()
+            .registerOnSharedPreferenceChangeListener(this);
+}
+
+@Override
+protected void onPause() {
+    super.onPause();
+    getPreferenceScreen().getSharedPreferences()
+            .unregisterOnSharedPreferenceChangeListener(this);
+}</codebox></node></cherrytree>

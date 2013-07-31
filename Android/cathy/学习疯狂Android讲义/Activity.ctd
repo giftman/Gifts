@@ -1,0 +1,183 @@
+<?xml version="1.0" ?><cherrytree><node name="Activity" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="1"><rich_text></rich_text><node name="startACtivity(Intent intent)" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="2"><rich_text>finish();</rich_text></node><node name="startActivityForResult" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="3"><rich_text>finishActivity(int requestCode);
+startActivityForResult(intent , 0);
+启动其它Activity并返回结果：
+需要重写onActivityResult
+
+P.187
+</rich_text><rich_text justification="left"></rich_text><rich_text>
+
+有时要想想要不要结束自己－－  finish();</rich_text><codebox char_offset="116" frame_height="200" frame_width="700" highlight_brackets="False" show_line_numbers="False" syntax_highlighting="java" width_in_pixels="True">startACtivityForResult(intent,0);
+
+
+
+public void on ActivityResult(int requestCode, int resultCode , Intet intent)
+{
+    //当requestCode,resultCode 同时为0时，也就是处理特定的结果
+    if (requestCode == 0 &amp;&amp; resultCode == 0)
+    {
+        Bundle data= intent.getExtras();
+        string resultCity = data.getString(&quot;city&quot;);
+        city.setText(resultCity);
+     }
+}</codebox></node><node name="Bundle" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="4"><rich_text>例子：
+</rich_text><rich_text justification="left"></rich_text><codebox char_offset="4" frame_height="200" frame_width="700" highlight_brackets="False" show_line_numbers="False" syntax_highlighting="java" width_in_pixels="True">public class BundleTest extends Activity
+{
+	@Override
+	public void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		Button bn = (Button)findViewById(R.id.bn);
+		bn.setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				EditText name = (EditText)findViewById(R.id.name);
+				EditText passwd = (EditText)findViewById(R.id.passwd);
+				RadioButton male = (RadioButton)findViewById(R.id.male);
+				String gender = male.isChecked() ? &quot;男 &quot; : &quot;女&quot;;
+				Person p = new Person(name.getText().toString()
+					, passwd.getText().toString() , gender);
+				//创建一个Bundle对象
+				Bundle data = new Bundle();
+				data.putSerializable(&quot;person&quot;, p);
+				//创建一个Intent
+				Intent intent = new Intent(BundleTest.this
+					, ResultActivity.class);
+				intent.putExtras(data);
+				//启动intent对应的Activity
+				startActivity(intent);
+				
+			}
+		});		
+	}
+}</codebox><node name="putExtras" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="5"><rich_text></rich_text><node name="putXXX(string key, Xxx data)" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="6"><rich_text>int,long
+get XXX()</rich_text></node><node name="putSerializable(String key, Serializable data)" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="7"><rich_text>序列化的实体类
+getSerializable(String key,seralizable data):</rich_text></node></node></node><node name="生命周期" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="8"><rich_text>创造
+看得见
+摸得着
+摸不着
+看不见
+消灭
+
+重生－－
+
+要我可以用，你要经历onCreate,onStart,onResume
+            暂停了一下：onPause   如果看我不见了还要onStop
+            当系统也不要我时就onDestroy...
+            不过，在我灭亡之前，都可以onRestart,onStart,onResume要回我--</rich_text></node><node name="启动模式" prog_lang="custom-colors" readonly="False" tags="Activity" unique_id="18"><rich_text> </rich_text><rich_text link="webs http://wenzongliang.iteye.com/blog/1344817">activity四种启动模式</rich_text><rich_text>      </rich_text><rich_text link="webs http://wenzongliang.iteye.com/blog/1344817">http://wenzongliang.iteye.com/blog/1344817</rich_text><rich_text>                                 
+</rich_text><rich_text foreground="#000000"> 我 们在开发项目的过程中，会涉及到该应用中多个Activity组件之间的跳转，或者夹带其它应用的可复用的Activity。例如我们可能希望跳转到原来 某个Activity实例，而不是产生大量重复的 Activity。这样就需要我们为 Activity  配置特定的加载模式，而不是使用默认的加载模式。</rich_text><rich_text>
+</rich_text><rich_text foreground="#000000">Activity 有四种加载模式</rich_text><rich_text>
+</rich_text><rich_text foreground="#000000">[1] standard 模式</rich_text><rich_text>
+</rich_text><rich_text foreground="#000000">     这是默认模式，每次激活Activity时都会创建Activity实例，并放入任务栈中。</rich_text><rich_text>
+
+</rich_text><rich_text foreground="#000000">[2] singleTop 模式</rich_text><rich_text>
+</rich_text><rich_text foreground="#000000">     如果在任务的栈顶正好存在该Activity的实例，就重用该实例( 会调用实例的 onNewIntent() )，否则就会创建新的实例并放入栈顶，即使栈中已经存在该Activity的实例，只要不在栈顶，都会创建新的实例。</rich_text><rich_text>
+
+</rich_text><rich_text foreground="#000000">[3] singleTask 模式</rich_text><rich_text>
+</rich_text><rich_text foreground="#000000">     如果在栈中已经有该Activity的实例，就重用该实例(会调用实例的 onNewIntent() )。重用时，会让该实例回到栈顶，因此在它上面的实例将会被移出栈。如果栈中不存在该实例，将会创建新的实例放入栈中。</rich_text><rich_text>
+
+</rich_text><rich_text foreground="#000000">[4] singleInstance 模式</rich_text><rich_text>
+</rich_text><rich_text foreground="#000000">       在一个新栈中创建该Activity的实例，并让多个应用共享该栈中的该Activity实例。一旦该模式的Activity实例已经存在于某个栈 中，任何应用再激活该Activity时都会重用该栈中的实例( 会调用实例的 onNewIntent()  )。其效果相当于多个应用共享一个应用，不管谁激活该 Activity 都会进入同一个应用中。</rich_text><rich_text>
+
+</rich_text><rich_text foreground="#000000">设置启动模式的位置在 </rich_text><rich_text foreground="#000000" link="webs http://www.apkbus.com/">Android</rich_text><rich_text foreground="#000000">Manifest.xml 文件中 Activity 元素的 </rich_text><rich_text foreground="#000000" link="webs http://www.apkbus.com/">android</rich_text><rich_text foreground="#000000">:launchMode 属性。</rich_text><rich_text>
+ 
+ 
+ 
+在多Activity开发中，有可能是自己应用之间的Activity跳转，或者夹带其他应用的可复用Activity。可能会希望跳转到原来某个Activity实例，而不是产生大量重复的Activity。
+这需要为Activity配置特定的加载模式，而不是使用默认的加载模式。
+加载模式分类及在哪里配置Activity有四种加载模式：
+• standard
+• singleTop
+• singleTask
+• singleInstance
+设置的位置在AndroidManifest.xml文件中activity元素的android:launchMode属性：
+&lt;activity android:name=&quot;ActB&quot; android:launchMode =&quot;singleTask&quot;&gt;&lt;/activity&gt;
+也可以在Eclipse ADT中图形界面中编辑：
+
+ 
+区分Activity的加载模式，通过示例一目了然。这里编写了一个Activity A（ActA）和Activity B（ActB）循环跳转的例子。对加载模式修改和代码做稍微改动，就可以说明四种模式的区别。
+standard首先说standard模式，也就是默认模式，不需要配置launchMode。先只写一个名为ActA的Activity：
+例子中都没有用layout，免得看着罗嗦。可见是ActA –&gt; ActA的例子。在界面中打印出对象的toString值可以根据hash code识别是否创建新ActA实例。
+第一个界面：
+
+点击按钮后：
+
+可以多点几次。发现每次都创建了该Activity的新实例。standard的加载模式就是这样的，intent将发送给新的实例。
+现在点Android设备的回退键，可以看到是按照刚才创建Activity实例的倒序依次出现，类似退栈的操作，而刚才操作跳转按钮的过程是压栈的操作。如下图：
+
+singleTopsingleTop 和standard模式，都会将intent发送新的实例（后两种模式不发送到新的实例，如果已经有了的话）。不  过，singleTop要求如果创建intent的时候栈顶已经有要创建的Activity的实例，则将intent发送给该实例，而不发送给新的实例。
+还是用刚才的示例，只需将launchMode改为singleTop，就能看到区别。
+运行的时候会发现，按多少遍按钮，都是相同的ActiA实例，因为该实例在栈顶，因此不会创建新的实例。如果回退，将退出应用。
+
+singleTop模式，可用来解决栈顶多个重复相同的Activity的问题。
+如果是A Activity跳转到B Activity，再跳转到A Activity，行为就和standard一样了，会在B Activity跳转到A Activity的时候创建A Activity的新实例，因为当时的栈顶不是A Activity实例。
+ActA类稍作改动：
+ActB类：
+ActB类使用默认（standard）加载，ActA使用singleTop加载。结果类似下图：
+
+如果把ActA的加载模式改为standard，情况一样。
+ 
+</rich_text><rich_text background="#ffffff">现有2个项目，taskA、taskB。taskA负责调用taskB中指定的界面。</rich_text><rich_text>
+taskB中有3个界面，a、b、c，每个界面显示它所在的task id。
+SingleTask：
+其中b界面被声明为SingleTask。
+先 运行taskB，显示a界面，由a界面调用b界面，这时b界面的taskid与a界面的taskid是一致的，说明b界面与a界面在同一个task中；由 b界面调用c界面时，c界面的taskid与a和b界面的taskid一致，说明这三个界面是在同一个task中。当前显示的是c界面，此时按Home键 回到桌面，运行taskA的界面调用taskB的b界面，这时b界面显示出来，它的taskid没有变，还是之前的taskid，只不过之前显示的是c界 面，这时c界面已经不知所踪，这时再按back键，则回到了a界面，然后是taskA的界面。
+这 说明，SingleTask所标注的Activity在被自身的app调用时，是不新建task的，同时，如果系统中存在了这个SingleTask界面 的实例时，会将其所在的task切换到前台，并把SingleTask界面之后开启的其他界面全部关闭(有待考证是否关闭)。
+ 
+另 外有一种情况，例如：a界面被调用，这时按Home键返回到桌面，启动taskA，并调用b界面，这时b界面的taskid与a界面的一致，说明b界面与 a界面同属于一个task。如果直接运行taskA调用b界面，b的taskid与taskA的界面的taskid不同，说明在新task中实例化了b界 面，由b界面调用c界面，c界面的taskid与b界面一致，说明b与c同属于一个task。
+ 
+SingleInstance：
+将b界面声明为SingleInstance。
+先运行taskB，显示a界面，由a界面调用b界面，这时b界面的taskid与a界面的taskid不同，说明b界面是在新task中生成的实例；由b界面调用c界面，c界面的taskid与a界面的taskid相同，说明a、c界面同属于一个task。
+由此可以看出SingleTask与SingleInstance是有本质区别的，而不是像网上说的那样，都是task的root activity，这是有错误的。
+
+ 
+  </rich_text></node></node><node name="Intent" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="9"><rich_text>看我不如看我的属性
+</rich_text><node name="Component" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="11"><rich_text>用来装着要启动的Activity 的包名还有类名
+一般直接new Intent(this,SecondActivity.class)就可以－－</rich_text></node><node name="Action(Important)" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="12"><rich_text>这个才是Intent中最重要的：配合filter来用
+Action属性（普通字符串）
+intent.setAction(ActionAttr.CRAZYIT_ACTION);
+一个Intent一个Action
+
+Filter里面：
+&lt;action android: name=&quot;org.crazyit.intent.action.CRAZYIT_ACTION&quot; /&gt;
+</rich_text></node><node name="Category(多个)" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="13"><rich_text>一般就要有
+android.intent.category.DEFAULT
+
+也是附加的一些属性，要启动含某些Category的Activity
+intent.addCategory(ActionCateAttr.CAZYIT_CATEGORY);
+
+
+在那个Activity中则要
+&lt;inent-filter&gt;
+    &lt; ...CAZYIT_CATEGORY&gt;
+    &lt;...Category_DEFAULT&gt;
+    ...两个都要有呀
+    &lt;&gt;</rich_text></node><node name="启动系统Activity（cool）" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="14"><rich_text></rich_text></node><node name="Date" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="15"><rich_text scale="h2">Ｄata接受一个</rich_text><rich_text foreground="#ffff00000000" scale="h2">Uri对象</rich_text><rich_text scale="h2">：</rich_text><rich_text>
+content://com.android.contacts/contacts/1
+
+tel:123
+
+数据类型＋数据
+
+Action+Data配合就可以指定　一个动作，一个内容
+
+ACTION_VIEW tel:123
+ACTION_VIEW content://com.android.contacts/contacts/1
+
+
+例子：
+Intent intent = new Intent();
+String data = &quot;www.meizu.com&quot;
+Uri  uri=parse(data);
+intent.setAction(Intent.ACTION_VIEW);
+intent.setData(uri);
+startActivity(intent);
+
+</rich_text></node><node name="Type(不指定Data前提下才会起作用）" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="16"><rich_text></rich_text></node><node name="Extra" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="17"><rich_text>就是Bundle...</rich_text></node></node><node name="cool" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="10"><rich_text></rich_text><node name="启动了图像" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="19"><rich_text>　　　　Intent intent = new Intent(Intent.ACTION_PICK, null);
+			intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+					&quot;image/*&quot;);
+
+			startActivityForResult(intent, OPEN_PHOTO_REQUESTCODE);</rich_text></node></node></cherrytree>

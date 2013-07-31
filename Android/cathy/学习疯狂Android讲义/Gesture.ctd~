@@ -1,0 +1,79 @@
+<?xml version="1.0" ?><cherrytree><node name="Ｇesture" prog_lang="custom-colors" readonly="False" tags="CrazyAndroid" unique_id="1"><rich_text>１、创建一个GestureDetector。
+2 . 为应用程序的Activity或者特定的组件的TouchEvent事件绑定监听器。
+
+图片缩小放大初版：
+
+</rich_text><codebox char_offset="79" frame_height="200" frame_width="700" highlight_brackets="False" show_line_numbers="False" syntax_highlighting="java" width_in_pixels="True">public class MainActivity extends Activity implements OnGestureListener{
+	GestureDetector detector;
+	ImageView imageView;
+	int width,height;
+	float currentScale=1;
+	Bitmap bitmap;
+	Matrix matrix;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		detector=new GestureDetector(this,this);
+		imageView=(ImageView)findViewById(R.id.show);
+		matrix =new Matrix();
+		bitmap=BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_launcher);
+		width=bitmap.getWidth();
+		height=bitmap.getHeight();
+		imageView.setImageBitmap(BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_launcher));
+	}
+	
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		
+		return detector.onTouchEvent(event);
+	}
+	@Override
+	public boolean onDown(MotionEvent arg0)
+	{
+		 
+		return false;
+	}
+	@Override
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+		float velocityY)
+	{
+		velocityX = velocityX &gt; 4000 ? 4000:velocityX;
+		velocityX = velocityX &lt; -4000 ? -4000:velocityX;
+		currentScale +=currentScale * velocityX /4000.0f;
+		currentScale = currentScale &gt; 0.1f? currentScale:0.1f;
+		matrix.reset();
+		matrix.setScale(currentScale, currentScale,160,200);
+		BitmapDrawable tmp =(BitmapDrawable)imageView.getDrawable();
+		if(!tmp.getBitmap().isRecycled()){
+			tmp.getBitmap().recycle();
+		}
+		Bitmap bitmap2=Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+		imageView.setImageBitmap(bitmap2);
+		return true;
+	}
+	@Override
+	public void onLongPress(MotionEvent e)
+	{
+		 	
+	}
+	@Override
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
+		float distanceY)
+	{
+		 
+		return false;
+	}
+	@Override
+	public void onShowPress(MotionEvent e)
+	{
+		 		
+	}
+	@Override
+	public boolean onSingleTapUp(MotionEvent e)
+	{
+		 
+		return false;
+	}
+}
+</codebox><node name="手势检测" prog_lang="custom-colors" readonly="False" tags="gesture" unique_id="2"><rich_text></rich_text><node name="onDown" prog_lang="custom-colors" readonly="False" tags="gesture" unique_id="4"><rich_text></rich_text></node><node name="onFling" prog_lang="custom-colors" readonly="False" tags="gesture" unique_id="5"><rich_text></rich_text></node><node name="onLongPress" prog_lang="custom-colors" readonly="False" tags="gesture" unique_id="6"><rich_text></rich_text></node><node name="onScroll" prog_lang="custom-colors" readonly="False" tags="gesture" unique_id="7"><rich_text></rich_text></node><node name="showPress" prog_lang="custom-colors" readonly="False" tags="gesture" unique_id="8"><rich_text></rich_text></node><node name="onSingleTapUp" prog_lang="custom-colors" readonly="False" tags="gesture" unique_id="9"><rich_text></rich_text></node></node><node name="ViewFlipper" prog_lang="custom-colors" readonly="False" tags="gesture" unique_id="10"><rich_text>ViewFlipper组件其实是一个窗口类组件，因此可调用addView(View v)添加多个组件，一旦向ViewFlipper中添加了多个组件之后，ViewFlipper可使用动画控制多个组件之间的切换效果。</rich_text></node><node name="增加手势" prog_lang="custom-colors" readonly="False" tags="gesture" unique_id="3"><rich_text></rich_text></node></node></cherrytree>
