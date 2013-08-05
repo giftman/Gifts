@@ -1,0 +1,18 @@
+Bundle: #管理插件
+http://github.com/gmarik/vundle
+1、Setup Vundle:
+git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+2.Configure bundles:
+#.vimrc:
+3.Install configured bundles:
+Launch vim . run :BundleInstall #BundleInstall! for update #BundleClean
+When install YouCompleteMe...need to compile Vim from source.
+Follow the link:
+http://github.com/Valloric/YouCompleteMe
+till hg clone https://code.google.com/p/vim
+You should set http_proxy=127.0.0.1:8087 #use goagent
+then hg clone https://code.google.com/p/vim --nosecur..
+#factal
+./configure --with-features=huge --enable-rubyi.. --enable-python.. --enable    -perlin.. --enable-gui=gnome2 --enable-cscope --prefix=/usr --with-python-co    nfig-dir=/usr/lib/python2.7/config...（Your python config)
+sudo make install is prefertable..
+
