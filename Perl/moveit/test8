@@ -1,5 +1,5 @@
 #!/usr/bin/perl -w
-$_ = "Hello there, neighbor";
-if(/(\S+) (\S+), (\S+)/){
-	print "the word was $1 $2 $3\n";
+$_="saurus steak";
+if(/(?:bronto)?saurus (steak|burger)/){
+	print "Fred wants a $1 \n";
 }
