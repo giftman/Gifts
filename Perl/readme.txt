@@ -1,4 +1,4 @@
-Now you in Gift>Ubuntu
+Now you in Gift>Perl
 
 20130614 第一次修订
 
@@ -10,4 +10,4 @@ super 源码或者灵感
 tools 相关工具
 readme 目录解释
 cathy 感悟
-code 常用代码
+code 常用代码（精华片段代码）
