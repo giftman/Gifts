@@ -1,7 +1,5 @@
 #!/usr/bin/perl -w
-my $what = "larry";
-while (<>)  {
-	if(/^($what)/){
-		print "We saw $what in beginning of $_";
-	}
+$_ = "Hello there, neighbor";
+if(/(\S+) (\S+), (\S+)/){
+	print "the word was $1 $2 $3\n";
 }
