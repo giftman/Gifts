@@ -1,0 +1,5 @@
+#!/usr/bin/perl -w
+$_="I saw Barney\ndown at the bowling alley\nwith fred\nlast night.\n";
+if(/Barney.*fred/s){
+	print "That string mentios fred after Barney!\n";
+}
