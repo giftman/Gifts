@@ -1,5 +1,6 @@
 #!/usr/bin/perl -w
-$_="saurus steak";
-if(/(?:bronto)?saurus (steak|burger)/){
-	print "Fred wants a $1 \n";
-}
+use 5.010;
+my $names = 'Fred Flinstone and Wilma Flinstone ';
+if ($names =~ m/(?<name1>\w+) (or|and) \w+ \g{name1}/){
+	say "I saw $+{name1} ";
+	}
