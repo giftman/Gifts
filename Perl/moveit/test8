@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 while(<>){
 	chomp;
-	if(/match/){
+	if(/(\w+)a$/){
 	print "Matched:|$`<$&>$'|\n";
 }else{
 	print "No match :|$_|\n";
