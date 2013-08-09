@@ -1,8 +1,8 @@
 #!/usr/bin/perl -w
 while(<>){
 	chomp;
-	if(/(\b\w*a\b)/){
-	print "\$1 contains '$1'\n";
+	if(/(?<cf>\b\w*a\b)/){
+	print "'word' contains '$+{cf}'\n";
 }else{
 	print "No match :|$_|\n";
 }
