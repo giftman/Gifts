@@ -1,6 +1,10 @@
 #!/usr/bin/perl -w
-use 5.010;
-my $names = 'Fred Flinstone and Wilma Flinstone ';
-if ($names =~ m/(?<name1>\w+) (or|and) \w+ \g{name1}/){
-	say "I saw $+{name1} ";
-	}
+while(<>){
+	chomp;
+	if(/YOU_PATTERN_GOES_HERE/){
+	print "Matched:|$`<$&>$`|\n";
+}else{
+	print "No match :|$_|\n";
+}
+
+}
