@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+##Copyright (C) 2013 by CF
 $pi = 3.141592654;
 print "What is the radius?\n";
 chomp($radius=<STDIN>);

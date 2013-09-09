@@ -1,0 +1,20 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF
+my %do_these;
+foreach (@ARGV){
+	$do_these{$_} = 1;
+}
+
+while (<>) {
+	if(/^##Copyright/) {
+		delete $do_these{$ARGV};
+	}
+}
+@ARGV = sort keys %do_these;
+$^I = ".bak";
+while (<>) {
+	if(/^#!/){
+		$_.= "##Copyright (C) 2013 by CF\n";
+	}
+	print;
+}

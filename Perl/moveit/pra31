@@ -1,3 +1,4 @@
 #!/usr/bin/perl -w
+##Copyright (C) 2013 by CF
 @lines=<STDIN>;
 print reverse @lines;

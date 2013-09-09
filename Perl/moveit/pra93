@@ -1,7 +1,8 @@
 #!/usr/bin/perl -w
 ##Copyright (C) 2013 by CF
 while(<>){
-	if(/\./){
-		print;
-	}
+	chomp;
+	s/2.19/2.20/gi;
+	s/20009/21000/g;
+	print;
 }

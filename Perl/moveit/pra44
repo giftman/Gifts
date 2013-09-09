@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+##Copyright (C) 2013 by CF
 use 5.010;
 greet_test("Barney");
 greet_test("Fred");

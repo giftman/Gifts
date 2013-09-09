@@ -1,0 +1,9 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF
+$^I = ".bak";
+while (<>) {
+	if(/^#!/){
+		$_.= "##Copyright (C) 2013 by CF\n";
+	}
+	print;
+}
