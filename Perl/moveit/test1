@@ -1,4 +1,6 @@
 #!/usr/bin/perl
+##Copyright (C) 2013 by CF
+##Copyright (C) 2013 by CF
 @lines='perldoc -u -f atan2';
 foreach(@lines){
 s/\w<([>]+)>/\U$1/g;

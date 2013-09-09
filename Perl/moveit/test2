@@ -1,4 +1,6 @@
 #!/usr/bin/perl -w
+##Copyright (C) 2013 by CF
+##Copyright (C) 2013 by CF
 $madonna = <STDIN>;
 if(defined($madonna)){
 print "The input was $madonna";

@@ -1,3 +1,5 @@
 #!/usr/bin/perl -w
+##Copyright (C) 2013 by CF
+##Copyright (C) 2013 by CF
 my @items = qw(wilma dino pebbles);
 printf "The items are:\n".("%10s\n" x @items),@items;

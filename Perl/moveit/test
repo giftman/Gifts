@@ -1,11 +1,10 @@
 #!/usr/bin/perl -w
+##Copyright (C) 2013 by CF
+##Copyright (C) 2013 by CF
 while(<>){
 	chomp;
-	if(/(?<cf>\b\w*a\b)(?<cf2>.{0,5})/s){
-	print "'word' contains '$+{cf}'\n";
-	print "'word' contains '$+{cf}'\n$+{cf2}";
-}else{
-	print "No match :|$_|\n";
+	if(/\s+$/){
+	print "$`$&$'*\n";
 }
 
 }
