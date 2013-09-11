@@ -1,9 +1,8 @@
 #!/usr/bin/perl -w
 ##Copyright (C) 2013 by CF
-@rocks = qw/ bedrock slate lava /;
-print "The rocks before are:\n", @rocks ,"\n";
-foreach $rock (@rocks){
-	$rock = "\t$rock";
-	$rock .="\n";
+chomp(@lines = <STDIN>);
+@lines = reverse @lines;
+print "The rocks are:\n";
+foreach $line (@lines){
+	print $line."\n"; 
 }
-print "The rocks are:\n", @rocks;
