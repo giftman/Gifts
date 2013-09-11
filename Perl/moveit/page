@@ -8,9 +8,47 @@ sub total{
 	$sum;
 }
 
+sub above_average{
+	my @above_average_list = {};
+	my $average = (total(@_))/@_;
+	print $average;
+	foreach (@_){
+		if($_ > $average){
+			push @above_average_list ,$_;
+		}
+	}
+	@above_average_list;
+}
+
 my @fred =1..1000;
 my $fred_total = total(@fred);
 print "The total of \@fred is $fred_total.\n";
-print "Enter som nubers on seperate lines:";
-my $user_total = total(<STDIN>);
-print "The total of those number is $user_total.\n";
+my @fred_average = above_average(@fred);
+print "The total of \@fred is @fred_average.\n";
+
+#print "Enter som nubers on seperate lines:";
+#my $user_total = total(<STDIN>);
+#print "The total of those number is $user_total.\n";
+
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF
+use 5.010;
+greet_test("Barney");
+greet_test("Fred");
+greet_test("Wilma");
+greet_test("Betty");
+
+sub greet_test{
+	state $names;
+	my $new = shift;
+	print "Hi $new!";
+	if($names){
+		print "I've seen: $names\n";
+	}
+	else {
+		print "You are the first one here !\n";
+	}
+	$names = $new;
+}
+
+
