@@ -1,8 +1,16 @@
 #!/usr/bin/perl -w
 ##Copyright (C) 2013 by CF
-chomp(@lines = <STDIN>);
-@lines = reverse @lines;
-print "The rocks are:\n";
-foreach $line (@lines){
-	print $line."\n"; 
+sub total{
+	my $sum = 0;
+	foreach (@_){
+		$sum += $_;
+	}
+	$sum;
 }
+
+my @fred =1..1000;
+my $fred_total = total(@fred);
+print "The total of \@fred is $fred_total.\n";
+print "Enter som nubers on seperate lines:";
+my $user_total = total(<STDIN>);
+print "The total of those number is $user_total.\n";
