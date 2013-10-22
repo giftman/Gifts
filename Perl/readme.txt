@@ -6,7 +6,7 @@ Now you in Gift>Perl
 book  相关书籍
 libs 库或者包
 moveit 工作区间
-super 源码或者灵感
+super cpan
 tools 相关工具
 readme 目录解释
 cathy 感悟
