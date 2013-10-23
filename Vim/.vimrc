@@ -2,7 +2,6 @@ set encoding=utf-8
 set termencoding=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,chinese,cp936
-
 language messages zh_CN.utf-8
 set nobackup
 setlocal noswapfile
@@ -15,7 +14,7 @@ set formatoptions=tcrqn
 set number
 set nocompatible
 colorscheme evening
-
+syntax on
 
 set nocompatible               " be iMproved
 filetype off                   " required!
