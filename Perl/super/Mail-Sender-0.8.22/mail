@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+
+use Mail::Sender;
+
+open(IN, "< ./index.html") or die("");
+
+$sender = new Mail::Sender{
+	smtp => 'smtp.qq.com',
+	from => '1556138063@qq.com'
+};
+
+$sender->Open({
+		to => '1556138063@qq.com',
+		subject => 'test',
+		msg => "hello!",
+		ctype => "text/html",
+		encoding => "7bit",
+	});
+
+while(<IN>)
+{
+	$sender->SendEx($_);
+}
+close IN;
+$sender->Close();
+debug => "debug.txt";
+print $Mail::Sender::Error eq "" ? "send ok!\n" : $Mail::Sender::Error;

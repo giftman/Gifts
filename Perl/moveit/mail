@@ -1,0 +1,27 @@
+#! /usr/local/bin/perl -w
+
+use Mail::Sender;
+
+ref ($sender = new Mail::Sender { from => 'liaojl@liaojl.com',
+		smtp => 'smtp.liaojl.com', boundary => 'This-is-a-mail-boundary-435427'})
+	or die "Error($sender) : $Mail::Sender::Error\n";
+
+ref $sender->Open({to => 'liaojl@liaojl.com, administrator@liaojl.com', 
+		cc => 'root@liaojl.com',
+		subject => 'Hello dear friend'})
+	or die "Error: $Mail::Sender::Error\n";
+my $FH = $sender->GetHandle();
+print $FH "How are you?\n\n";
+print $FH <<'*END*';
+I've found these jokes.
+
+ Doctor, I feel like a pack of cards.
+ Sit down and I'll deal with you later.
+
+ Doctor, I keep thinking I'm a dustbin.
+ Don't talk rubbish.
+
+Hope you like'em. Jenda
+*END*
+
+$sender->Close;

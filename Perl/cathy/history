@@ -1,0 +1,13 @@
+$_
+reverse
+sort
+同一个表达式，出现在不同的地方会有不同的意义
+scalar @rocks #强制指定标题上下文
+
+sub marine{
+	$n += 1;
+	print "Hello,sailor number $n!\n"
+}
+
+&marine;
+最后一行是返回值

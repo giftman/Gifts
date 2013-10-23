@@ -1,0 +1,24 @@
+#!/usr/bin/perl
+use MIME::Lite;
+
+
+$msg = MIME::Lite->new(
+	From    => '121552591@qq.com',
+	To       => '121552591@qq.com',
+#Cc      => 'some@other.com, some@more.com',
+	Subject => 'you have got a message',
+	Type    => 'multipart/mixed'
+);
+
+#### Add parts (each "attach" has same arguments as "new"):
+#$msg->attach(
+#	Type     => 'TEXT',
+#	Data     => "Here's the GIF file you wanted"
+#);
+#$msg->attach(
+#	Type     => 'AUTO',
+#	Path     => '111.txt',
+#	Disposition => 'attachment'
+#);
+### use Net:SMTP to do the sending
+$msg->send();
