@@ -1,0 +1,10 @@
+#!/usr/bin/perl -w
+use strict;
+use LWP::Simple qw(get);
+use XML::Simple;
+use Data::Dumper;
+my $url = shift || "http://www.baidu.com";
+my $content = get($url);
+#print Dumper (XML::Simple->new()->XMLin($content));
+print $content;
+

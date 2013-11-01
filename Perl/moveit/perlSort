@@ -1,0 +1,11 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use List::MoreUtils qw(uniq);
+
+my $filename = 'temp';
+open (INFILE,$filename);
+my @a=<INFILE>;
+close INFILE;
+open (my $fh, '>',$filename) or die "Could not open file '$filename' $!";
+print $fh uniq(sort @a);

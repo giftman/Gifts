@@ -1,0 +1,21 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use LWP::UserAgent;
+use HTML::TokeParser;
+my $url="http://www.baidu.com";
+my $agent= new LWP::UserAgent();
+my $request=new HTTP::Request('GET'=>$url);
+my $response=$agent->request($request);
+my $document=$response->content();
+
+my $page=HTML::TokeParser->new (\$document);
+while (my $token=$page->get_token()){
+my $type = shift(@{$token});
+my $text=shift(@{$token});
+if($type eq "T"){
+print ("$text");
+}
+}
+
+

@@ -1,0 +1,35 @@
+#!/usr/bin/perl -w
+use utf8;
+binmode(STDIN,':encoding(utf8)');
+binmode(STDOUT,':encoding(utf8)');
+binmode(STDERR,':encoding(utf8)');
+use Encode;
+use strict;
+#use LWP::Simple qw(get);
+use LWP::Simple qw(get);
+#my $config (XML::Simple->new()->XMLin('part1.xml'));
+#print $config->{user};
+#print Dumper (XML::Simple->new()->XMLin('part1.xml'));
+my $url = shift || "http://gzbusnow.sinaapp.com/index.php?c=busrunningv2&a=query&keyword=B8";
+my $content = get($url);
+$content = encode("utf-8",decode("gbk",$content));
+#if($content =~/<td>(.*)<\/td>\s*<td>(.*)<\/td>/) {
+#while($content =~ m%<td>(.*B8.*)</td>%isg){
+#	print $1;
+#}
+use HTML::TableExtract;
+use Data::Dumper qw(Dumper);
+my $html_string = join("", $content);
+my $te = HTML::TableExtract->new();
+my $ts;
+my $row;
+$te->parse($html_string);
+#print Dumper($te), "\n";
+foreach $ts ($te->tables) {
+    print "Table (", join(',', $ts->coords), "):\n";
+    foreach $row ($ts->rows) {
+        print join(',', @$row), "\n";
+    }
+}
+
+

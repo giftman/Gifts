@@ -1,0 +1,10 @@
+#!/usr/bin/perl
+while(<>){
+	chomp;
+	#if(/<td>(.*)<\/td>\s*<td>(.*)<\/td>/) {
+	#if(/(.*B8.*)/) {
+	if(/<td>(.*)<\/td>\s*<td>(.*)<\/td>/) {
+		print $1;
+		print "\n";
+	}
+}

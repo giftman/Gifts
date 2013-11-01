@@ -1,0 +1,9 @@
+<config>
+  <user>freddy</user>
+  <passwd>longNails</passwd>
+  <books>
+    <book author="Steinbeck" title="Cannery Row">a</book>
+    <book author="Faulkner" title="Soldier's Pay">b</book>
+    <book author="Steinbeck" title="East of Eden">c</book>
+  </books>
+</config>

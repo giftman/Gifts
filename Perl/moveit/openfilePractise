@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use List::MoreUtils qw(uniq);
+
+my $filename = 'input';
+open (INFILE,$filename);
+my @a=<INFILE>;
+chomp @a;
+close INFILE;
+#open (my $fh, '>',$filename) or die "Could not open file '$filename' $!";
+#print $fh uniq(sort @a);
+print uniq @a;
