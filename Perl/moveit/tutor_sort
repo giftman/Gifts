@@ -1,0 +1,14 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF
+use 5.010;
+my %score = (
+	"barney" => 195,
+	"fred" => 205,
+	"dino" => 30,
+	"fan" => 2000
+);
+my @winners =sort {$score{$a} <=> $score{$b}} keys %score;
+foreach $win(@winners){
+	printf("%-15s %s\n",$win,$score{$win});
+}
+
