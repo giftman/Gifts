@@ -1,0 +1,14 @@
+#!/usr/bin/perl -w
+use File::Find;
+my $reg = ".*";
+my @curDir = @ARGV;
+find(\&PrintName,@curDir);
+sub PrintName{
+	my $path;
+	if(/$reg/){
+		$path = $File::Find::name;
+		#$path = $_;
+		#$path =~ m/pra.*/g;
+		print $path."\n";
+	}
+}
