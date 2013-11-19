@@ -1,0 +1,70 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use 5.010;
+
+my $filename = shift or die "Usage:$0 error.log\n";
+
+my $entity = '_DEFAULT_';
+my $block;
+my $record;
+my @errors;
+
+my %error_messages;
+my %block_count;
+
+process($filename);
+say "\nNumber of blocks in each Entity";
+foreach my $b1 (reverse sort {$block_count{$a} <=> $block_count{$b} } keys %block_count){
+	printf("%-15s %s\n",$b1,$block_count{$b1});
+}
+foreach my $msg (reverse sort {$error_messages{$a} <=> $error_messages{$b} } keys %error_messages){
+	printf("%-25s %s\n",$msg,$error_messages{$msg});
+}
+
+sub process {
+	my ($file) = @_;
+
+	open my $fh,'<',$file or die "Could not open '$file' $!";
+	while(my $line = <$fh>) {
+		chomp $line;
+		#say $line;
+		if($line =~ /^=+ \s+ ERRORS \s+ ON \s+ ENTITY \s+ (\w+) \s+ =+$/x){
+			$entity = $1;
+#			say $entity;
+#			say $line;
+			next;
+		}
+		if($line =~ /^SOURCE \s+ LINE \s+ (\d+)$/x){
+			$block = $1;
+#			say $block;
+#			say $line;
+			next;
+		}
+		if($line =~ /^&N \s+ (\w+)$/x){
+			$record = $1;
+#			say $record;
+#			say $line;
+			next;
+		}
+		if($line =~ /^[ ^]*$/x){
+#			say $line;
+			next;
+		}
+		push @errors,$line;
+	}
+	process_block();
+	return;
+}
+
+sub process_block {
+	return if not $block;
+
+	$block_count{$entity}++;
+	foreach my $err (@errors){
+		$error_messages{$err}++;
+	}
+	$block = undef;
+	$record = undef;
+	@errors = ();
+}

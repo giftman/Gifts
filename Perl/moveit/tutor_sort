@@ -5,9 +5,11 @@ my %score = (
 	"barney" => 195,
 	"fred" => 205,
 	"dino" => 30,
-	"fan" => 2000
+	"fan" => 2000,
+	"cathy" => 205
 );
-my @winners =sort {$score{$a} <=> $score{$b}} keys %score;
+my @winners =sort {$score{$a} <=> $score{$b} or $b cmp $a } keys %score;
+#my @winners =sort {$score{$a} <=> $score{$b}} keys %score;
 foreach $win(@winners){
 	printf("%-15s %s\n",$win,$score{$win});
 }

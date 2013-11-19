@@ -1,0 +1,10 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF
+use strict;
+use warnings;
+use 5.010;
+
+my $x= int 3.14;
+say $x;
+my $z =int rand 6;
+say $z;

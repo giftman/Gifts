@@ -1,0 +1,9 @@
+#!/usr/bin/perl
+while(<>){
+	chomp;
+	if(/(\/\S*\.jar)/){
+		print "Matched: |$`<$&>$'|\n";
+	}else{
+		print "No match: |$_|\n";
+	}
+}
