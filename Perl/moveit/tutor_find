@@ -1,7 +1,10 @@
 #!/usr/bin/perl -w
 use File::Find;
-my $reg = ".*";
+my $newVersion=22000;
+my $newVersionName=2.3;
+my $reg = "AndroidManifest.xml";
 my @curDir = @ARGV;
+my @dirs;
 find(\&PrintName,@curDir);
 sub PrintName{
 	my $path;
@@ -9,6 +12,23 @@ sub PrintName{
 		$path = $File::Find::name;
 		#$path = $_;
 		#$path =~ m/pra.*/g;
-		print $path."\n";
+		#print $path."\n";
+		push @dirs,$path;
 	}
+}
+
+$^I = ".bak";
+@ARGV = @dirs;
+#print join "\n",@ARGV;
+while (<>) {
+	#if(/^#!/){
+	#	$_.= "#Copyright (C) 2013 by CF\n";
+	#}
+	s/android:versionCode=\".*\"/android:versionCode=\"$newVersion\"/;
+	s/android:versionName=\".*\"/android:versionName=\"$newVersionName\"/; 
+	s/android:name=\"QQGameHallAuthorVer\" android:value=\".*\"/android:name=\"QQGameHallAuthorVer\" android:value=\"$newVersion\"/; 
+	if(/android.permission.INTERNET/){
+		$_.= "	<uses-permission android:name=\"android.permission.VIBRATE\"/>\n";
+	}
+	print;
 }
