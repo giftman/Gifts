@@ -4,12 +4,15 @@ use warnings;
 use Parallel::ForkManager;
 
 my @people = ("Foo","Bar");
+my $pm = Parallel::ForkManager->new(2);
 &accept_new_to_queue();
 while(@people){
     my $next_people = shift @people;
     #print "$next_people\n";
+    my $pid = $pm->start and next;
     &handle_item($next_people);
     &accept_new_to_queue();
+    $pm->finish;
 }
 
 sub accept_new_to_queue{
