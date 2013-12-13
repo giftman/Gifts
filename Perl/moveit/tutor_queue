@@ -1,0 +1,18 @@
+#!/usr/bin/perl -w
+use strict;
+use warnings;
+
+my @people = ("Foo", "Bar");
+while(@people){
+    my $next_people = shift @people;
+    print "$next_people\n";
+
+    print "type the new people coming!\n";
+    while(my $new = <STDIN>){
+        chomp $new;
+        if($new eq "") {
+            last;
+        }
+        push  @people, $new;
+    }
+}

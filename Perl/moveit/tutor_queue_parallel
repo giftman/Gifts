@@ -1,0 +1,28 @@
+#!/usr/bin/perl -w
+use strict;
+use warnings;
+use Parallel::ForkManager;
+
+my @people = ("Foo","Bar");
+&accept_new_to_queue();
+while(@people){
+    my $next_people = shift @people;
+    #print "$next_people\n";
+    &handle_item($next_people);
+    &accept_new_to_queue();
+}
+
+sub accept_new_to_queue{
+    print "type the new people coming!\n";
+    while(my $new = <STDIN>){
+        chomp $new;
+        if($new eq "") {
+            last;
+        }
+    push @people,$new;
+    }
+}
+
+sub handle_item (){
+    print "$_[0]\n";
+}

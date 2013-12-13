@@ -1,0 +1,11 @@
+#!/usr/bin/perl -w
+use strict;
+use warnings;
+use v5.10;
+
+use Person;
+my $teacher = Person->new( name => 'Joe', age => '8',time => '1000');
+say $teacher->name;
+say $teacher->age;
+say $teacher->time;
+
