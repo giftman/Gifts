@@ -3,10 +3,14 @@ use strict;
 use warnings;
 
 my $filename = 'data';
-open(my $fh,'<:encoding(UTF-8)',$filename)
-    or die "Could not open file '$filename' $!";
+if(open(my $fh,'<:encoding(UTF-8)',$filename)){
 
 while(my $row= <$fh>){
     chomp $row;
     print "$row\n";
 }
+
+}else{
+    warn "Could not open file '$filename' $!";
+}
+
