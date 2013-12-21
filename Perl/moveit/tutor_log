@@ -2,14 +2,18 @@
 use strict;
 use warnings;
 
+my %WARNS;
 local $SIG{__WARN__} = sub {
     my $message = shift;
+#    return if $WARNS{$message}++;
     logger('warning',$message);
 };
 
 my $counter;
 count();
 print "$counter\n";
+$counter = undef;
+count();
 sub count {
     $counter = $counter + 42;
 }
