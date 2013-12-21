@@ -28,11 +28,8 @@ if($response->is_success){
     my $obj = $json->decode($result);
     print Dumper $obj;
     my $trans = @{$obj->{'translateResult'}[0]}[0]->{"tgt"};
-    $trans = "翻译结果:$trans" if $trans;
-    my $string;
-    eval{
-        $string = join " ",@{$obj->{'smartResult'}->{"entries"}};
-    };
-    $trans = "$trans\n其它结果:$string" if $string;
-    print $trans."\n" //"Not found\n";
+    my $type = $obj->{'type'};
+    my $word = @{$obj->{'translateResult'}[0]}[0]->{"src"};
+    my $nnnn = @{$obj->{'smartResult'}->{'entries'}}[1];
+    print $trans."\n".$type."\n".$word."\n".$nnnn; 
 }
