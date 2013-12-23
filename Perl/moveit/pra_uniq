@@ -1,0 +1,31 @@
+#!/usr/bin/perl -w
+use strict;
+use warnings;
+
+my $filename = 'mydata.tped';
+my @twos;
+my $twosNumber;
+my $totalNumber;
+if(open(my $fh,'<:encoding(UTF-8)',$filename)){
+
+    while(my $row= <$fh>){
+        chomp $row;
+        #print "$row\n";
+        $row =~s/\s+$//;
+        #print "$row\n";
+        @twos = split / /,$row;
+        for(my $i=0;$i<=$#twos;$i++){
+            my $element = $twos[$i];
+            $totalNumber ++; 
+            if($element eq 2){
+                $twosNumber++;
+            }
+        }
+
+    }
+    print "\$twosNumber: $twosNumber";
+    print "\$totalNumber $totalNumber";
+}else{
+    warn "Could not open file '$filename' $!";
+}
+
