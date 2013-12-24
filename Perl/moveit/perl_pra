@@ -1,0 +1,58 @@
+#!/usr/bin/perl -w
+use strict;
+use Data::Dumper;
+use Moose;
+use Person;
+
+my $filename = 'data';
+my @teachers;
+my %names;
+
+if(open(my $fh,'<:encoding(UTF-8)',$filename)){
+
+while(my $row= <$fh>){
+    chomp $row;
+#    push @infos,$row;
+    my @infos = split /,/,$row;
+    my $teacher = Person->new;
+    $teacher->name("$infos[0]");
+    $teacher->age("$infos[1]");
+    $names{$infos[0]}=$row;
+    #@infos[$infos[0]]=
+   #for(my $i=0;$i<=$#infos;$i++){
+   #    @infos[$infos[$i]]=
+   #}
+    push @teachers,$teacher;
+}
+}else{
+    warn "Could not open file '$filename' $!";
+}
+#print Dumper(@infos);
+#my $temp = pull @infos;
+#my @tmp = split /,/,$temp;
+print "Please input a name\n";
+chomp(my $inputName =<STDIN>);
+if($names{$inputName}){
+    print $names{$inputName}."\n";
+}else{
+       print "new name,write to file,Please Enter Your name and age,split with ,\n";
+        open (my $fh, '>>',$filename) or die "Could not open file '$filename' $!";
+       chomp(my $input =<STDIN>);
+       print $fh $inputName.",".$input."\n"; 
+       close $fh;
+
+}
+#for(my $i=0;$i<=$#teachers;$i++){
+#    #print $teachers[$i]->name,"\n";
+#    if($teachers[$i]->name eq $input){
+#        print $teachers[$i]->name.",".$teachers[$i]->age;
+#     }else{
+#         print "new name,write to file\n";
+#        open (my $fh, '>>',$filename) or die "Could not open file '$filename' $!";
+#        $input =<STDIN>;
+#        chomp $input;
+#       print $fh $input; 
+#       close $fh;
+#   }
+#}
+
