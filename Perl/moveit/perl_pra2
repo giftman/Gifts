@@ -1,0 +1,24 @@
+#!/usr/bin/perl -w
+
+my $sign = 0;
+my $file = $ARGV[0];
+
+open FILE,"<$file" or die "cant't open $file";
+my @lines = <FILE>;
+close FILE;
+
+do
+{
+    print "Enter the Phone Number:\n";
+    chomp (my $input = <STDIN>);
+    print "You input $input\n";
+
+    for (@lines){
+        chomp;
+        my @array = split /,/;
+        if($array[0] =~ /^\s*$input\s*$/){
+            print "find: $_\n";
+            $sign = 1;
+        }
+    }
+}while($sign);
