@@ -1,0 +1,37 @@
+#!/usr/bin/perl -w
+use strict;
+use XML::Parser;
+use File::Basename;
+use XML::Simple;
+use Data::Dumper;
+
+my $xmlfile = dirname($0)."\\config.xml";
+if (-e $xmlfile)
+{
+    #print "---------------------------------\n"; my $userxs = XML::Simple->new(KeyAttr => "name"); my $userxml = $userxs->XMLin($xmlfile); #print output print Dumper($userxml); my %allemployees = %{$userxml->{employee}}; foreach my $key (keys(%allemployees)) { print $key." "; print $allemployees{$key}{"age"}."\n"; } print "-------------------------------\n"; my $userxsT = XML::Simple->new(ForceArray=>1); my $userxmlT = $userxsT->XMLin($xmlfile); #print output print Dumper($userxmlT); my @allemployeeT = @{$userxmlT->{"employee"}}; foreach my $employee (@allemployeeT) { print $employee->{"name"}[0]." "; print $employee->{"age"}."\n"; }
+    print "--------------------------------\n";
+    my $p = XML::Parser->new(Style => 'Tree');
+    my $doc = $p->parsefile($xmlfile);
+    #print Dumper($doc);
+    my $length = scalar(@{@{$doc}[1]});
+    #print $length;
+    #print scalar(@{@{$doc}[1]});
+    my %hash;
+    for(my $i=4;$i<=$length;$i=$i+4)
+    {
+        #print $i."\n";
+        #print @{@{@{$doc}[1]}[$i]}[0]->{"name"}; 
+        $hash{@{@{@{$doc}[1]}[$i]}[0]->{"name"}} = @{@{@{$doc}[1]}[$i]}[0]->{"value"};
+    }
+    print Dumper(%hash);
+    print $hash{"Help_File_Url"};
+    #print @{@{@{$doc}[1]}[128]}[0]->{"name"};
+    #print Dumper(@{@{$doc}[1]});
+    # my $allemployees = @{$doc->{"meta-data"}}[0]->{"name"};
+    #print Dumper($allemployees);
+    #foreach my $key (keys(@allemployees)) 
+    #{ 
+    #    print $key." "; 
+        #print $allemployees{$key}{"name"}."\n"; 
+        #}
+}

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<config>
+  <meta-data name="IS_DEBUG" value="false" />
+  <meta-data name="IS_LOG" value="true" />
+  <meta-data name="QD_Key" value="youai" />
+  <meta-data name="QD_Name" value="游爱" />
+  <meta-data name="QD_Code1" value="1" />
+  <meta-data name="QD_Code2" value="0" />
+  <meta-data name="QD_Gift_Html" value="输入礼品码，即可领取特权礼包！" />
+  <meta-data name="QD_Gift_Prompt" value="领取%1$s成功！恭喜您获得了%2$s" />
+  <meta-data name="QD_Property1" value="" />
+  <meta-data name="QD_Property2" value="" />
+  <meta-data name="Partition_Key" value="c_youai" />
+  <meta-data name="Login_Setting_Url" value="http://server.fytxonline.com/static/server/c_youai.json" />
+<meta-data name="Gift_Activity_Get_Url" value="http://service.fytxonline.com/card_service/" />
+  <meta-data name="Backup_Login_Setting_Url" value="http://slbackup.fytxonline.com/static/server/c_youai.json" />
+  <meta-data name="ReceiveGold" value="false" />
+  <meta-data name="ShareQuest" value="true" />
+  <meta-data name="ShareQuest_Facebook" value="false" />
+  <meta-data name="ShareQuest_QQ" value="true" />
+  <meta-data name="ShareQuest_Sina" value="true" />
+  <meta-data name="ShareQuest_Renren" value="false" />
+<meta-data name="Log_Start_Url" value="http://service.fytxonline.com/client/open/" />
+  <meta-data name="Help_File_Url" value="http://server.fytxonline.com/static/help/" />
+  <meta-data name="Login_Domain" value="youai.fytxonline.com" />
+  <meta-data name="Login_Type" value="0" />
+  <meta-data name="Screen_Type" value="0" />
+  <meta-data name="GFSite" value="" />
+  <meta-data name="GFBbs" value="" />
+  <meta-data name="WorkingHours" value="客服工作时间：9:30-18:30（周一至周六）" />
+  <meta-data name="ShareContent" value="我在玩最火的手机三国网游《风云天下》了哟。在这里可成为魏蜀吴国王，册封大臣，威风无比。听说以后还有后宫系统，好期待哦！^三国猛将云集手机网游《风云天下》，美眉武将也很可爱哦，大乔小乔孙尚香，只要官职高了就可以招募，有兴趣的一起用手机玩啊~^拿出手机就能玩的网游《风云天下》真心不错，人气火爆，图像精美！还有超赞的三国谋士，你说用诸葛亮还是用郭嘉好呢？^我正在手机网游《风云天下》中发号施令，听说赵云很厉害，只要排兵布阵得当，一夫当关万夫莫开，希望能尽快见识到其风采~^手机网游《风云天下》可以聚集兄弟，组建军团，攻城掠地，一起征战三国世界。玩军团，就要像关二哥一样，义字当头哦~^我的手机网游《风云天下》玩得越来越顺了，听说打败吕布就可将其招为麾下武将，他的战法是『三国无双』，攻击超猛，很赞的！^今天立志，一定要在手游《风云天下》里一统天下，建立自己的皇朝做皇帝！曹操刘备孙权，统统做我的手下吧！一起来玩吧！" />
+	<meta-data name="Gift_Activity_Name" value="" />
+	<meta-data name="Gift_Activity_Url" value="" />
+<meta-data name="Customer_Service_Info" value="客服QQ：800026093" />
+</config>

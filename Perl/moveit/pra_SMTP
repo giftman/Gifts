@@ -1,0 +1,32 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF
+use Net::SMTP;
+
+my $from = '1556138063@qq.com';
+my $site = 'qq.com';
+my $smtp_host='smtp.qq.com';
+my $to = '1556138063@qq.com';
+
+my $smtp = Net::SMTP->new($smtp_host,Hello=>$site);
+
+$smtp->mail($from);
+$smtp->to($to);
+$smtp->data();
+
+$smtp->datasend("To:$to\n");
+$smtp->datasend("Subject:A message from my Perl program.\n");
+$smtp->datasend("\n");
+
+$smtp->datasend("This is just to let you know,\n");
+$smtp->datasend("I don't care what those other people say about you,\n");
+$smtp->datasend("I still think you're doing a great job.\n");
+$smtp->datasend("\n");
+$smtp->datasend("Have you considered enacting a law naming Perl \n");
+$smtp->datasend("the national programming language?\n");
+
+$smtp->dataend();
+$smtp->quit;
+
+print "done";
+
+

@@ -1,0 +1,16 @@
+<dataroot>
+  <anon>
+    <anon>
+      <capital>london</capital>
+      <country>england</country>
+    </anon>
+    <anon>
+      <capital>oslo</capital>
+      <country>norway</country>
+    </anon>
+    <anon>
+      <capital>new delhi</capital>
+      <country>india</country>
+    </anon>
+  </anon>
+</dataroot>
