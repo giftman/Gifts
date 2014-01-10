@@ -40,6 +40,6 @@ my $str=<<_XML_STRING_;
 </config>
 _XML_STRING_
 
-my $xml_ref=XMLin($str,KeepRoot => 1);
+my $xml_ref=XMLin($str,KeepRoot => 0);
 my $xml_str=XMLout($xml_ref,outputfile => "output2.xml");
 print "-----------------------------------------\n";

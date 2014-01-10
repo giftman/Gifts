@@ -1,0 +1,35 @@
+#!/usr/bin/perl -w
+use strict;
+use Data::Dumper;
+use Spreadsheet::XLSX;
+my @array;
+
+my $excel = Spreadsheet::XLSX->new("c_youai.xlsx");
+if (!defined $excel)
+{
+    die $excel->error(),".\n";
+}
+print "-"x10,"\n";
+#print Dumper($excel);
+foreach my $sheet (@{$excel->{Worksheet}})
+{
+    printf("Sheet:%s\n",$sheet->{Name});
+    #print ("\$sheet:$sheet->{MaxRow}");
+    #print ("\$sheet:$sheet->{MinRow}");
+    #$sheet->{MaxRow} ||=$sheet->{MinRow};
+    foreach my $row($sheet->{MinRow}..$sheet->{MaxRow})
+    {
+        # $sheet->{MaxCol} ||=$sheet->{MinCol};
+        foreach my $col($sheet->{MinCol}..$sheet->{MaxCol})
+        {
+            my $cell=$sheet->{Cells}[$row][$col];
+            if($cell)
+            {
+                 printf("(%s,%s)=>%s\n",$row,$col,$cell->{Val});
+            }
+        }
+
+    }
+}
+#print Dumper(@array);
+

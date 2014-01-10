@@ -1,0 +1,2 @@
+warning - Use of uninitialized value $counter in addition (+) at tutor_log line 18.
+warning - Use of uninitialized value $counter in addition (+) at tutor_log line 18.

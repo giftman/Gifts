@@ -1,0 +1,31 @@
+#!/usr/bin/perl -w
+use strict;
+use Data::Dumper;
+use LWP::Simple;
+use Spreadsheet::ParseExcel;
+
+my @array;
+
+my $parser = Spreadsheet::ParseExcel->new();
+my $workbook = $parser->parse('c_youai.xlsx');
+if (!defined $workbook)
+{
+    die $parser->error(),".\n";
+}
+print "-"x10,"\n";
+for my $worksheet ($workbook->worksheets())
+{
+    my ($row_min,$row_max) = $worksheet->row_range();
+    my ($col_min,$col_max) = $worksheet->col_range();
+    print "\$row_min:$row_min \$row_max:$row_max","\n";
+    for my $row ($row_min..$row_max)
+    {
+        my $cell = $worksheet->get_cell($row,2);
+        next unless $cell;
+        my $tmp_url = $cell->value();
+        push @array,$tmp_url;
+    }
+}
+
+print Dumper(@array);
+

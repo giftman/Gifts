@@ -1,0 +1,96 @@
+#!/usr/bin/perl -w
+use strict;
+use Win32::GUI qw(WS_CLIPCHILDREN);
+use Win32::GUI::Grid;
+use Spreadsheet::ParseExcel;
+use Spreadsheet::ParseExcel::FmtUnicode;
+use Cwd;
+my $parser = Spreadsheet::ParseExcel->new();
+my $oFmtJ = Spreadsheet::ParseExcel::FmtUnicode->new(Unicode_Map => 'CP936' );
+my $Directory = cwd;
+my $desk = Win32::GUI::GetDesktopWindow();
+my $dw = Win32::GUI::Width($desk);
+my $dh = Win32::GUI::Height($desk);
+#隐藏dos窗口
+my $DOS = Win32::GUI::GetPerlWindow();
+Win32::GUI::Hide($DOS);
+#主窗口
+my $Window = new Win32::GUI::Window (
+    -title => "分析excel文件",
+    -pos => [100, 100],
+    -size => [300, 600],
+    -name => "Window",
+    -addstyle => WS_CLIPCHILDREN,
+) or die "new Window";
+#打开文件按钮
+$Window->AddButton(
+    -pos => [ 5,5 ],
+    -name => "openfile",
+    -size => [ 280, 40 ],
+    -title => "打开文件",
+    );
+    
+    
+# Grid窗口
+my $Grid = new Win32::GUI::Grid (
+    -parent => $Window,
+    -name => "Grid",
+    -pos => [0, 50],
+    -hscroll => 'true',
+    -vscroll => 'true',
+) or die "new Grid";
+# Init Grid
+$Grid->SetEditable(2);
+#$Grid->SetRows(50);
+#$Grid->SetColumns(3);
+$Grid->SetFixedRows(1);
+#$Grid->SetFixedColumns(1);
+#$Grid->AutoSize();
+#在这里堵塞，等待消息队列
+$Window->Show();
+Win32::GUI::Dialog();
+Win32::GUI::Show($DOS);
+exit(0);
+sub Window_Terminate {
+  return -1;
+}
+sub Window_Resize {
+  my ($width, $height) = ($Window->GetClientRect)[2..3];
+  $Grid->Resize ($width, $height);
+}
+#点击图表
+sub Grid_Click {
+    my ($col, $row) = @_;
+    my $text=$Grid->GetCellText($col,$row);
+    print "$text\n";
+  }
+#打开文件
+sub openfile_Click{
+my $file = Win32::GUI::GetOpenFileName(
+        -owner => $Window,
+        -title => "Open a text file",
+        -filter => [
+                    'excel file (*.xls)' => '*.xls',
+                    'All files' => '*.*',
+                   ],
+        -directory => $Directory ,
+    );
+  if(defined $file){
+    my $workbook = $parser->Parse($file,$oFmtJ) or die "can't parse this file: $!";
+    my $worksheet = ($workbook->worksheets())[0] or die "can't open sheets: $!";
+        my ( $row_min, $row_max ) = $worksheet->row_range();
+        my ( $col_min, $col_max ) = $worksheet->col_range();
+        $Grid->SetRows($row_max+1);
+        $Grid->SetColumns($col_max+1);
+        for my $row ($row_min .. $row_max ) {
+           for my $col ( $col_min .. $col_max ) {
+                
+                my $cell = $worksheet->get_cell( $row, $col );
+                $cell ? ($Grid->SetCellText($row, $col, $cell->value())) :($Grid->SetCellText($row, $col, "null")) ;
+                
+               
+           }
+        }
+        $Grid->AutoSize();
+  }
+}

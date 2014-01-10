@@ -1,0 +1,32 @@
+#!/usr/bin/perl -w
+use strict;
+use XML::Parser;
+use File::Basename;
+use XML::Simple;
+use Data::Dumper;
+
+my $xmlfile = dirname($0)."\\config.xml";
+if (-e $xmlfile)
+{
+    print "---------------------------------\n";
+    my $userxs = XML::Simple->new(KeyAttr  => "meta-data");
+    my $userxml = $userxs->XMLin($xmlfile);
+    #my $xml_ref=XMLin($userxml,KeepRoot => 1);
+    #my $xml_str=XMLout($xml_ref,outputfile => "counfigout.xml");
+    print Dumper($userxml);
+    print "-"x10;
+    my @metadatas = @{$userxml->{"meta-data"}};
+    foreach my $metadata (@metadatas)
+    {
+        print $metadata->{"name"};
+        print ":";
+        print $metadata->{"value"};
+        print "\n";
+        $metadata->{"name"} = "fan";
+        
+    }
+    @{$userxml->{"meta-data"}}=@metadatas;
+    my $xml = new XML::Simple(NoAttr=>0,Rootname=>'config');
+    my $data = $xml->XMLout($userxml,outputfile=>"configout.xml");
+    #my %allemployees = %{$userxml->{employee}}; foreach my $key (keys(%allemployees)) { print $key." "; print $allemployees{$key}{"age"}."\n"; } print "-------------------------------\n"; my $userxsT = XML::Simple->new(ForceArray=>1); my $userxmlT = $userxsT->XMLin($xmlfile); #print output print Dumper($userxmlT); my @allemployeeT = @{$userxmlT->{"employee"}}; foreach my $employee (@allemployeeT) { print $employee->{"name"}[0]." "; print $employee->{"age"}."\n"; }
+}

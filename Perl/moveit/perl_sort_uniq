@@ -1,0 +1,31 @@
+#!/usr/bin/perl -w
+use strict;
+use warnings;
+use List::MoreUtils qw(uniq);
+
+my $filename = shift;
+my @arrays;
+if(open(my $fh,'<:encoding(UTF-8)',$filename)){
+
+    while(my $row= <$fh>){
+        chomp $row;
+        #print "$row\n";
+        if($row =~/uses-permission/)
+        {
+            push @arrays,$row."\n";
+            #print $row."\n";
+        }
+    }
+    close $fh;
+
+}else{
+    warn "Could not open file '$filename' $!";
+}
+if(@arrays){
+    open (my $fh, '>',"top") or die "Could not open file '$filename' $!";
+    #print $fh uniq(sort @a);
+    #print $fh uniq @a;
+    print $fh uniq(sort @arrays);
+}
+
+
