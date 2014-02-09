@@ -1,22 +1,35 @@
-function serialize (o)
+function basicSerialize (o)
     if type(o) == "number" then
-        io.write(o)
-    elseif type(o) == "string" then
-        io.write(string.format("%q",o)) --good choose
-    elseif type(o) == "table" then
-        io.write("{\n")
-        for k,v in pairs(o) do
-           -- io.write(" ",k," = ")
-           io.write(" [")
-           serialize(k)
-           io.write("] = ")
-            serialize(v)
-            io.write(",\n")
-        end
-        io.write("}\n")
+        return tostring(o)
     else
-        error("cannot serialize a " .. type(o))
+        return string.format("%q",o)
     end
 end
 
-serialize{a=12,b='Lua',key='another "one"'}
+function save(name,value,saved)
+    saved = saved or {}
+    io.write(name, " = ")
+    if type(value) == "number" or type(value) == "string" then
+        io.write(basicSerialize(value),"\n")
+    elseif type(value) == "table" then
+        if saved[value] then --value already saved?
+            --use its previous name
+            io.write(saved[value],"\n")
+        else
+            saved[value] = name
+            io.write("{}\n")
+            for k,v in pairs(value) do
+                local fieldname = string.format("%s[%s]",name,basicSerialize(k))
+                save(fieldname,v,saved)
+            end
+        end
+    else
+        error("cannot save a " .. type(value))
+    end
+end
+
+a = {x=1,y=2;{3,4,5}}
+a[2] =a
+a.z = a[1]
+
+save('a',a)
