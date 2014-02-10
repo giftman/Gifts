@@ -1,3 +1,4 @@
+--how can it do that...almost ruthless... __index && __newindex give the right value,track gives the proxy
 --create private index
 local index = {}
 
