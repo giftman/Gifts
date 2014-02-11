@@ -1,3 +1,4 @@
+--build a table to reamember every declare value,when the metamethod call it will check if the value is there.
 local declaredNames = {}
 function declare (name,initval)
     rawset(_G, name, initval)
