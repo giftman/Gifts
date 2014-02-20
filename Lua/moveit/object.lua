@@ -1,15 +1,22 @@
---a simple object and for use 
+--how can we create many many accounts
 Account = {
     balance = 0,
-    withdraw = function(self,v)
-        self.balance = self.balance -v 
+    withdraw = function (self,v)
+        self.balance = self.balance -v
     end
 }
-
 function Account:deposit (v)
     self.balance = self.balance + v
 end
 
-Account.withdraw(Account,1000.00)
-Account:deposit(100.00)
-print(Account.balance)
+function Account:new (o)
+    o = o or {}
+    setmetatable(o,self)
+    self.__index = self
+    return o
+end
+
+a = Account:new{balance = 1000}
+--a:deposit(100.00)
+a.withdraw(a,1200)
+print(a.balance)
