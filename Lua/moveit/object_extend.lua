@@ -1,3 +1,5 @@
+--the scripts on the book not work...the self.limit have no value... but change the self to Specialaccount it can run.
+--don't know why...and Multiple Inheritance also omitted
 Account = {balance = 0}
 
 function Account:new (o)
@@ -17,10 +19,11 @@ function Account:withdraw (v)
     self.balance = self.balance - v
 end
 
-SpecialAccount = Account:new()
+SpecialAccount = Account:new ()
 s = SpecialAccount:new {limit = 1000.00}
 function SpecialAccount:getLimit ()
-    return self.limit or 0
+    print(SpecialAccount.limit)
+    return SpecialAccount.limit or 0
 end
 function SpecialAccount:withdraw (v)
     if v-self.balance >= self:getLimit() then
@@ -29,8 +32,9 @@ function SpecialAccount:withdraw (v)
     self.balance = self.balance -v
 end
 
-
-s:deposit(100.00)
-print(s.balance)
+function s:getLimit()
+    print "s's Limit"
+    return s.balance * 0.10
+end
+--s:deposit(100.00)
 print(s.getLimit())
-
