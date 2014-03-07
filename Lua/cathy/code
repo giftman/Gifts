@@ -1,0 +1,7 @@
+--a rotate sprite
+local  sprite = CCSprite:create(s_pPathGrossini)
+    ret:addChild(sprite)
+    sprite:setPosition( ccp(s.width-40, s.height/2) )
+    local  rotate = CCRotateBy:create(2, 360)
+    local  repeat_action = CCRepeatForever:create(rotate)
+sprite:runAction(repeat_action)
