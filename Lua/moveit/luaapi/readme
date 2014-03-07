@@ -1,0 +1,8 @@
+Begin To Learn Lua API
+
+use:
+1 create a "HelloWord" project --use the QUICK_ROOT/bin/create_project.bat
+2 cp the luaapi res to HelloWord/res
+3 replace the Myapp with the scrips -- forexample the cp SceneTest.lua to Myapp.lua
+
+refresh the project
