@@ -5,3 +5,8 @@ local  sprite = CCSprite:create(s_pPathGrossini)
     local  rotate = CCRotateBy:create(2, 360)
     local  repeat_action = CCRepeatForever:create(rotate)
 sprite:runAction(repeat_action)
+
+
+--self.go(self) = self:go()
+self:means an object,it will send itself to the method
+self.means a stastic method
