@@ -1,0 +1,24 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF   
+use strict;
+use warnings;
+use Data::Dumper;
+
+my %h;
+while (<>){
+    chomp;
+    my ($n1,$n2,$n3,$n4,$n5,$n6) = split;
+    $h{$n1,$n2,$n3,$n4,$n5}++;
+    $h{$n2,$n3,$n4,$n5,$n6}++;
+    $h{$n3,$n4,$n5,$n6,$n1}++;
+    $h{$n4,$n5,$n6,$n1,$n2}++;
+    $h{$n5,$n6,$n1,$n2,$n3}++;
+    $h{$n6,$n1,$n2,$n3,$n4}++;
+    
+}
+END{
+    for my $k(keys %h){
+         grep ($_ > 1,$h{$k})? print "$k\t$h{$k}\n" : next;
+    }
+}
+print Dumper(\%h);

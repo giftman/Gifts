@@ -1,0 +1,21 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF 
+use strict;
+use warnings;
+use Data::Dumper;
+qw(say);
+
+my @data = map { [(split)[ 0,3 ],$_] } <DATA>;
+my @sort = map { $_->[2] }
+sort { $a->[0] cmp $b->[0] || $a->[1] cmp $b->[1] } @data;
+#say @sort;
+print Dumper(\@sort);
+
+
+__DATA__
+a b1 c z
+a b555 c7 a
+c baa c12 b
+b bx c66 b
+a ab cz c
+c cba ac123 a

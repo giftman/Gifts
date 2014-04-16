@@ -1,0 +1,22 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!!great method...shift the word and the [0] will always be the next one to plus 
+use strict;
+use warnings;
+use Data::Dumper;
+
+my @value = map[ split /\s*,\s*|\n/ ],<DATA>;
+#print Dumper(\@value);
+while ( my $A = shift @value ) {
+    print "$A->[0],$A->[1]\t,$A->[2]\n";
+    next unless @value;
+    my @C = map { ($A->[$_] + $value[0][$_])/2 } 0..2;
+    print "$C[0],$C[1]\t,$C[2]\n";
+}
+
+__DATA__
+3,4.8          ,400.452802218193
+3.2,4.6          ,400.615193459049
+3.4,4.4          ,401.285205527175
+3.6,4.2          ,402.253284109361
+3.6,4.4          ,395.175614273155
+3.8,4          ,403.497966749557

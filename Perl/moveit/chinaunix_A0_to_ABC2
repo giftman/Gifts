@@ -1,0 +1,71 @@
+#!/usr/bin/perl
+
+use 5.016;
+
+my $text = <<EOF;
+ABC =  A1_B1;
+ABD =  C1_D1;
+A1  =  D0_A0;
+B1  =  A1_ABD;
+C1  =  C0;
+D1  =  B0_C1;
+EOF
+
+compute($text);
+
+sub compute {
+    my $text = shift;
+    my @lines = split /\n/, $text;
+    my $data = {};
+    foreach my $line (@lines) {
+        my ($key, @keys) = $line =~ /[A-Z0-9]+/g;
+        #    print $key.":".join " ",@keys;
+        $data->{ $key  } = [ @keys  ];
+
+    }
+    #print $data;
+    $data = replace_recur($data);
+    #output($data)
+
+}
+
+sub replace_recur {
+    my $data = shift;
+    foreach my $key (keys $data) {
+        my $over_flag = 0;
+LOOP:
+        foreach (1 .. 10) {
+            my $value = $data->{$key};
+            my @new_value = ();
+            foreach my $element (@{$value}) {
+                if (exists $data->{$element}) {
+                    @new_value = (@new_value, @{ $data->{$element}  });
+                    $over_flag++;
+
+                } else {
+                    push @new_value, $element;
+
+                }
+
+            }
+            $data->{$key} = [ @new_value  ];
+            last LOOP if ($over_flag == 0);
+            $over_flag = 0;
+
+        }
+
+    }
+    return $data;
+
+}
+
+sub output {
+    my $data = shift;
+    while (my ($key, $value) = each %{$data}) {
+        my $value_str = join '_', @{$value};
+        say "$key = $value_str;";
+
+    }
+
+}
+

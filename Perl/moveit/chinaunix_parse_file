@@ -1,0 +1,42 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF good...first mark the index ,second put the value 
+use strict;
+use warnings;
+use Data::Dumper;
+
+my @array = ();  #the result
+my $index = 0;
+my @ele;
+while (<DATA>) {
+    if( /============/ ) {
+        push(@array,{@ele}) if $index > 0;
+        $index++;
+        undef @ele;
+        push @ele,(index => $index);
+    } else {
+        if (/ÎÄ¼þÃû:\s*(\w+\.\w+)/){
+            #print $1."\n";
+            push @ele,(filename => $1);
+        }
+    }
+}
+print Dumper(\@array);
+__DATA__
+===================
+    ÎÄ¼þÃû:   st180000.cab
+    ËéÆ¬ÎÄ¼þ: 465
+    ´óÐ¡:    104.99 MB
+    ½á¹û:    ·ÖÎöÍê±Ï
+
+==============================
+ÎÄ¼þÃû:   External.tlg
+ËéÆ¬ÎÄ¼þ: 175
+´óÐ¡:    708.70 KB
+½á¹û:    ·ÖÎöÍê±Ï
+
+===================
+   ÎÄ¼þÃû:   msg.tlg.3
+   ËéÆ¬ÎÄ¼þ: 150
+   ´óÐ¡:    20.42 MB
+   ½á¹û:    ·ÖÎöÍê±Ï
+============================= 
