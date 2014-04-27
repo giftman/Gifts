@@ -1,0 +1,30 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF good...first mark the index ,second put the value 
+#use strict;
+use warnings;
+use Data::Dumper;
+
+#$_ = 'A=B=C=D=E=F=J=H=I=N/A=N/A=N/A=N/A=1';
+#my @array = split /=/;
+#splice @array,9,0,"J";
+#print join "=",@array;
+
+#my $line = 'A=B=C=D=E=F=G=H=I=N/A=N/A=N/A=N/A=1';
+#
+#my $pos;
+#my $n=1;
+#while ($line =~ m/(=)/g) {
+#    if ($n == 8) {
+#                        $pos = pos ($line);
+#                                
+#    }
+#            $n++;
+#
+#}
+#print "$pos\n";
+#$line =~ s/(^.{$pos}.*?)(=)/$1."=J="/eg;  #replace from 16 char...???
+#print "$line\n";
+
+$_ = 'A=B=C=D=E=F=J=H=I=N/A=N/A=N/A=N/A=1';
+s/=(?{$i++})/$i==9?"=J=":"="/ge;
+print;

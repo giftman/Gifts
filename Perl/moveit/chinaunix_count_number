@@ -1,0 +1,83 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF good...first mark the index ,second put the value 
+use strict;
+use warnings;
+use Data::Dumper;
+
+my @range = (
+    [ 8650000, 9750000  ],
+    [ 13250000, 13950000  ],
+    [ 17650000, 18850000  ],
+);
+my %array;
+
+while(<DATA>) {
+    chomp;
+    my @datas = split ;
+    $array{$datas[0]} = $datas[2];
+}
+my $left;
+my @right;
+#while(@range){
+range:for my $R(@range){
+    my @_trange = $R;
+    my $_mines = $_trange[0][1] - $_trange[0][0];
+    #print Dumper(\@_trange);
+    #print $_trange[0][0]."\n";
+    foreach my $ran (sort {$a <=> $b} keys %array) {
+        #print $ran."\n";
+        # print $ran."\n";
+        if($_trange[0][0] > $ran){
+            $left = $ran;
+            #print '$left:'.$left."\n";
+            next;         
+        }elsif($_trange[0][1] > $ran){
+            push @right,$ran;        
+            next;
+            # print $array{$ran}."\n";
+        }else{
+            push @right,$ran;        
+            print $left."\n";
+            print Dumper(\@right);
+            @right=();
+            my $result;
+            if($#right > 1){
+                for(my $i=1;$i<$#right;$i++){
+                    my $left = $right[$i - 1];
+                    my $right = $right[$i];
+                    $result = $result + ($right-$left/$_mines)*$array{$left};
+                }
+                my $tmp = shift @right;
+                my $right = pop @right;
+                $result = ($tmp-$_trange[0][0]/$_mines)*$array{$left} + $result;
+                $result = ($_trange[0][0] - $right/$_mines)*$array{$tmp} + $result;
+                print $_trange[0][0].",".$_trange[0][1].":".$result;
+            }else{
+                $result = $array{$left};
+                print $_trange[0][0].",".$_trange[0][1].":".$result;
+            }
+            next range;
+        }
+    }
+}
+#print Dumper(\%array);
+
+__DATA__
+7400000 8200000  -747.871582
+8200000 8500000  -311.464386
+8500000 9100000  -552.063538
+9100000 9800000  -691.326904
+9800000 10700000  -860.887024
+10700000 11500000  -775.908630
+11500000 12300000  -748.672424
+12300000 13200000  -868.078918
+13200000 14100000  -844.211609
+14100000 14600000  -531.665039
+14600000 15500000  -934.396790
+15500000 16300000  -808.178162
+16300000 17500000  -1163.265747
+17500000 17900000  -425.282043
+17900000 18900000  -937.942383
+18900000 19600000  -743.132019
+19600000 20800000  -1200.120850
+20800000 21100000  -285.289520

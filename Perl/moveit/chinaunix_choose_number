@@ -1,0 +1,31 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF good...first mark the index ,second put the value 
+use strict;
+use warnings;
+use Data::Dumper;
+
+#solution one
+my @aData = (250,300,350,400,450,600,700,800);
+my $sN500 = get_num(500,@aData);
+print "$sN500\n";
+
+sub get_num {
+    my ( $sNum, @aData ) = @_ ;
+    my $sRet = "";
+    foreach ( @aData ) {
+        if ( $_ <= $sNum ){
+            if($sRet eq ""){
+                $sRet = $_;
+            }elsif ( $sRet < $_ ){
+                $sRet = $_;
+            }
+        }
+    }
+    return $sRet eq ""?$sNum:$sRet;
+}
+solution two
+
+#my @A = (250,300,350,400,450,600,700,800);
+#use List::MoreUtils qw(last_value);
+#my $B = last_value{ $_ <= 500 } @A or 500;
+#print $B;
