@@ -1,0 +1,39 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! push @{$h->{$arr1[$_]}},$_    Greate,push an @array to $ or %hash  everyPerler knows that 
+use strict;
+use warnings;
+use Data::Dumper;
+
+#clear one
+#my @arr1 = qw(1 2 3 5 3 1 4 5 6 1 2);
+#my $h;
+#push @{$h->{$arr1[$_]}},$_ for 0..$#arr1;
+#print "[$_]=>(@{$h->{$_}})\n" for sort keys %$h;
+
+#clear two
+
+#my @arr1 = qw(1 2 3 5 3 1 4 5 6 1 2);
+#my %h;
+#push @{ $h{$arr1[$_]} },$_ for 0..$#arr1;
+#print "[$_]=>(@{ $h{$_} })\n" for sort keys %h;
+
+#clear three
+my %hash;
+my $index;
+my $inp;
+while(chomp ($inp = <STDIN>)) {
+    if($inp eq "!"){
+        last;
+    }
+    push @{ $hash{$inp} },$index++;
+}
+print Dumper(\%hash);
+
+
+__DATA__
+ABC = A1_B1;
+ABD = C1_D1;
+A1 = D0_A0;
+B1 = A1_ABD;
+C1 = C0;
+D1 = B0_C1;
