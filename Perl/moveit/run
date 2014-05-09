@@ -1,0 +1,49 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! push @{$h->{$arr1[$_]}},$_    Greate,push an @array to $ or %hash  everyPerler knows that 
+use strict;
+use warnings;
+use Data::Dumper;
+
+my $DEBUG = 0;
+my $sFile_data = "file1";
+my $sFile_over = "file2";
+
+open( my $FHdata, "<", $sFile_data) or die "cannot open $sFile_data\n";
+open( my $FHover, "<", $sFile_over) or die "cannot open $sFile_over\n";
+
+sub DBGprint{print " >>> DEBUG: @_" if $DEBUG};
+
+sub get_next{
+    my ($FH) = @_;
+    my $sLine = <$FH>;
+    if( !defined $sline ){
+        DBGprint "cannot read file \n";
+        return;
+        exit;
+    }
+    chomp $sLine;
+    my @aRet = split (/\s+/,$sLine);
+    DBGprint "get_next,@aRet\n";
+    return @aRet;
+}
+sub Xprint{
+    my ( $sId, $sStart, $sEndof ) = @_;
+    print "$sId't$sStart't$sEndof\n";
+}
+sub remove_over(++){
+    my ($raData,$raOver) = @_;
+    DBGprint "data=@{$raData},Over=@{$raOver} \n"
+
+    exit if( !defined $raData->[0] );
+    if ()
+}
+print Dumper(\%hash);
+
+
+__DATA__
+ABC = A1_B1;
+ABD = C1_D1;
+A1 = D0_A0;
+B1 = A1_ABD;
+C1 = C0;
+D1 = B0_C1;
