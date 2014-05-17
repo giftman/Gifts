@@ -1,15 +1,18 @@
 #!/usr/bin/perl -w
 ##Copyright (C) 2013 by CF  !!!! push @{$h->{$arr1[$_]}},$_    Greate,push an @array to $ or %hash  everyPerler knows that 
-#use strict;
-#use warnings;
+use strict;
+use warnings;
 use Data::Dumper;
+use Cwd;
+use File::Spec::Functions;
 
-@ARGV=glob "perl*";
-print $ARGV[0];
-my @smaller_than_1000 = grep { -s < 1000 } @ARGV;
-print map { "   $_\n" },@smaller_than_1000;
+my $cwd = getcwd;
+foreach my $file (glob (".* *")){
+    print "   ",catfile( $cwd , $file ) , "\n";
+}
+
 #print Dumper(\%hash);
-#print map {"    $_\n"}, grep { -s<1000 } @ARGV;
+
 
 __DATA__
 ABC = A1_B1;
