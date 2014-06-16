@@ -1,0 +1,26 @@
+#!/usr/bin/perl
+
+use File::Find;
+use File::Copy;
+my @dir = glob "*.png" ; #-d表示选出目录文件，还可以换成其它表达式
+if(@ARGV < 1){die "Not enough arguments\n";}
+my $reg = "";
+my @curDir = @ARGV;
+foreach(@dir){
+    $reg = $_;
+     print $reg."\n";
+    find(\&FindName,@curDir); 
+}
+
+sub FindName{
+    my $path;
+    if(/$reg/){
+        $path = $File::Find::name;
+        print $path."\n";
+        #system("cp $reg $path");
+        copy "/workplace/tmp/IOS/".$reg,$path;
+        
+    }
+}
+#print join "\n",@dir;
+#close TEMPDIR;
