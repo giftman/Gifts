@@ -1,0 +1,20 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! push @{$h->{$arr1[$_]}},$_    Greate,push an @array to $ or %hash  everyPerler knows that 
+#use strict;
+#use warnings;
+use Data::Dumper;
+
+@ARGV=glob "perl*";
+print $ARGV[0];
+my @smaller_than_1000 = grep { -s < 1000 } @ARGV;
+print map { "   $_\n" },@smaller_than_1000;
+#print Dumper(\%hash);
+#print map {"    $_\n"}, grep { -s<1000 } @ARGV;
+
+__DATA__
+ABC = A1_B1;
+ABD = C1_D1;
+A1 = D0_A0;
+B1 = A1_ABD;
+C1 = C0;
+D1 = B0_C1;
