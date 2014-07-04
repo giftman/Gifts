@@ -4,18 +4,19 @@
 #use warnings;
 use Data::Dumper;
 
-open IN,"tt1.txt";
+open IN,"1";
 open OU,">","result.txt";
 my %hash = ();
 my $line=0;
 while(<IN>){
     chomp;
-    my $tmp = join "\t",sort {$a<=>$b} split /\t/;
+    my $tmp = join "\t",sort {$a<=>$b} split ;
     $hash{$tmp}++;
 }
 print "sortDone\n";
+#print Dumper(\%hash);
 while(my ($cc)=each %hash){
-    print OUT $cc,"\n";
+    print OU $cc,"\n";
 }
 #print map {"    $_\n"}, grep { -s<1000 } @ARGV;
 
