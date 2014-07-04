@@ -5,18 +5,19 @@
 use Data::Dumper;
 
 open IN,"1";
-open OU,">","result.txt";
+open OUT,">","result.txt";
 my %hash = ();
-my $line=0;
+my $line = 0;
 while(<IN>){
     chomp;
-    my $tmp = join "\t",sort {$a<=>$b} split ;
-    $hash{$tmp}++;
+    my @tmp = sort {$a <=> $b} split;
+    $hash{$tmp[0]}{$tmp[1]}{$tmp[2]}++;
+    $line++;
+    last if $line > 10000000;
 }
 print "sortDone\n";
-#print Dumper(\%hash);
 while(my ($cc)=each %hash){
-    print OU $cc,"\n";
+    print OUT $cc,"\n";
 }
 #print map {"    $_\n"}, grep { -s<1000 } @ARGV;
 
