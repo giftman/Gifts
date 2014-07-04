@@ -4,52 +4,30 @@
 #use warnings;
 use Data::Dumper;
 
-my @fileA = qw(小明 小王 小李 小东 小蔡 小杨 小红);
-my @fileB = qw(小明 小王 小红);
-my @fileC = qw(小红 小黄 小杨);
-my @fileD = qw(小红 小蔡 小牛);
-my %hashb;
-my %hashc;
-my %hashd;
-
-foreach my $item (@fileB){
-    $hashb{$item} = 1;
+my @files = qw /A B C D/;
+my  $g;
+print join "\t", @files, "\n";
+my $all = shift @files;
+for my $file(@files){
+    open FH,$file or die $!;
+    while(<FH>) {
+        push @{$g->{$file}},$_;
+    }
 }
-foreach my $item (@fileC){
-    $hashc{$item} = 1;
+open FA,$all or die $!;
+while(my $line = <FA> ) {
+    chomp $line;
+    print $line;
+    my $letter;
+    for my $file(@files) {
+        for (@{ $g->{$file} }){
+            $line eq $_ ? do { $letter = "y"; last } : do {$letter = "n"};
+        }
+        print "\t$letter";
+    }
+    print "\n";
 }
-foreach my $item (@fileD){
-    $hashd{$item} = 1;
-}
-
-print "file A:  file B:  file C:  file D:\n";
-foreach my $item (@fileA){
-    if($hashb{$item}){
-        print "$item   Y";
-    }
-    else
-    {
-        print "$item  N";
-    }
-
-    if($hashc{$item}){
-        print "   Y";
-    }
-    else
-    {
-        print "   N";
-    }
-
-    if($hashd{$item}){
-        print "   Y\n";
-    }
-    else
-    {
-        print "   N\n";
-    }
-
-}
-#print Dumper(\%hash);
+print Dumper(\$g);
 #print map {"    $_\n"}, grep { -s<1000 } @ARGV;
 
 __DATA__
