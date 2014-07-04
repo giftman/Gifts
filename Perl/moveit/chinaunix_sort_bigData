@@ -4,20 +4,18 @@
 #use warnings;
 use Data::Dumper;
 
-my $module = 11;
-my @files = ();
-my $lines;
-for (0..$module-1){
-    open $files[$_],">","map_$_.txt"
-        or die "could not open map_$_.txt: $!";
-}
-
-while (<>){
+open IN,"tt1.txt";
+open OU,">","result.txt";
+my %hash = ();
+my $line=0;
+while(<IN>){
     chomp;
-    $lines++;
-    print $lines."\n";
-    my($f1,$f2,$f3) = sort {$a <=> $b} split ;
-    print {$files[$lines % $module]} "$f1\t$f2\t$f3\n";
+    my $tmp = join "\t",sort {$a<=>$b} split /\t/;
+    $hash{$tmp}++;
+}
+print "sortDone\n";
+while(my ($cc)=each %hash){
+    print OUT $cc,"\n";
 }
 #print map {"    $_\n"}, grep { -s<1000 } @ARGV;
 
