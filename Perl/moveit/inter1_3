@@ -1,0 +1,19 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! push @{$h->{$arr1[$_]}},$_    Greate,push an @array to $ or %hash  everyPerler knows that 
+use strict;
+use warnings;
+use Data::Dumper;
+use Business::ISBN;
+
+my $isbn = Business::ISBN->new($ARGV[0]);
+print "ISBN is "   .$isbn->as_string    ."\n";
+print "Country code "   .$isbn->group_code    ."\n";
+print "Publisher code "   .$isbn->publisher_code    ."\n";
+
+#print map {"    $_\n"}, grep { -s<1000 } @ARGV;
+
+__DATA__
+name1 A C AA SS AS SA 00
+name2 A H WW WA AA AW 00
+name3 A I AY YA YY AA 00
+name4 C H CC CZ ZZ ZC 00
