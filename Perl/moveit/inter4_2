@@ -1,0 +1,46 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+# 1 next unless 
+# 2 location = ? : ; 
+#use warnings;
+use Data::Dumper;
+
+#1 Greate nex unless example
+#foreach my $crewmember (@crew){
+#    next unless $crewmember->{"name"} =~ "Howell"; 
+#    $crewmember->{location} = "The Island Country Club";
+#}
+my %gilligan_info = (
+    name => 'Gilligan',
+    hat  => 'White',
+    shirt => 'Red' ,
+    position => 'First Mate',
+);
+
+my %skipper_info = (
+    name => 'Skipper',
+    hat  => 'Black',
+    shirt => 'Blue' ,
+    position => 'Captain',
+);
+my %mr_howell = (
+    name => 'Mr.Howell',
+    hat  => undef,
+    shirt => 'White' ,
+    position => 'Passenger',
+);
+my @crew = (\%gilligan_info,\%skipper_info,\%mr_howell);
+my $format = "%-15s %-7s %-7s %-15s\n";
+foreach my $crewmember (@crew){
+    $crewmember->{location} = $crewmember->{"name"} =~ "Howell" ? "The Island country Club":"The Islandry Club"; 
+}
+$format = "%-15s at  %-15s\n";
+foreach my $crewmember (@crew){
+    printf $format,@$crewmember{qw(name location)};
+}
+
+__DATA__
+name1 A C AA SS AS SA 00
+name2 A H WW WA AA AW 00
+name3 A I AY YA YY AA 00
+name4 C H CC CZ ZZ ZC 00
