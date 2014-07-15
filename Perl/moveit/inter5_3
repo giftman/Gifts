@@ -1,0 +1,32 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+# 1 next unless 
+# 2 location = ? : ; 
+use warnings;
+use Data::Dumper;
+use diagnostics;
+my %total_bytes;
+while(<>){
+    my($source,$destination,$bytes) = split;
+    $total_bytes{$source}{$destination} += $bytes;
+}
+#for my $destination (sort keys %total_bytes){
+#    print "$destination\n";
+#    for my $source (sort keys %{ $total_bytes{$destination} }){
+#        print "  $source :","$total_bytes{$source}{$destination} bytes\n";
+#    }
+#    print "\n";
+#}
+#for my $source (sort keys %total_bytes){
+#    print "$source\n";
+#    for my $dest (sort keys %{ $total_bytes{$source} }){
+#        print "  $dest :","$total_bytes{$source}->{$dest} bytes\n";
+#    }
+#    print "\n";
+#}
+print Dumper(\%total_bytes);
+__DATA__
+name1 A C AA SS AS SA 00
+name2 A H WW WA AA AW 00
+name3 A I AY YA YY AA 00
+name4 C H CC CZ ZZ ZC 00

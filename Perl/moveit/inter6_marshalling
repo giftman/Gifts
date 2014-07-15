@@ -1,0 +1,23 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+# P79 Marshalling Data? 
+# difference between the two print?
+use warnings;
+use Data::Dumper;
+use diagnostics;
+my @data1 = qw(one won);
+my @data2 = qw(two too to);
+push @data2,\@data1;
+push @data1,\@data2;
+my $string = Dumper(\@data1,\@data2);
+my $data_structure = eval $string;
+print $string;
+print Data::Dumper->Dump(
+    [\@data1,\@data2],
+    [qw(*data1 *data2)]
+)
+__DATA__
+name1 A C AA SS AS SA 00
+name2 A H WW WA AA AW 00
+name3 A I AY YA YY AA 00
+name4 C H CC CZ ZZ ZC 00

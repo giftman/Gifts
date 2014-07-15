@@ -1,0 +1,26 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! isReference ? $passenger={} : %passenger = () 
+# 1 next unless  
+# 2 location = ? : ; 
+use warnings;
+use Data::Dumper;
+use diagnostics;
+my $passenger_1 = {
+    name => 'Ginger',
+    age  => 22,
+    occupation => 'Move Star',
+    hat => undef,
+};
+my $passenger_2 = {
+    name => 'Mary Ann',
+    age =>19,
+    hat => 'bonnet',
+    favorite_food => 'corn',
+};
+my @passengers = ($passenger_1, $passenger_2);
+print Dumper(\@passengers);
+__DATA__
+name1 A C AA SS AS SA 00
+name2 A H WW WA AA AW 00
+name3 A I AY YA YY AA 00
+name4 C H CC CZ ZZ ZC 00
