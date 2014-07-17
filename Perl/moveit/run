@@ -4,32 +4,37 @@
 # Storable::dclone can help us have a deep copy.
 use warnings;
 use Data::Dumper;
-use Storable;
+use Json:Basic;
 
-my $data_file = "latest.data";
-my %total_bytes ;
+my $data_file = "total_bytes.json";
+my $total_bytes ;
 if(-e $data_file){
-    my $data = Storable::retrieve($data_file);
-    %total_bytes = %$data;
+    local $/;
+    open my $fh,'<:raw',$data_file;
+    $json_text = <$fh>;
+    $total_bytes = decode_json($json_text);
 }
-print Dumper(\%total_bytes);
+print Dumper($total_bytes);
 my $all = "**All Machine **";
 while(<>){
     next if /^#/;
     my($source,$destination,$bytes) = split;
-    $total_bytes{$source}{$destination} += $bytes;
-    $total_bytes{$source}{$all} += $bytes;
+    $total_bytes->{$source}{$destination} += $bytes;
+    $total_bytes->{$source}{$all} += $bytes;
 }
-my @source = sort {$total_bytes{$b}{$all}<=>$total_bytes{$a}{$all}} keys %total_bytes;
+my @source = sort {$total_bytes->{$b}{$all}<=>$total_bytes->{$a}{$all}} keys %{$total_bytes};
 for my $source (@source){
-    print "$source: $total_bytes{$source}{$all} total  bytes sent\n";
-    for my $destination (sort {$total_bytes{$source}{$b}<=>$total_bytes{$source}{$a}} keys %{ $total_bytes{$source} }){
+    print "$source: $total_bytes->{$source}{$all} total  bytes sent\n";
+    for my $destination (sort {$total_bytes->{$source}{$b}<=>$total_bytes->{$source}{$a}} keys %{ $total_bytes->{$source} }){
             next if $destination eq $all;
-        print "$source => $destination:","$total_bytes{$source}{$destination} bytes\n";
+        print "$source => $destination:","$total_bytes->{$source}{$destination} bytes\n";
     }
     print "\n";
 }
-Storable::nstore \%total_bytes,"latest.data";
+{
+    open my $fh,'>:utf8',$data_file;
+    print $fh to_json($total_bytes,{pretty => 1});
+}
 __DATA__
 name1 A C AA SS AS SA 00
 name2 A H WW WA AA AW 00
