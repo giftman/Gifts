@@ -1,0 +1,19 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+##Finding Out Who We Are  =====> __SUB__
+use warnings;
+use Data::Dumper;
+use File::Find;
+use v5.16;
+my $sub = sub{
+    state $n = 5;
+    return unless $n > -1;
+    say $n--;
+    __SUB__->();
+};
+$sub->();
+__DATA__
+name1 A C AA SS AS SA 00
+name2 A H WW WA AA AW 00
+name3 A I AY YA YY AA 00
+name4 C H CC CZ ZZ ZC 00

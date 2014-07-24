@@ -1,0 +1,48 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+#闭环 closure:访问了外部声明的私有变量 ,那么这个subroutine 就叫做closure.
+#??The closure declaration increases the reference count of the referent, as if another reference had been taken explicitly. Right at the end of the bare block, the reference count of $count is two, but after the block has exited, the value still has a reference count of one. Although no other code may access $count, it will still be kept in memory as long as the reference to the subroutine is available in $callback or elsewhere.
+#
+use warnings;
+use Data::Dumper;
+use File::Find;
+
+#count one
+#{
+#    my $count;
+#    sub count_one {++$count};
+#    sub count_so_far{return $count}
+#}
+#count_one();
+#count_one();
+#count_one();
+#count_one();
+#print 'we hava seen ',count_so_far()," coconuts!\n";
+
+#count_down
+#{
+#    my $countdown = 10;
+#    sub count_down {$countdown--}
+#    sub count_remaining{$countdown}
+#}
+#count_down();
+#count_down();
+#count_down();
+#print "we're down to ",count_remaining()," coconuts!\n";
+#
+
+#
+#use state
+use v5.10;
+sub add_to_tab{
+    my $castaway = shift; #有初始值的才用State..
+    state $castaways = qw(Ginger Mary Ann Gilligan);
+    state $tab = map{$_,0} @$castaways;
+    $tab->{$castaway}++;
+}
+add_to_tab("winFan");
+__DATA__
+name1 A C AA SS AS SA 00
+name2 A H WW WA AA AW 00
+name3 A I AY YA YY AA 00
+name4 C H CC CZ ZZ ZC 00

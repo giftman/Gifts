@@ -1,0 +1,68 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+# Storable::if you copy an array it's a shallow copy ,when it hava a reference,it will change by the shallow copy 
+# Storable::dclone can help us have a deep copy.
+use warnings;
+use Data::Dumper;
+
+sub skipper_greets{
+    my $person = shift;
+    print "Skipper:Hey there,$person!\n";
+}
+sub gilligan_greets{
+    my $person = shift;
+    if($person eq "Skipper"){
+        print "Gilligan: Sir,yes,sir,$person!\n";
+    }else{
+        print "Gilligan:Hi,$person!\n";
+    }
+}
+
+sub professor_greets{
+    my $person = shift;
+    print "Professor: By my calculations , you must be $person!\n";
+}
+my %greets =(
+    Gilligan => \&gilligan_greets,
+    Skipper  => \&skipper_greets,
+    Professor => \&professor_greets,
+) ;
+
+#First solve:
+#skipper_greets("Gilligan");
+#gilligan_greets("Skipper");
+#for my $greet (\&skipper_greets,\&gilligan_greets){
+#    $greet->("Professor");
+#}
+#professor_greets("Gilligan");
+#professor_greets("Skipper");
+
+#use coderef
+#my @everyone = sort keys %greets;
+#for my $greet (@everyone){
+#    for my $greeted (@everyone){
+#        $greets{$greet}->($greeted)
+#            unless $greet eq $greeted;
+#    } 
+#}
+#
+
+
+#walk into the room one by one
+my @room;
+my @everone = sort keys %greets;
+
+for my $person (@everone){
+    print "\n";
+    print "$person walks into the room.\n";
+    for my $room_person (@room){
+        $greets{$person}->($room_person);
+        $greets{$room_person}->($person);
+    }
+    push @room,$person;
+}
+__DATA__
+name1 A C AA SS AS SA 00
+name2 A H WW WA AA AW 00
+name3 A I AY YA YY AA 00
+name4 C H CC CZ ZZ ZC 00
