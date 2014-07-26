@@ -1,0 +1,32 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+##put the filehandle to hash...
+use strict;
+use warnings;
+
+#use v5.10;
+#while(<>){
+#    state $fhs;
+#    my($source,$date) = split /:/;
+#    $source = lc $source;
+#    unless($fhs->{$source}){
+#        open my $fh,">"," $source.info" or die;
+#    $fhs->{$source} = $fh;
+#    }
+#    print { $fhs->{$source} } "$source : $date\n";
+#}
+
+my %output_handles;
+while(<>){
+    unless(/^([^:]+):/){
+        print "waring,can't find the pattern:$_\n";
+        next;
+    }
+    my $name = lc $1;
+    unless($output_handles{$name}){
+        open my $fh,">","$name.info" or die;
+    $output_handles{$name} = $fh;
+    }
+    print { $output_handles{$name} } $_;
+}
+

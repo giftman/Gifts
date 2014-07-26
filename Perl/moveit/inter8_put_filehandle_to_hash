@@ -1,0 +1,17 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+##put the filehandle to hash...
+use v5.10;
+use strict;
+use warnings;
+
+while(<>){
+    state $fhs;
+    my($source,$destination,$bytes) = split;
+    unless($fhs->{$source}){
+        open my $fh,">>",$source or die;
+    $fhs->{$source} = $fh;
+    }
+    print { $fhs->{$source} } "$destination $bytes";
+}
+

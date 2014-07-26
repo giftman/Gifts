@@ -1,0 +1,46 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+##8888 open , io
+use strict;
+use warnings;
+
+my @handlepairs;
+foreach my $file (glob('*.input')){
+    (my $out = $file) =~ s/.input/.output/;
+    push @handlepairs,[
+        (IO::File->new("<$file")||die),
+        (IO::File->new(">$out")||die),
+    ]
+}
+
+#while(@handlepairs){
+#    @handlepairs = grep {
+#    if(defined(my $line = $_->[0]->getline)){
+#        print {$_->[1]} $line;
+#    }
+#    }@handlepairs;
+#}
+#
+
+# simply copying the complexly referenced value into a simple scalar is easier on the eyes
+#while(@handlepairs){
+#    @handlepairs = grep {
+#        my($IN,$OUT) = @$_;
+#        if(defined (my $line = <$IN>)){
+#            print $OUT $line;
+#        }else{
+#            0
+#        }
+#    }@handlepairs;
+#}
+#
+
+#get rid of the ugly if structure
+#
+while(@handlepairs){
+    @handlepairs = grep {
+        my($IN,$OUT) = @$_;
+        my $line;
+        defined($line = <$IN>) and print $OUT $line;
+    }@handlepairs;
+}

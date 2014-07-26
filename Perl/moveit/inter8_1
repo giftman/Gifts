@@ -1,0 +1,63 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+##put the filehandle to hash...
+use strict;
+use warnings;
+use Time::Local;
+use IO::Tee;
+
+#one way
+#print "Please choose the output to a file or a scalar?\n";
+#while(chomp(my $choose =<STDIN>)){
+#    if($choose eq "file"){
+#        open my $file,">","timefile.log";
+#        output_to_fh($file,localtime);
+#    }elsif($choose eq "scalar"){
+#        my $file = as_string(localtime);
+#        print "Time is :$file \n";
+#    }elsif($choose eq "both"){
+#
+#    }else{
+#        print "Input error ,try again.\n"
+#    }
+#}
+#sub output_to_fh{
+#    my ($fh,@data) = @_;
+#    print $fh @data;
+#}
+#
+#sub as_string{
+#    my (@data) = @_;
+#    open my $string_fh,'>',\ my $string;
+#    output_to_fh($string_fh,@data);
+#    $string;
+#}
+
+my $fh;
+my $scalar;
+
+print "Enter type of output [Scalar/File/Tee]>";
+my $type = <STDIN>;
+if($type =~ /^s/i){
+    open $fh,'>',\$scalar;
+}elsif($type =~ /^f/i){
+    open $fh,'>',"$0.out";
+}elsif($type =~ /^t/i){
+    open my $file_fh,'>',"$0.out" or die "Could not open $0.out $!";
+    open my $scalar_fh,'>',\$scalar;
+    $fh = IO::Tee->new($file_fh,$scalar_fh); 
+}
+
+my $date = localtime;
+my $date_of_week = (localtime)[6];
+
+print $fh <<"HERE";
+This is run $$
+The date is $date
+The day of the week is $date_of_week
+HERE
+
+print STDOUT <<"HERE" if $type =~ m/^[st]/i;
+Scalar contains:
+$scalar
+HERE

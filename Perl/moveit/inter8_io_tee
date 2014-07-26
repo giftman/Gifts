@@ -1,0 +1,11 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+##put the filehandle to hash...
+use strict;
+use warnings;
+use IO::Tee;
+
+my $tee_fh = IO::Tee->new($read_fh,$log_fh,$scalar_fh);
+
+my $message = <$read_fh>;
+

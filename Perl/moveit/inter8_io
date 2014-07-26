@@ -1,0 +1,18 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+##8888
+use strict;
+use warnings;
+
+#open my $fh,">> ./castaways.log"
+#open my $fh,"./castaways.log"
+#    or die "Could not open config.xml:$!";
+#print {$fh} "We have no bananas today!n";
+#while(<$fh>){
+#    print;
+#}
+
+use IO::File;
+my $fh = IO::File->new('> castaways.log')
+    or die "Could not create filehandle:$!";
+print $fh "what the ...what\n";

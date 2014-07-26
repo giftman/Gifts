@@ -1,0 +1,17 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+##IO::Scalar
+use strict;
+use warnings;
+
+sub output_to_fh{
+    my ($fh,@data) = @_;
+    print $fh @data;
+}
+
+sub as_string{
+    my (@data) = @_;
+    open my $string_fh,'>',\ my $string;
+    output_to_fh($string_fh,@data);
+    $string;
+}

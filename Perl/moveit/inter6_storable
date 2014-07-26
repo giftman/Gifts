@@ -1,0 +1,23 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+# Storable::freeze  <=>  thaw 
+# Storable::nstore  <=>  retrieve //include write and read file...Lift is not fair-- 
+use warnings;
+use Data::Dumper;
+use diagnostics;
+use Storable;
+
+my @data1 = qw(one won);
+my @data2 = qw(two too to);
+push @data2,\@data1;
+push @data1,\@data2;
+# Storable::freeze  <=>  thaw 
+#my $frozen = Storable::freeze [\@data1,\@data2];
+#print Dumper(Storable::thaw($frozen));
+Storable::nstore [\@data1,\@data2],"nstore.data";
+print Dumper(Storable::retrieve("nstore.data"));
+__DATA__
+name1 A C AA SS AS SA 00
+name2 A H WW WA AA AW 00
+name3 A I AY YA YY AA 00
+name4 C H CC CZ ZZ ZC 00

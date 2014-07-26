@@ -1,0 +1,40 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+##put the filehandle to hash...
+use strict;
+use warnings;
+use IO::Pipe;
+#read 接收处理后的数据
+#use IO::Pipe;
+#my $pipe = IO::Pipe->new;
+#$pipe->reader("ls");
+#while(<$pipe>){
+#    print "Read:$_";
+#}
+#
+#
+#my $command = "ls";
+#open my $pipe,"| $command" or die "Could not open filehandle:$!";
+#foreach( 1..10 ){
+#    print $pipe "I can count to $_\n";
+#}
+
+
+#use IO::Pipe
+#
+
+
+#write ==> 先执行，再执行write后的命令
+my $pipe = IO::Pipe->new;
+$pipe->writer("ls");
+foreach (1..10){
+    print $pipe "I can count to $_\n";
+    print STDOUT "I can count to $_\n";
+}
+#
+#
+#
+#open my $pipe,"-|","ls -al" or die;
+#while(<$pipe>){
+#    print;
+#}

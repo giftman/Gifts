@@ -1,0 +1,19 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+##put the filehandle to hash...
+use strict;
+use warnings;
+my @dirs = grep {-d} @ARGV;
+my @dir_hs = map{opendir my $dh,$_;$dh} @dirs;
+foreach my $dh (@dir_hs){
+    print_content($dh);
+}
+
+sub print_content{
+    my $dh = shift;
+
+    while(my $file = readdir($dh)){
+        next if ($file eq '.' or $file eq '..');
+        print "$file\n";
+    }
+}
