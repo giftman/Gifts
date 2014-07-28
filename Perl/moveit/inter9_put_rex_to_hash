@@ -1,0 +1,43 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+use strict;
+use warnings;
+
+
+#smart match 
+#$string ~~ @patterns;
+
+#solve match who
+my %patterns = (
+    Gilligan => qr/(?:Willie)?Gilligan/,
+    'Mary Ann' => qr/Mary Ann/,
+    Ginger => qr/Ginger/,
+    Professor => qr/(?:The)?Professor/,
+    Skipper =>qr/Skipper/,
+    "A howell" =>qr/Mrs?. Howell/,
+);
+#
+#my $name = 'Ginger';
+#
+#my ($match) = grep {$name =~ $patterns{$_}} keys %patterns;
+#print "Match !$match\n" if $match;
+
+
+my $position = rightmost(
+    'There is Mrs. Howell,Ginger, and Gilligan',
+    #qr/Mary/,qr/Gin/,
+    @patterns{sort keys %patterns}
+);
+
+sub rightmost{
+    my($string,@pattern) = @_;
+
+    my $rightmost = -1;
+    while( my($i,$pattern) = each @pattern){
+        $position = $string =~ m/$pattern/ ? $-[0]:-1;
+        $rightmost = $position if $position > $rightmost;
+    }
+    return $rightmost;
+}
+
+print "Rightmost match at position $position";

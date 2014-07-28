@@ -1,0 +1,21 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+use strict;
+use warnings;
+
+#old way
+#sub is_valid_pattern{
+#    my($pattern) = @_;
+#    local($@);
+#
+#    eval { ''=~ /$pattern/ };
+#    return defined $@ ? 0:1;
+#}
+#
+#
+
+my $regex = qr/((?i:Gilligan))/;
+my $string = "Gilligan Bill Wen TI";
+if($string =~ $regex){
+    print "$1\n";
+}
