@@ -1,0 +1,26 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+use strict;
+use warnings;
+use Data::Dumper;
+use Benchmark ;
+
+my @files = glob '*';
+print 'There are '.@files."files to compare\n";
+
+my $ordinary = sub{
+    my @sorted = sort{-s $a <=> -s $b} @files;
+};
+
+my $transform = sub{
+    my @sorted = 
+    map $_->[0],
+    sort {$a->[1] cmp $b->[1]}
+    map [$_,-s $_],
+    @files;
+};
+#-2 means at least run time
+timethese(-2,{
+        ORDENERY => $ordinary,
+        Schwartzian => $transform,
+    });

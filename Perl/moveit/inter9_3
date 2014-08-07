@@ -1,0 +1,30 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+use strict;
+use warnings;
+use Regexp::Assemble;
+open my $fh,'<','patterns.txt' or die "Could not open patterns.txt:$!";
+
+my $ra = Regexp::Assemble->new;
+while(<$fh>){
+    chomp;
+    $ra->add("$_");
+}
+
+#while(<>){
+#    foreach my $pattern(@array){
+#        print "Match of [$pattern] at line $. | $_" if /$pattern/;
+#    }
+#}
+
+#be that simple:report one match
+    my $pattern = $ra->re;
+    print "rRgexp is :$pattern\n";
+LINE:while(<>){
+        if(/$pattern/){
+            print "Match at line $. | $_" if /$pattern/;
+            next LINE;
+        }
+}
+
+

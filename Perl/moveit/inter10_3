@@ -1,0 +1,23 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+use strict;
+use warnings;
+use Data::Dumper;
+use Benchmark ;
+use v5.16;
+my @sorted = 
+map $_->[0],
+sort {$a->[1] cmp $b->[1]}
+map [$_,dictionary($_) ],
+glob '*';
+
+sub dictionary{
+    my $string = shift;
+    #$string =~ tr/A-Z/a-z/;
+    #$string =~ tr/a-z//cd;
+    $string =~ s/\P{Letter}//g;
+    $string = fc($string);
+    $string;
+}
+
+print Dumper(\@sorted);

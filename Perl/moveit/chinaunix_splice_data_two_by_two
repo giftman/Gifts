@@ -1,0 +1,30 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+use strict;
+use warnings;
+use Data::Dumper;
+
+my @zone = reverse (
+    32666,
+    28064,
+    28354,
+    24183,
+    24326,
+    19936,
+    19964,
+    16585,
+    16072,
+    15727,
+    15562,
+    11341,
+    11381,
+    5549,
+);
+
+my @zone_real;
+#while(@zone){
+#    print Dumper([splice(@zone,0,2)]);
+#    push(@zone_real,[splice(@zone,0,2)]);
+#}
+push(@zone_real,[splice(@zone,0,2)]) while @zone;
+print Dumper(\@zone_real);

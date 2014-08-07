@@ -1,0 +1,51 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+use strict;
+use warnings;
+
+sub ask_monkey_about{
+    return length;
+}
+#...
+my @castaways = qw(Gilligan Skipper Professor Ginger Mary Ann Thurston Lovey);
+#my @names_and_pineapples = map {[$_,ask_monkey_about($_)]} @castaways;
+#my @sorted_names_and_pineapples = sort {$a->[1] <=> $b->[1];} @names_and_pineapples;
+#my @names = map $_->[0], @sorted_names_and_pineapples;
+#
+#
+#################### Schwartzian transform#####################
+#
+#my @names = map $_->[0],sort {$a->[1] <=> $b->[1]} map [$_,ask_monkey_about($_)],@castaways;
+#
+#
+
+
+####################基本格式#####################
+#
+#array
+#my @output_data = 
+#    map $_->[0],
+#    sort {$a->[1] cmp $b->[1]}
+#    map [$_,"\F$_"],
+#    @castaways;
+#hash
+#my @output_data = 
+#    map $_->{ORIGINAL},
+#    sort {$a->{FOLDED} cmp $b->{FOLDED}}
+#    map {ORIGINAL=>$_,FOLDED =>"\F$_"},
+#    @castaways;
+#print "@output_data\n";
+#
+
+#
+####################N级排序#####################
+#array
+my @output_data = 
+map $_->[0],
+sort {$a->[2] cmp $b->[2]
+    or $a->[1] cmp $b->[1]
+    or $a->[3] cmp $b->[3]
+}
+map [$_,lc,length],
+@castaways;
+print "@output_data\n";

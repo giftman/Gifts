@@ -1,0 +1,68 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+use strict;
+use warnings;
+use Data::Dumper;
+use File::Basename;
+use File::Spec::Functions;
+sub factorial{
+    my $n = shift;
+    $n <= 1? 1:$n * factorial($n-1);
+}
+#print factorial(5)."\n";
+
+##################### recursive ###########################
+#sub data_for_path{
+#    my $path = shift;
+#    if(-f $path or -l $path){
+#        return undef;
+#    }
+#    if(-d $path){
+#        my %directory;
+#        opendir PATH,$path or die "Cannot opendir $path:$!";
+#        my @names = readdir PATH;
+#        closedir PATH;
+#        for my  $name (@names){
+#            next if $name eq "." or $name eq "..";
+#            $directory{$name} = data_for_path("$path/$name");
+#        }
+#        return \%directory;
+#    }
+#    warn "$path is neither a file nor a directory\n";
+#    return undef;
+#}
+#
+#print Dumper(data_for_path('.'));
+
+
+##################### iterative_solution ###########################
+sub data_for_path{
+    my($path,$depth) = @_;
+
+    my $data = {};
+    my @queue = ([$path,0,$data]);
+
+    while(my $next = shift @queue){
+        my($path,$level,$ref) = @$next;
+        my $basename = basename($path);
+        $ref->{$basename} = do{
+            if(-f $path or -l $path){undef }
+            else{
+                my $hash = {};
+                if($level < $depth){
+                    opendir my ($dh),$path;
+                    my @new_paths = map{
+                    catfile($path,$_)
+                    } grep {! /^\.\.?\z/} readdir $dh; 
+##################### depthh-first       ###########################
+#                unshift @queue,map{[$_,$hash]} @new_paths;
+##################### breadth-first       ###########################
+                    push @queue,map{[$_,$level + 1,$hash]} @new_paths;
+                }
+                $hash;
+            } 
+        };
+    }
+    $data;
+}
+print Dumper(data_for_path('/workplace',3));

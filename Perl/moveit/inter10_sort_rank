@@ -1,0 +1,24 @@
+#!/usr/bin/perl -w
+##Copyright (C) 2013 by CF  !!!! 
+use strict;
+use warnings;
+
+
+#my @sortString = reverse sort {$a <=> $b} 1,2,4,8,16,32;
+#print "@sortString\n";
+
+my @input = qw(Gilligan Skipper Professor Ginger Mary);
+print "@input\n";
+my @sorted_positions = sort {$input[$a] cmp $input[$b]} 0..$#input;
+print "@sorted_positions\n";
+my @rank;
+#0 3 4 2 1 (排完后的结果) 传给rank 得出他们对应走到了哪个位置 
+#0 4 3 1 2
+@rank[@sorted_positions] = (1..@sorted_positions);
+#0 3 4 2 1
+#           0=0 1=4 2=3 3=1 4=2 ----> 0 4 3 1 2
+#0 1 2 3 4
+print "@rank\n";
+foreach(0..$#rank){
+    print "$input[$_] sorts into position $rank[$_]\n";
+}

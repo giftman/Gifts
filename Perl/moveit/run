@@ -2,52 +2,19 @@
 ##Copyright (C) 2013 by CF  !!!! 
 use strict;
 use warnings;
+use Data::Dumper;
+use File::Copy;
 
-
-#smart match 
-#$string ~~ @patterns;
-
-#solve match who
-my %patterns = (
-    Gilligan => qr/(?:Willie)?Gilligan/,
-    'Mary Ann' => qr/Mary Ann/,
-    Ginger => qr/Ginger/,
-    Professor => qr/(?:The)?Professor/,
-    Skipper =>qr/Skipper/,
-    "A howell" =>qr/Mrs?. Howell/,
-);
-
-my $position = rightmost(
-    'There is Mrs. Howell,Ginger, and Gilligan',
-    #qr/Mary/,qr/Gin/,
-    \%patterns
-);
-
-# my solve
-#sub rightmost{
-#    my($string,$patterns) = @_;
-#
-#    my $rightmost = -1;
-#    foreach my $pattern (keys %$patterns){
-#        $position = $string =~ m/$patterns->{$pattern}/ ? $-[0]:-1;
-#        $rightmost = $position if $position > $rightmost;
-#    }
-#    return $rightmost;
+#my @datas;
+#while(my $line =<>){
+#    push @datas,$line;
+#}
+#for(my $i = 0;$i < @datas/2; $i ++ ){
+#    print $datas[$i],"\n",$datas[$i+5],"\n";
 #}
 #
-sub rightmost{
-    my($string,$patterns) = @_;
-    my($rightmost_position,$rightmost_key) = (-1,undef);
-    while(my($key,$value) = each %$patterns){
-        my $position = $string =~ m/$value/ ? $-[0]:-1;
-        if($position > $rightmost_position){
-            $rightmost_position = $position;
-            $rightmost_key = $value;
-        }
-    }
-    return $rightmost_key;
-}
 
-print "Rightmost match at position $position";
-
-
+#
+my $target_dir = "/tmp/tmp";
+my @files_small_than_1000k = grep { -s $_< 1024*10 } glob("*");
+copy $_ =>$target_dir for @files_small_than_1000k;
