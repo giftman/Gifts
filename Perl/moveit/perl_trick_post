@@ -1,0 +1,24 @@
+#!/usr/bin/perl -w
+use strict;
+
+use LWP::UserAgent;
+
+my $browser = LWP::UserAgent -> new();
+my $response = $browser->post(
+    'http://mlife.cmbchina.com/NeptuneApp/queryProductList.json?_pro=0&_pla=pluto_andr_4.0.3_uni_360&_ver=4.0.3&_mt=GOOGLE,OMNIMAGURO,4.4.3&appId=27503781416b4f8b967e2824afa134b3&_appId=27503781416b4f8b967e2824afa134b3&DeviceID=351554053326170&_r=no&_channel=360&_uid=bcc7c2f04a83db467486e9aebd32b8b4&_ss=720x1184&_accountId=bcc7c2f04a83db467486e9aebd32b8b4
+districtId=&couponType=3HoursRushBuy&parentTypeId=&cityNo=20&sortType=&childTypeId=&pageIndex=1&regionId='
+);
+#my $result = $response->content;
+if($response->is_success){
+    my $result = $response->content;
+    print $result."\n";
+}
+#my $response = $browser->post(
+#    'http://mlife.cmbchina.com/NeptuneApp/queryConditions.json?_pro=0&_pla=pluto_andr_4.0.3_uni_360&_ver=4.0.3&_mt=GOOGLE,OMNIMAGURO,4.4.3&appId=27503781416b4f8b967e2824afa134b3&_appId=27503781416b4f8b967e2824afa134b3&DeviceID=351554053326170&_r=no&_channel=360&_uid=bcc7c2f04a83db467486e9aebd32b8b4&_ss=720x1184&_accountId=bcc7c2f04a83db467486e9aebd32b8b4
+#cityNo=20'
+#);
+##my $result = $response->content;
+#if($response->is_success){
+#    my $result = $response->content;
+#    print $result."\n";
+#}

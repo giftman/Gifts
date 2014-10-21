@@ -1,0 +1,9 @@
+#!/usr/bin/perl -w
+#$^I = ".bak";
+#print join "\n",@ARGV;
+while (<>) {
+    if(/"(.*)":(.*),/){
+        $_="<$1>$2</$1>\n";
+        print $_;
+	}
+}

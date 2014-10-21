@@ -1,0 +1,45 @@
+unsigned when values cannot be negative.
+use int  or long long
+using "signed char" "unsigined char"
+use double
+
+
+bool b = 42; //b is true;
+int i = b; //i = 1;
+i = 3.14; // i = 3
+double pi = i; //pi = 3.0
+unsigned char c = -1; // assuming 8-bit chars , c has value 255  
+//unsigned char :if we assign a value outside this range, c = -1 mod 256 =====> -1 - ((-1/256) ~~ -1)*256  ====> 255
+//signed char :if we assign a value outside this range ===> undefined
+
+####################### Literals  #######################
+
+Integer Literals 
+Suffix  Minimum Type
+u or U  unsigned
+l or L  long 
+ll or LL long long
+
+Floating-Point Literals
+f or F float
+l or L long double
+
+####################### Character and Character String Literals  #######################
+'a' //character literal
+"a" //string literal (an array of two characters, the letter A and the null character)
+
+####################### Escape Sequences   #######################
+
+
+####################### List Initialization   #######################
+##The compiler will not let us list initialize variables of built-in type if the initializer might lead to the loss of information:
+long double ld = 3.1415926536
+int a{ld},b = {ld};//error: narrowing conversion required
+int c(ld),d=ld; // ok:but value will be truncated
+
+
+####################### Default Initialization  ########################
+#what that defult value is depends on the type of the variable and may also depend on where the variable is defined.
+#Variables defined outside any function body are initialized to zero.With one exception ,which variables of built-in type defined inside a function are uninitialized.
+
+external int i; //declares but does not define i
