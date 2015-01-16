@@ -1,24 +1,329 @@
 #!/usr/bin/perl -w
-use strict;
-
-use LWP::UserAgent;
-
-my $browser = LWP::UserAgent -> new();
-my $response = $browser->post(
-    'http://mlife.cmbchina.com/NeptuneApp/queryProductList.json?_pro=0&_pla=pluto_andr_4.0.3_uni_360&_ver=4.0.3&_mt=GOOGLE,OMNIMAGURO,4.4.3&appId=27503781416b4f8b967e2824afa134b3&_appId=27503781416b4f8b967e2824afa134b3&DeviceID=351554053326170&_r=no&_channel=360&_uid=bcc7c2f04a83db467486e9aebd32b8b4&_ss=720x1184&_accountId=bcc7c2f04a83db467486e9aebd32b8b4
-districtId=&couponType=3HoursRushBuy&parentTypeId=&cityNo=20&sortType=&childTypeId=&pageIndex=1&regionId='
-);
-#my $result = $response->content;
-if($response->is_success){
-    my $result = $response->content;
-    print $result."\n";
-}
+#use strict;
+#
+#use LWP::UserAgent;
+#
+#my $browser = LWP::UserAgent -> new();
 #my $response = $browser->post(
-#    'http://mlife.cmbchina.com/NeptuneApp/queryConditions.json?_pro=0&_pla=pluto_andr_4.0.3_uni_360&_ver=4.0.3&_mt=GOOGLE,OMNIMAGURO,4.4.3&appId=27503781416b4f8b967e2824afa134b3&_appId=27503781416b4f8b967e2824afa134b3&DeviceID=351554053326170&_r=no&_channel=360&_uid=bcc7c2f04a83db467486e9aebd32b8b4&_ss=720x1184&_accountId=bcc7c2f04a83db467486e9aebd32b8b4
-#cityNo=20'
+#    'http://mlife.cmbchina.com/NeptuneApp/queryProductList.json?_pro=0&_pla=pluto_andr_4.0.3_uni_360&_ver=4.0.3&_mt=GOOGLE,OMNIMAGURO,4.4.3&appId=27503781416b4f8b967e2824afa134b3&_appId=27503781416b4f8b967e2824afa134b3&DeviceID=351554053326170&_r=no&_channel=360&_uid=bcc7c2f04a83db467486e9aebd32b8b4&_ss=720x1184&_accountId=bcc7c2f04a83db467486e9aebd32b8b4
+#districtId=&couponType=3HoursRushBuy&parentTypeId=&cityNo=20&sortType=&childTypeId=&pageIndex=1&regionId='
 #);
 ##my $result = $response->content;
 #if($response->is_success){
 #    my $result = $response->content;
 #    print $result."\n";
 #}
+##my $response = $browser->post(
+##    'http://mlife.cmbchina.com/NeptuneApp/queryConditions.json?_pro=0&_pla=pluto_andr_4.0.3_uni_360&_ver=4.0.3&_mt=GOOGLE,OMNIMAGURO,4.4.3&appId=27503781416b4f8b967e2824afa134b3&_appId=27503781416b4f8b967e2824afa134b3&DeviceID=351554053326170&_r=no&_channel=360&_uid=bcc7c2f04a83db467486e9aebd32b8b4&_ss=720x1184&_accountId=bcc7c2f04a83db467486e9aebd32b8b4
+##cityNo=20'
+##);
+###my $result = $response->content;
+##if($response->is_success){
+##    my $result = $response->content;
+##    print $result."\n";
+##}
+#
+#
+#!/usr/bin/perl -w
+
+use strict;
+use Curses;
+use Curses::Widgets;
+use Curses::Widgets::Label;
+use Curses::Widgets::ListBox;
+use Net::PcapUtils;
+use Time::HiRes qw(sleep time);
+my %from_ip_byte;
+my %to_ip_byte;
+my $total_in=0;
+my $total_out=0;
+my $lasttime=0;
+my $localip="192.168.1.1";
+my @pkg;
+
+my $mwh=new Curses;
+#my %attr={
+
+#        A_ALTCHARSET=> "字符交替",
+
+#        A_ATTRIBUTES=>"",
+
+#        A_BLINK=>"闪动显示",
+
+#        A_BOLD=>"加亮加粗",
+
+#        A_CHARTEXT=>"字符掩盖",
+
+#        A_COLOR =>"",
+
+#        A_DIM =>"半亮显示",
+
+#        A_INVIS =>"空白显示模式",
+
+#        A_NORMAL=>"不加亮显示",
+
+#        A_PROTECT =>"保护模式",
+
+#        A_REVERSE =>"反白显示",
+
+#        A_STANDOUT =>"终端字符最亮",
+
+#        A_UNDERLINE=>"下划线",
+
+#        COLOR_PAIR=>"前景、背景色设置",
+
+#    };
+
+initscr();        #初始化为curses模式，清屏
+
+if(has_colors() == 0) { #判断是否支持颜色显示
+
+    endwin();
+    printf("Terminal does not support color\n");
+}
+start_color();        #开启彩色显示功能
+
+init_color(COLOR_RED,700,0,0);        #改变模个颜色的RGB
+
+init_pair(1,COLOR_WHITE,COLOR_BLUE);
+#raw();            #禁用行缓冲，控制字符将不作为终端程序处理的信号，交给程序处理
+
+#cbreak();        #禁用行缓冲，控制字符将被认为是终端控制字符
+
+#echo();        #字符在终端中显示
+
+#noecho();        #字符不在终端中显示
+
+#keypad(stdscr,1);    #允许使用功能键(F1 F2 方向键等) stdscr为标准显示设备
+
+#halfdelay(2);        #启用半延时模式，没有有效输入返回ERR，常用于密码输入超时等
+
+#addch/addstr/attrset/mvprintw/mvwprintw/wprintw     #在c的curses中有，perl没有
+
+#scanw/mvscanw/wscanw/mvwscanw/vwscanw/getstr        #在c的curses中有，perl没有
+
+#getyx
+
+##subwin(20,80,0,0); #建立窗体
+
+##box(0,0); #给$win绘制边框
+
+##refresh(stdscr);
+
+#delwin(stdscr);
+
+noecho();
+halfdelay(0.2);
+$mwh->keypad(1);
+$mwh->syncok(1);
+curs_set(0);
+leaveok(1);
+Net::PcapUtils::loop(\&process_pkt);
+
+sub process_pkt {
+    my($arg, $hdr, $pkt) = @_;
+        my($packages)=unpack('H*', $pkt);
+### START PACKAGE INFO ###
+
+        my(%PACKTYPE)=('0800'=>'IP', '0806'=>'ARP', '8035'=>'RARP');
+        my($source_mac)=substr($packages,0,12);
+        my($dest_mac)=substr($packages,12,12);
+        my($type)=substr($packages,24,4);
+
+        $type=$PACKTYPE{$type};
+        ### START IP HEAD ###
+
+        #if ($type eq IP) {
+
+    if (defined $type) {
+     if ($type eq $PACKTYPE{'0800'}) {
+             ## get ip head info ##
+
+                    my($totlength)=hex(substr($packages,32,4));
+     my($protocol)=substr($packages,46,2);
+             my($sourceipA)=hex(substr($packages,52,2));
+                    my($sourceipB)=hex(substr($packages,54,2));
+     my($sourceipC)=hex(substr($packages,56,2));
+             my($sourceipD)=hex(substr($packages,58,2));
+                    my($sourceip)=$sourceipA . "." . $sourceipB . "." . $sourceipC . "." . $sourceipD;
+
+     my($destipA)=hex(substr($packages,60,2));
+             my($destipB)=hex(substr($packages,62,2));
+                    my($destipC)=hex(substr($packages,64,2));
+     my($destipD)=hex(substr($packages,66,2));
+             my($destip)=$destipA . "." . $destipB . "." . $destipC . "." . $destipD;
+
+     my(%TCPORUDP)=('06'=>'TCP', '17'=>'UDP');
+             $protocol=$TCPORUDP{$protocol};
+     ### END IP HEAD ###
+
+             ### START TCP HEAD ###
+
+            if (defined $protocol) {
+         if ($protocol eq $TCPORUDP{'06'}) {
+         #if ($protocol eq TCP) {
+
+                 my($sourceport)=hex(substr($packages,68,4));
+                         my($destport)=hex(substr($packages,72,4));
+my $pkg=sprintf("%16s:%-5s\t->\t%16s:%-5s\t%s",$sourceip,$sourceport,$destip,$destport,$protocol);
+push(@pkg,$pkg);
+         ### END TCP HEAD ###
+
+        
+                 ### PRINT INFO ###
+
+                    if (!(defined $from_ip_byte{$sourceip})) {
+                        $from_ip_byte{$sourceip}=0;
+                    }
+                    if (!(defined $to_ip_byte{$destip})) {
+                        $to_ip_byte{$destip}=0;
+                    }
+                    if ($sourceip eq $destip) { #local
+
+                    } elsif ($sourceip eq $localip) { #out
+
+                        $total_out=$total_out+$totlength;
+                        if (!(defined $from_ip_byte{$destip})) {
+                            $from_ip_byte{$destip}=0;
+                        }
+                        if (!(defined $to_ip_byte{$destip})) {
+                            $to_ip_byte{$destip}=0;
+                        }
+                        $from_ip_byte{$destip}=$from_ip_byte{$destip}+0;
+                        $to_ip_byte{$destip}=$to_ip_byte{$destip}+$totlength;
+                    } elsif ($destip eq $localip) { #in
+
+                        $total_in=$total_in+$totlength;
+                        if (!(defined $from_ip_byte{$sourceip})) {
+                            $from_ip_byte{$sourceip}=0;
+                        }
+                        if (!(defined $to_ip_byte{$sourceip})) {
+                            $to_ip_byte{$sourceip}=0;
+                        }
+                        $from_ip_byte{$sourceip}=$from_ip_byte{$sourceip}+$totlength;
+                        $to_ip_byte{$sourceip}=$to_ip_byte{$sourceip}+0;
+                    }                    
+         }
+            }
+     }
+    }
+### END PACKAGE INFO ###
+
+    my @list;
+    if ((time - $lasttime)>0.5) {
+        my $y=2;
+        my $x=1;
+        attron(A_UNDERLINE | A_BOLD | COLOR_PAIR(1));    #开启字符修饰效果
+
+        move($y,$x);        #将光标移动到 (行,列)
+
+        #printw(" IP: %s IN_BYTES:%12.2fKbyte\tOUT_BYTES:%12.2fKbyte",$localip,$total_in/1024,$total_out/1024);
+
+        my $head=sprintf(" IP: %s IN_BYTES:%.2fKbyte OUT_BYTES:%.2fKbyte",$localip,$total_in/1024,$total_out/1024);
+        $y=$y+2;
+        foreach my $key (keys %from_ip_byte) {
+            my $in_per=0;
+            my $out_per=0;
+            if ($total_in > 0) {
+                $in_per=$from_ip_byte{$key}*100/$total_in;
+            } else {
+                $in_per=0;
+            }
+            if ($total_out>0) {
+                if (defined $to_ip_byte{$key}) {
+                    $out_per=$to_ip_byte{$key}*100/$total_out;
+                } else {
+                    $out_per=0;
+                }
+            } else {
+                $out_per=0;
+            }
+            #my $out="$key $from_ip_byte{$key}($in_per\%) \t$to_ip_byte{$key}($out_per\%)";
+
+            move($y,$x);        #将光标移动到 (行,列)
+
+            #printw("%16s\tIN:%11.2fM (%5.2f%s)\tOUT:%11.2fM (%5.2f%s)",$key,$from_ip_byte{$key}/1024,$in_per,"%",$to_ip_byte{$key}/1024/1024,$out_per,"%");
+
+            if (!(defined $from_ip_byte{$key})) {
+                $from_ip_byte{$key}=0;
+            }
+            if (!(defined $to_ip_byte{$key})) {
+                $to_ip_byte{$key}=0;
+            }
+            my $in=$from_ip_byte{$key}/1048576;
+            my $out=$to_ip_byte{$key}/1048576;
+            my $line=sprintf("%16s\tIN:%11.2fM (%5.2f%s)\tOUT:%11.2fM (%5.2f%s)",$key,$in,$in_per,"%",$out,$out_per,"%");
+            push(@list,$line);
+            $y++;
+        }
+                my $length=scalar(@list);
+                $mwh->erase();
+                $mwh->attrset(COLOR_PAIR(select_color(qw(red blue))));
+                $mwh->box(ACS_VLINE, ACS_HLINE);
+                $mwh->attrset(0);
+                $mwh->standout();
+                $mwh->standend();
+        my($max_y,$max_x);
+        $mwh->getmaxyx($max_y, $max_x);
+                my $lines=10;
+                my $columns=$max_x-2;
+                my $widgets1 = Curses::Widgets::ListBox->new({
+                        Y => 0,
+                        X => 0,
+                        COLUMNS => $columns,
+                        LINES => $lines,
+                        LISTITEMS => \@list,
+                        MULTISEL => 1,
+                        VALUE => [0,1],
+                        SELECTEDCOL => 'white',
+                        CAPTION => $head,
+                        CAPTIONCOL => 'yellow',
+               FOREGROUND => 'white',
+                BACKGROUND => 'blue',
+                });
+                $widgets1->draw($mwh);
+                my $widgets2 = Curses::Widgets::ListBox->new({
+                        Y => 12,
+                        X => 0,
+                        COLUMNS => $columns,
+                        LINES => $max_y-$lines-4,
+                        LISTITEMS => [],
+                        MULTISEL => 0,
+                # VALUE => 0,
+
+                        SELECTEDCOL => 'white',
+                # CAPTION => $head,
+
+                        CAPTIONCOL => 'yellow',
+               FOREGROUND => 'white',
+                BACKGROUND => 'blue',
+                });
+                $widgets2->draw($mwh);
+        my $yy=13;
+        my $xx=2;
+        while ($yy< $max_y){
+            my $pkg=shift @pkg;
+            move($yy,$xx);
+            if (defined $pkg) {
+                printw("$pkg");
+            } else {
+                printw("");
+            }
+            $yy++;
+        }
+        
+#        move(11,2);
+
+        #attron(COLOR_WHITE,COLOR_BLUE);    #关闭字符修饰效果
+
+#        printw("info");
+
+        #attroff(COLOR_WHITE,COLOR_BLUE);    #关闭字符修饰效果
+
+        #attroff(COLOR_PAIR(1));    #关闭字符修饰效果
+
+        refresh();
+        $lasttime=time;
+    }
+}
+exit 1;
