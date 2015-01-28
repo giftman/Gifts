@@ -1,0 +1,16 @@
+#!/usr/bin/python
+#标识符没有类型，提示的数据对象有类型。
+#BIF 内置函数
+#def
+#for
+#len
+#列表可以放任意数据
+
+def print_lol(the_list):
+	for _list in the_list:
+		if isinstance(_list,list):
+			print_lol(_list)
+		else:
+			print(_list)
+movies=[1,2,["what","the",["haha",879,[12,"end"]]]]
+print_lol(movies)

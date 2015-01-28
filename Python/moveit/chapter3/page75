@@ -1,0 +1,16 @@
+try:
+	the_file=open('sketc.txt')
+	for each_line in the_file:
+		#if not each_line.find(":") == -1:
+		try:
+			(who,said)=each_line.split(":",1)
+			print(who),
+			print("have said"),
+			print(said),
+		#else:
+		except:
+			pass
+			#print(each_line),
+	the_file.close()
+except:
+	print('The data file is missing!')

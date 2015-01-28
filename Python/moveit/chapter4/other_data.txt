@@ -1,0 +1,36 @@
+(lp0
+S"I've told you once."
+p1
+aS'Yes I have.'
+p2
+aS'Just now.'
+p3
+aS'Yes I did!'
+p4
+aS"I'm telling you, I did!"
+p5
+aS"Oh I'm sorry, is this a five minute argument, or the full half hour?"
+p6
+aS'Just the five minutes. Thank you.'
+p7
+aS'Anyway, I did.'
+p8
+aS'Oh yes I did!'
+p9
+aS'Oh yes I did!'
+p10
+aS'Yes it is!'
+p11
+aS"No it isn't!"
+p12
+aS'It is NOT!'
+p13
+aS"No I didn't!"
+p14
+aS'No no no!'
+p15
+aS'Nonsense!'
+p16
+aS"No it isn't!"
+p17
+a.
