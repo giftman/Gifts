@@ -1,6 +1,5 @@
 #!/usr/local/bin/python3
 import pickle
-names = ["james2.txt","julie2.txt","mikey2.txt","sarah2.txt"]
 def sanitize(time_string):
 	if '-' in time_string:
 		splitter = '-'
@@ -51,7 +50,3 @@ def get_from_store():
 		print('File error (get_from_store):' + str(err))
 	return(all_athletes)
 
-#data = put_to_store(names)
-data = get_from_store()
-for each_data in data:
-	print(data[each_data].name + ' ' + data[each_data].dob)
