@@ -49,4 +49,7 @@ def get_from_store():
 	except IOError as err:
 		print('File error (get_from_store):' + str(err))
 	return(all_athletes)
-
+def get_names_from_store():
+	data = get_from_store()
+	response=[data[each_athletes].name for each_athletes in data]
+	return(response)
