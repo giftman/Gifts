@@ -36,3 +36,11 @@ cgitb
 聲明為@property 這種情況下不再需要括號
 
 http.server   簡單Web服務
+
+
+Tornado :
+	static_url:auto create a hash ensures that browsers will always load the latest version
+
+{%raw%}
+
+module: template 方便用 可直接用js css
