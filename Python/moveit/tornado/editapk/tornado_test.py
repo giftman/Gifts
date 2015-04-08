@@ -1,10 +1,35 @@
 import tornado.ioloop
 import tornado.web
-import os.path
-import random
+import zipfile
+import os
+import shutil
+
+def zip_dir(dirname,zipfilename):
+	filelist=[]
+	if os.path.isfile(dirname):
+		filelist.append(dirname)
+	else:
+		for root,dirs,files in os.walk(dirname):
+			for name in files:
+				filelist.append(os.path.join(root,name))
+	f = zipfile.ZipFile(zipfilename,'w')
+	for tar in filelist:
+		arcname = tar[len(dirname):]
+		print arcname
+		f.write(tar,arcname)
+	f.close()
+
+def unzip_apk(apkfilename):
+	f = zipfile.ZipFile(apkfilename)
+	file_name = apkfilename[:-4]
+	f.extractall(file_name)
+	f.close()
 
 class MainHandler(tornado.web.RequestHandler):
 	def get(self):
+		filename = os.path.join(os.path.dirname(__file__),"cbzz_uc.apk")
+		print filename
+		unzip_apk(filename)
 		self.render('index.html')
 class WrapHandler(tornado.web.RequestHandler):
 	def map_by_first_letters(self,text):
@@ -30,6 +55,7 @@ application = tornado.web.Application([
 	(r"/",MainHandler),
 	(r"/poem",WrapHandler),
 ],**settings)
+
 if __name__ == "__main__":
 	application.listen(8888)
 	tornado.ioloop.IOLoop.instance().start()
