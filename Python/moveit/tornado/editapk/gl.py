@@ -3,15 +3,15 @@ xmlkey=["isShowTestView","developVersion","productVersion","publishDate","publis
 apkName=""
 apk_directory="tmp"
 config_str=apk_directory+"/assets/raw/config.xml"
-inputSdk="/Volumes/cbzr/SDK/"
+inputSdk="/mnt/cbzr/SDK/"
 output="signed_apk/"
-clound="/Volumes/cbzr/SDK_sign/"
+clound="/mnt/cbzr/SDK_sign/"
 
 
 keystorestr="data/cbzr.keystore"
 storepass="mango123"
 keypass="mango123"
-cmd = "jarsigner -keystore {keystorestr} -storepass {storepass} -keypass {keypass} -digestalg SHA1 -sigalg MD5withRSA -signedjar {signedApkFile} {unsignedApkFile} cbzr.keystore"
+cmd = "jarsigner -tsa http://timestamp.digicert.com -keystore {keystorestr} -storepass {storepass} -keypass {keypass} -digestalg SHA1 -sigalg MD5withRSA -signedjar {signedApkFile} {unsignedApkFile} cbzr.keystore"
 cmd = cmd.replace("{keystorestr}",keystorestr)
 cmd = cmd.replace("{storepass}",storepass)
 cmd = cmd.replace("{keypass}",keypass)

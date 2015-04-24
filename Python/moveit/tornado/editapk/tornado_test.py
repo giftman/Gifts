@@ -113,6 +113,7 @@ def zip_file_and_sign():
 
 	signApk(apkstr,gl.output + "sign_" +gl.apkName)
 	zipAlign(gl.output + "sign_" +gl.apkName,apkstr)
+	os.remove(gl.output + "sign_" +gl.apkName)
 	copy(apkstr,gl.clound + "sign_" + gl.apkName)
 	del_folder(gl.apk_directory)
 def del_folder(fileName):
