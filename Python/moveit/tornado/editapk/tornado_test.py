@@ -44,6 +44,7 @@ def unzip_apk(apkfilename):
 		f.extract(replaceFile,gl.apk_directory)
 	f.close()
 	copy(gl.apk_directory + "/res/drawable-hdpi/icon.png","static/images/")
+	copy(gl.apk_directory + "/res/drawable-nodpi/logo.png","static/images/")
 	copy(gl.apk_directory + "/assets/art/auth/union_background.jpg","static/images/")
 
 def get_attrvalue(node,attrname):
@@ -136,18 +137,19 @@ class MainHandler(tornado.web.RequestHandler):
 	def post(self):
 	#文件的暂存路径
 		upload_path=os.path.join(os.path.dirname(__file__),'static/images')  
-		for pngkey in gl.pngkeys:
+		postfiles=self.request.files    
+		for key,value in postfiles.iteritems():
+			print key
 	        	#提取表单中‘name’为‘file’的文件元数据
-			file_metas=self.request.files[pngkey[:-4]]    
 			filepath=""
-	        	for meta in file_metas:
+	        	for meta in value:
 	        		filename=meta['filename']
 	        		print filename
-	        		filepath=os.path.join(upload_path,pngkey)
+	        		filepath=os.path.join(upload_path,key)
  	         		#有些文件需要已二进制的形式存储，实际中可以更改
 	        		with open(filepath,'wb') as up:      
 					up.write(meta['body'])
-			for filename in iterfindfiles(gl.apk_directory,pngkey):
+			for filename in iterfindfiles(gl.apk_directory,key):
 				print filename
 				copy(filepath,filename)
 				print "copy:"+ filepath + "to:" +filename

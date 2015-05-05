@@ -15,5 +15,5 @@ cmd = "jarsigner -tsa http://timestamp.digicert.com -keystore {keystorestr} -sto
 cmd = cmd.replace("{keystorestr}",keystorestr)
 cmd = cmd.replace("{storepass}",storepass)
 cmd = cmd.replace("{keypass}",keypass)
-pngkeys=["icon.png","union_background.jpg"]
-replaceFiles=["assets/art/auth/union_background.jpg","res/drawable-hdpi/icon.png","res/drawable-mdpi/icon.png","res/drawable-ldpi/icon.png","assets/raw/config.xml"]
+pngkeys=["icon.png","logo.png","union_background.jpg"]
+replaceFiles=["assets/art/auth/union_background.jpg","res/drawable-nodpi/logo.png","res/drawable-hdpi/icon.png","res/drawable-mdpi/icon.png","res/drawable-ldpi/icon.png","assets/raw/config.xml"]
