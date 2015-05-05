@@ -1,0 +1,48 @@
+#coding: utf-8
+#/usr/bin/python
+#http://blog.jobbole.com/61171/
+#
+#生成器推导
+#num = [1,4,-5,10,-7,2,3,-1]
+#filtered_and_squared = ( x**2 for x in num if x > 0)
+#print list(filtered_and_squared)
+#
+#zip()
+#
+#
+#遍历目录
+# import os
+# def tree(top):
+# 	for path, names, fnames in os.walk(top):
+# 		print path
+# 		print names
+# 		print fnames
+# 		print "---"*30
+# 		# for fname in fnames:
+# 			# yield os.path.join(path,fname)
+# for name in tree("../"):
+# 	print name
+def fab(max):
+	n,a,b = 0,0,1
+	print "before before"
+	while n < max:
+		print "before"
+		yield b
+		print "after"
+		a,b = b,a+b
+		n = n + 1
+# for n in fab(5):
+# 	print n
+f = fab(15)
+print f.next()
+print f.next()
+
+def read_file(fpath): 
+	BLOCK_SIZE = 1024 
+        with open(fpath, 'rb') as f: 
+        	while True: 
+            	block = f.read(BLOCK_SIZE) 
+            	if block: 
+                	yield block 
+            	else: 
+                	return
