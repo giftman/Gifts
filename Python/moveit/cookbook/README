@@ -1,0 +1,34 @@
+内置的 sorted() 函数有一个关键字参数 key ，可以传入一个 callable 对象给它， 这个 callable 对象对每个传入的对象返回一个值，这个值会被 sorted 用来排序这些对象。
+
+{} --> dic or ...
+() --> tuple 元组 generator 无法改变值 
+[] --> list 数组
+
+参数：
+* --> tuple
+** -->dict
+
+The essential functionality is first compiling a pattern using re.compile() and then using methods such as match(), findall(), or finditer().
+
+To fix this, add the ? modifier after the * operator in the pattern, like this:
+
+To fix the problem, you can add support for newlines. For example:
+>>> comment = re.compile(r'/\*((?:.|\n)*?)\*/')
+
+NFC表示字符应该是整体组成(比如可能的话就使用单一编码)，而NFD表示字符应该分解为多个组合字符表示。
+
+>>> # Whitespace stripping 
+>>> s = ' hello world \n' >>> s.strip()
+'hello world'
+>>> s.lstrip()
+'hello world \n'
+>>> s.rstrip()
+' hello world'
+>>> # Character stripping 
+>>> t = '-----hello=====' 
+>>> t.lstrip('-') 'hello====='
+>>> t.strip('-=') 'hello'
+
+with open(filename) as f:
+        lines = (line.strip() for line in f)
+        for line in lines:

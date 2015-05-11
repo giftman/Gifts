@@ -1,0 +1,2 @@
+print(format("Hello World","#^20"))
+print('{:>10s} {:>10d}'.format("Hello",1000))

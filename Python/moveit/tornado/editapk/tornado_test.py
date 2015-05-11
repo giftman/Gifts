@@ -1,3 +1,4 @@
+#!/usr/bin/python2.6
 #coding:utf-8
 import tornado.ioloop
 import tornado.httpserver

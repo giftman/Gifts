@@ -1,0 +1,31 @@
+text = 'Today is 11/27/2012.PyCon starts 3/13/2015.'
+text1 = '11/27/2012abcdefc'
+import re
+
+#find :::Be aware:match always tries to find the match at the start of a string.
+datepat = re.compile(r'(\d+)/(\d+)/(\d+)')
+print(datepat.match(text))
+print(datepat.findall(text))
+print(datepat.finditer(text))
+
+
+from calendar import month_abbr
+def change_date(m):
+	mon_name = month_abbr[int(m.group(1))]
+	return '{} {} {}'.format(m.group(2),mon_name,m.group(3))
+#replace
+print(datepat.sub(change_date,text))
+
+
+text3 = 'UPPER PYTHON, lower python, Mixed Python'
+re.findall('python', text3, flags=re.IGNORECASE)
+
+s1 = 'Spicy Jalape\u00f1o'
+import unicodedata
+t1 = unicodedata.normalize('NFD',s1)
+print(t1)
+## first decompose  ---> then throw the combining one..
+t2 = ''.join(c for c in t1 if not unicodedata.combining(c))
+print(t2)
+print(t1[-2])
+print(unicodedata.combining(t1[-2]))
