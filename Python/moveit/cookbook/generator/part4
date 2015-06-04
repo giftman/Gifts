@@ -1,0 +1,55 @@
+#coding  utf-8
+import re
+
+loglines = open('data4')
+logpats = r'(\S+) (\S+) (\S+) \[(.*?)\] "(\S+)" (\S+) (\S+)'
+colnames = ('host','referrer','user','datetime','method','status','bytes')
+logpat = re.compile(logpats)
+groups = (logpat.match(line) for line in loglines)
+tuples = (g.groups() for g in groups if g)
+logs = (dict(zip(colnames,t)) for t in tuples)
+
+
+def field_map(dictseq,name,func):
+    for d in dictseq:
+        d[name] = func(d[name])
+        yield d
+logs = field_map(logs,'status',int)
+logs = field_map(logs,'bytes',lambda s:int(s) if s != '-' else 0)
+for log in logs:
+    print(log)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def lines_from_dir(filepat,dirname):
+    names = gen_find(filepat,dirname)
+    files = gen_open(names)
+    lines = gen_cat(files)
+    return lines
+def apache_log(lines):
+    groups = (logpat.match(line) for line in lines)
+    tuples = (g.groups() for g in groups if g)
+
+    colnames = ('host','referrer','user','datetime','method','status','bytes')
+    log = (dict(zip(colnames,t)) for t in tuples)
+    log = field_map(log,"bytes",int)
+    log = field_map(log,"status",lambda s:int(s) if s != '-' else 0)
+    return log
+
+#It's easy
+lines = lines_from_dir("access-log*","www")
+log = apache_log(lines)
+for r in log:
+    print(r)

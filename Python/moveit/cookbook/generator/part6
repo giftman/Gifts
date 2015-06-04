@@ -1,0 +1,41 @@
+#coding  utf-8
+import time
+import re
+
+logpats = r'(\S+) (\S+) (\S+) \[(.*?)\] "(\S+)" (\S+) (\S+)'
+logpat = re.compile(logpats)
+
+def follow(thefile):
+    thefile.seek(0,2)
+    while True:
+        line = thefile.readline()
+        if not line:
+            time.sleep(0.1)
+            continue
+        yield line
+
+def field_map(dictseq,name,func):
+    for d in dictseq:
+        d[name] = func(d[name])
+        yield d
+
+def apache_log(lines):
+    groups = (logpat.match(line) for line in lines)
+    tuples = (g.groups() for g in groups if g)
+
+    colnames = ('host','referrer','user','datetime','method','status','bytes')
+    log = (dict(zip(colnames,t)) for t in tuples)
+    log = field_map(log,"bytes",int)
+    log = field_map(log,"status",lambda s:int(s) if s != '-' else 0)
+    return log
+
+logfile = open('data4')
+loglines = follow(logfile)
+log = apache_log(loglines)
+r404 = (r for r in log if r['status']==404)
+for r in r404
+    print(r)
+
+import socket
+def receive_connections(addr):
+    s = socket.socket(socket.AF_INET,socket.)
