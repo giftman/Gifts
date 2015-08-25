@@ -1,0 +1,6 @@
+#/usr/bin
+# aapt r $1 META-INF/CERT.RSA
+# aapt r $1 META-INF/CERT.SF
+aapt r $1 META-INF/MANIFEST.MF
+jarsigner -tsa http://timestamp.digicert.com -keystore cbzr.keystore -storepass mango123 -keypass mango123 -digestalg SHA1 -sigalg MD5withRSA -signedjar ~/Desktop/resign_apk.apk $1 cbzr.keystore
+echo "生成在桌面"

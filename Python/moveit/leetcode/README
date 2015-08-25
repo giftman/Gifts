@@ -1,0 +1,3 @@
+j#Excel Sheet Column Number
+return reduce(lambda x,y:x*26+y,[ord(t)-64 for t in list(s)])
+ ord(s[-1])-64 + self.titleToNumber(s[:-1])*26

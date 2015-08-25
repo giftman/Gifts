@@ -8,12 +8,12 @@ output="signed_apk/"
 clound="/mnt/cbzr/SDK_sign/"
 
 
-#keystorestr="data/cbzr.keystore"
-keystorestr="data/debug.keystore"
-storepass="android"
-keypass="android"
-#cmd = "jarsigner -tsa http://timestamp.digicert.com -keystore {keystorestr} -storepass {storepass} -keypass {keypass} -digestalg SHA1 -sigalg MD5withRSA -signedjar {signedApkFile} {unsignedApkFile} cbzr.keystore"
-cmd = "jarsigner -tsa http://timestamp.digicert.com -keystore {keystorestr} -storepass {storepass} -keypass {keypass} -digestalg SHA1 -sigalg MD5withRSA -signedjar {signedApkFile} {unsignedApkFile} androiddebugkey"
+keystorestr="data/cbzr.keystore"
+#keystorestr="data/debug.keystore"
+storepass="mango123"
+keypass="mango123"
+cmd = "jarsigner -tsa http://timestamp.digicert.com -keystore {keystorestr} -storepass {storepass} -keypass {keypass} -digestalg SHA1 -sigalg MD5withRSA -signedjar {signedApkFile} {unsignedApkFile} cbzr.keystore"
+#cmd = "jarsigner -tsa http://timestamp.digicert.com -keystore {keystorestr} -storepass {storepass} -keypass {keypass} -digestalg SHA1 -sigalg MD5withRSA -signedjar {signedApkFile} {unsignedApkFile} androiddebugkey"
 cmd = cmd.replace("{keystorestr}",keystorestr)
 cmd = cmd.replace("{storepass}",storepass)
 cmd = cmd.replace("{keypass}",keypass)

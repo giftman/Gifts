@@ -37,3 +37,10 @@ with open(filename) as f:
 1 creator
 2 不必要的字符串连接
 
+使用模式为rb or wb to open binary data
+
+#更改binary opened file encoding
+u = urllib.request.urlopen('http://www.baidu.com')
+f = io.TextIOWrapper(u,encoding='utf-8')
+text = f.read()
+

@@ -1,0 +1,23 @@
+class Solution:
+# @param {string} s
+# @param {integer} numRows
+# @return {string}
+    def convert(self, s, numRows):
+        if numRows == 1:
+            return s
+        strmap = []
+        for i in range(numRows):
+            strmap.append([])
+        for i in range(len(s)):
+            pos = i%numRows
+            if int(i/numRows)%2 !=0:
+                pos = numRows - pos -1 -1
+            strmap[pos].append(s[i])
+        res= ''
+        for i in range(len(strmap)):
+            res= res + ''.join(strmap[i])
+        print(strmap)
+        return res
+
+test = Solution()
+print(test.convert('ABCDEF',3))
